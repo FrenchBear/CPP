@@ -64,6 +64,9 @@ int main() {
 	a->method1();
 	a = nullptr;		// Only a this point A destructor is called
 
+#ifdef _WIN32
+	cout << "\n(Pause) ";
 	getchar();
+#endif
 	return 0;
 }
