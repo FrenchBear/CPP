@@ -1,12 +1,12 @@
 // CppStack.cpp : Defines the entry point for the console application.
-//
+// 2017-04-28	PV	Simplified version for GitHub/Linux sharing
 
 #include <stdio.h>
 #include <iostream>
 #include <stack>
 
-
 using namespace std;
+
 
 int main()
 {
@@ -24,7 +24,9 @@ int main()
 		myStack.pop();
 	}
 
+#ifdef _WIN32
 	cout << "\n(Pause) ";
 	getchar();
+#endif
 	return 0;
 }
