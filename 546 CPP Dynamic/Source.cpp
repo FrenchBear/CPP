@@ -1,7 +1,12 @@
+// CPP Factorial
+// An implementation of factorial in C++ at compile-time based on template
+// 2017-04-09	PV	Added constexpr version, GitHub, Linux support
+
 #include <stdio.h>
 #include <iostream>
 
 using namespace std;
+
 
 template <int N> struct Factorial
 {
@@ -15,7 +20,7 @@ template <> struct Factorial<0> // required for terminating condition
 
 void TestFactorial()
 {
-	int x = Factorial<10>::value; // 24, known at compile time
+	int x = Factorial<10>::value; // 3628800, known at compile time
 	cout << x << endl;
 }
 
@@ -39,6 +44,9 @@ int main() {
 	double d = distance<double>(x1, y1, x2, y2);
 	cout << d << endl;
 
+#ifdef _WIN32
+	cout << "\n(Pause) ";
 	getchar();
+#endif
 	return 0;
 }
