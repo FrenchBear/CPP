@@ -1,5 +1,6 @@
 // CPP Arith2
 // Metaprogramming and pairs in C++
+//
 // 2017-01-23	PV
 // 2017-01-24	PV	Int4d --> template IntBase
 // 2017-04-29	PV	GitHub and Linux
@@ -382,6 +383,7 @@ int main() {
 
 	typedef DA<Int512d> Int1024d;
 	Test<Int1024d>();
+
 
 #ifdef _WIN32
 	cout << "\n(Pause)";

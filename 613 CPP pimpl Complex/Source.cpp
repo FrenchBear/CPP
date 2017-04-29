@@ -8,12 +8,14 @@
 // avoiding cascade recompilations/rebuilds after an implementation change.
 //
 // 2017-02-02	PV	First version, also worked hard to output UTF-16/Unicode on console...
+// 2017-04-29	PV	GitHub and Linux
 
+#ifdef _WIN32
 #include <Windows.h>
-
 #include <fcntl.h>  
 #include <io.h>  
 #include <stdio.h>
+#endif
 
 #include <iostream>
 #include <memory>
@@ -66,11 +68,15 @@ int main() {
 	// For wcout and wstrings
 	// Without this, unicode characters block output on wcout
 	// With this, wcout can output unicode characters...  but then cout crashes on an internal error!!!!!!!!!!!!!!
+#ifdef _WIN32
 	_setmode(_fileno(stdout), _O_U16TEXT);
+#endif
 
 	Test();
 
+#ifdef _WIN32
 	wcout << L"\n(Pause)";
 	wcin.get();
+#endif
 	return 0;
 }

@@ -5,6 +5,7 @@
 // specified in base class does NOT allow this trick (see http://www.gotw.ca/gotw/039.htm for a possible solution)
 //
 // 2017-03-14	PV
+// 2017-04-29	PV	GitHub and Linux; g++ does not support abstract, tampered with code (badly)
 
 #define _SCL_SECURE_NO_WARNINGS
 #include <iostream>
@@ -16,6 +17,10 @@
 #include <vector>
 
 using namespace std;
+
+#ifndef _WIN32
+#define abstract =0
+#endif
 
 
 template <typename T>
@@ -29,7 +34,11 @@ struct IList {
 template <typename T>
 struct ICollection {
 public:
+#ifdef _WIN32
 	virtual int Count() abstract;
+#else
+	virtual int Count2() abstract;
+#endif
 	virtual bool isReadOnly() abstract;
 };
 
@@ -53,6 +62,7 @@ public:
 		return std::find(v.begin(), v.end(), item) != v.end();
 	}
 
+#ifdef _WIN32
 	int IList<T>::Count() {
 		return v.size();
 	}
@@ -60,7 +70,15 @@ public:
 	int ICollection<T>::Count() {
 		return v.size();
 	}
+#else
+	int Count() {
+		return v.size();
+	}
 
+	int Count2() {
+		return v.size();
+	}
+#endif
 	bool isReadOnly() override {
 		return false;
 	}
@@ -76,7 +94,9 @@ int main() {
 	cout << "li.isReadOnly(): " << li.isReadOnly() << endl;
 	cout << "li.Count(): " << ((IList<int> *)&li)->Count() << endl;
 
+#ifdef _WIN32
 	cout << "\n(Pause)";
 	cin.get();
+#endif
 }
 

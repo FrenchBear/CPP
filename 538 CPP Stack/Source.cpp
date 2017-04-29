@@ -1,4 +1,6 @@
-// CppStack.cpp : Defines the entry point for the console application.
+// CppStack.cpp
+// First play in C++ after years using stack from STL
+//
 // 2017-04-28	PV	Simplified version for GitHub/Linux sharing
 
 #include <stdio.h>

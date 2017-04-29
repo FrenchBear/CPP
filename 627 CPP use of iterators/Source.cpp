@@ -1,6 +1,7 @@
 // 627 CPP use of iterators
 //
 // 2017-04-08	PV
+// 2017-04-29	PV	GitHub and Linux
 
 // Avoid iterator checking for the end exception in debug mode
 #define 	_ITERATOR_DEBUG_LEVEL 0
@@ -117,6 +118,8 @@ int main() {
 	cout << endl;
 
 
+#ifdef _WIN32
 	cout << "\n(Pause)";
 	cin.get();
+#endif
 }

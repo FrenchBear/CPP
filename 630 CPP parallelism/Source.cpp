@@ -3,7 +3,7 @@
 // Stroustrup Tour of C++, §13
 //
 // 2017-04-20	PV
-
+// 2017-04-29	PV	GitHub and Linux
 
 #include <iostream>
 #include <string>
@@ -11,9 +11,9 @@
 #include <vector>
 #include <thread>
 #include <mutex>
+#include <condition_variable>
 #include <chrono>
 #include <queue>
-
 
 using namespace std;
 using namespace std::chrono;
@@ -218,6 +218,8 @@ double accum(const double* beg, const double* end)
 
 
 
+extern "C" double fmult(int, double);
+
 
 int main()
 {
@@ -241,7 +243,12 @@ int main()
 
 	}
 
-	cout << pb << " " << pe << " " << pe - pb << endl;
+	cout << pb << " " << pe << " " << pe - pb << endl << endl;
+
+	cout << "2*1.414 = " << fmult(2, 1.414) << endl;
+
+#ifdef _WIN32
 	cout << "\n(Pause)";
 	cin.get();
+#endif
 }

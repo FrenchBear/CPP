@@ -1,5 +1,6 @@
 // 555 CPP complex
 // Complex class with use of User-Defined Literals (suffix i)
+//
 // 2016-10-13	PV
 // 2017-04-29	PV		GitHub and Linux; gpp doesn't like i suffix...
 
@@ -42,6 +43,5 @@ int main() {
 	cout << "\n(Pause)";
 	cin.get();
 #endif
-
 	return 0;
 }

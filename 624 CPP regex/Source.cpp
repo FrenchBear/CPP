@@ -3,6 +3,7 @@
 // From A Tour of C++ (2014) - [Addison-Wesley] - Bjarne Stroustrup, chapter 7 
 //
 // 2017-03-28	PV
+// 2017-04-29	PV	GitHub and Linux
 
 
 #include <iostream>
@@ -66,6 +67,8 @@ int main() {
 	TestIterator();
 
 
-	std::cout << "\n(Pause)";
-	std::cin.get();
+#ifdef _WIN32
+	cout << "\n(Pause)";
+	cin.get();
+#endif
 }

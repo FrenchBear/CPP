@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 
-double f(a, b)
+double fmult(a, b)
 int a;
 double b;
 {

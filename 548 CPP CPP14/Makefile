@@ -1,5 +1,3 @@
-CXXFLAGS=-Wall -std=gnu++14 -Wno-unused-but-set-variable -Wno-unused-variable
-#LDFLAGS=-static-libgcc
-#LDFLAGS=-shared-libgcc
+CXXFLAGS=-Wall -std=gnu++17 -Wno-unused-but-set-variable -Wno-unused-variable -Wno-deprecated-declarations
 
 make:	Source

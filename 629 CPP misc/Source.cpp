@@ -3,6 +3,7 @@
 // Stroustrup Tour of C++, §11 and 12
 //
 // 2017-04-13	PV
+// 2017-04-29	PV	GitHub and Linux
 
 #include <iostream>
 #include <string>
@@ -146,7 +147,7 @@ void reverse_helper(C& c, forward_iterator_tag) {
 template<typename C>
 void reverse(C& c) {
 	using Iter = typename C::iterator;
-	using Iterator_category = iterator_traits<Iter>::iterator_category;
+	using Iterator_category = typename iterator_traits<Iter>::iterator_category;
 	reverse_helper(c, Iterator_category{});		// Compiler choses which helper to call depending on Iterator_category type
 }
 
@@ -356,6 +357,8 @@ int main() {
 
 	TestValArray();
 
+#ifdef _WIN32
 	cout << "\n(Pause)";
 	cin.get();
+#endif
 }

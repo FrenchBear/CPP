@@ -3,6 +3,7 @@
 // Stroustrup Tour of C++, §10.4
 //
 // 2017-04-09	PV
+// 2017-04-29	PV	GitHub and Linux
 
 #include <iostream>
 #include <iterator>
@@ -72,6 +73,9 @@ int main() {
 	TestInputStreamOperator();
 	SortAndRemoveDuplicates(R"(Source.cpp)");
 
+
+#ifdef _WIN32
 	cout << "\n(Pause)";
 	cin.get();
+#endif
 }

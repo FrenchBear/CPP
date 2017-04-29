@@ -1,14 +1,17 @@
 ﻿// laby.cpp
 // C++ implementation of labyrinth using digging method
+//
 // 2016-06-03	PV
 // 2017-01-27	PV	Windows version (CPP 612 Laby)
 // 2017-02-01	PV	Added recursive dividing algorithm
+// 2017-04-29	PV	GitHub and Linux
 
 #include <stdlib.h>
 #include <time.h>
 #include <assert.h>
 #include <iostream>
 #include <stack>
+#include <string.h>
 
 #ifdef _WIN32
 // Windows
@@ -613,11 +616,11 @@ int main(int argc, char **argv) {
 		Solve();
 	Print();
 
+
 #ifdef _WIN32
 	cout << endl << "(Pause)";
 	cin.get();
 #endif
-
 	return 0;
 }
 

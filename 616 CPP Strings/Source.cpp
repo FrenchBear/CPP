@@ -1,7 +1,9 @@
-﻿//CPP616 Strings
+﻿// CPP616 Strings
 // Various types of strings in C++
+//
 // 2017-02-09	PV
 // 2017-02-11	PV	Test2
+// 2017-04-29	PV	GitHub and Linux
 
 #include <iostream>
 #include <string>
@@ -91,7 +93,9 @@ void Test2() {
 
 	// Character literals  
 	auto c0 = 'A'; // char  
+#ifdef _WIN32
 	auto c1 = u8'A'; // char  
+#endif
 	auto c2 = L'A'; // wchar_t  
 	auto c3 = u'A'; // char16_t  
 	auto c4 = U'A'; // char32_t  
@@ -149,7 +153,10 @@ int main() {
 	Test1();
 	Test2();
 
+
+#ifdef _WIN32
 	cout << "\n(Pause)";
 	cin.get();
+#endif
 	return 0;
 }

@@ -1,6 +1,8 @@
 // 618 CPP Pointer to member
+//
 // 2017-02-16	PV
 // 2017-03-14	PV	Added Window example
+// 2017-04-29	PV	GitHub and Linux
 
 #include <iostream>
 using namespace std;
@@ -25,7 +27,7 @@ class Window
 public:
 	Window() {}                            
 	Window(int x1, int y1, int x2, int y2) {} 
-	bool SetCaption(const char *szTitle) {} 
+	bool SetCaption(const char *szTitle) { return false; } 
 	const char *GetCaption() { return szWinCaption; }
 	char *szWinCaption;                    
 	int id;
@@ -53,6 +55,8 @@ int main() {
 	pw->*pid = 2;
 
 	
+#ifdef _WIN32
 	cout << "\n(Pause)";
 	cin.get();
+#endif
 }

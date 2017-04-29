@@ -1,7 +1,9 @@
 // CPPVariadic
 // Example of variadic template in C++
 // https://en.wikipedia.org/wiki/Variadic_template
+//
 // 2017-03-17	PV
+// 2017-04-29	PV	GitHub and Linux
 
 #include <iostream>
 #include <string>
@@ -70,6 +72,8 @@ int main() {
 	func(12, "Hello", "world"s, 2.0i + 3.0, sqrt(2), 140ms, 
 		Plus1{}, [](int x, int y) {return x * y; });
 
+#ifdef _WIN32
 	cout << "\n(Pause)";
 	cin.get();
+#endif
 }

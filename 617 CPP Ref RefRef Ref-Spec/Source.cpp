@@ -1,6 +1,8 @@
 // CPP617 Ref RefRef Ref-Spec
 // Play with C++ references
+//
 // 2017-02-13	PV
+// 2017-04-29	PV	GitHub and Linux
 
 #include <iostream>
 
@@ -75,6 +77,8 @@ int main() {
 	(GetMemoryBlock()).mb();
 
 
+#ifdef _WIN32
 	cout << "\n(Pause)";
 	cin.get();
+#endif
 }

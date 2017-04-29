@@ -4,7 +4,7 @@
 // 2016-09-14	PV
 // 2017-02-11	PV	Continue in VS2017, much better support!
 // 2017-03-18	PV	const char* specialization of pi templace, myPow constexpr function
-// 2017-04-29	PV	GitHut and Linux
+// 2017-04-29	PV	GitHub and Linux
 
 #include <iostream>
 #include <vector>

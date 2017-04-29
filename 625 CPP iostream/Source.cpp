@@ -1,11 +1,14 @@
 // CPP 625 iostream
 // 2017-04-01	PV
+// 2017-04-29	PV	GitHub and Linux
 
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <cmath>
 
 using namespace std;
+
 
 struct sprocket {
 	int i;
@@ -83,6 +86,8 @@ int main() {
 
 	TestDouble();
 
+#ifdef _WIN32
 	cout << "\n(Pause)";
 	cin.get();
+#endif
 }

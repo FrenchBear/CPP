@@ -1,4 +1,7 @@
-// Source.cpp
+// 622 CPP Perfect forwarding
+// Play with this concept
+//
+// 2017-04-29	PV	GitHub and Linux
 
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -8,6 +11,7 @@
 #include <utility>
 
 using namespace std;
+
 
 class c {
 public:
@@ -76,6 +80,8 @@ void Test2() {
 int main() {
 	Test2();
 
+#ifdef _WIN32
 	cout << "\n(Pause)";
 	cin.get();
+#endif
 }

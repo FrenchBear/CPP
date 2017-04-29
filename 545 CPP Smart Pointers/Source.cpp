@@ -1,7 +1,9 @@
 // 545 CPP Smart Pointers
 // Example of smart pointers in C++
+//
 // 2016-08-13	PV
 // 2016-10-12	PV	Expanded code
+// 2017-04-29	PV	GitHub/Linux sharing
 
 #include <stdio.h>
 #include <iostream>

@@ -1,9 +1,8 @@
 // Variable templates in C++ VS2017
+// Example from http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3651.pdf
+//
 // 2017-01-17	PV
 // 2017-04-29	PV		GitHub and Linux
-//
-// Example from http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3651.pdf
-
 
 template <typename T>
 T t16[16];
@@ -29,5 +28,9 @@ int main() {
 	cp[0] = 'a';
 	dp[0] = pi<double>;
 
-	return 0;
+
+#ifdef _WIN32
+	cout << "\n(Pause)";
+	cin.get();
+#endif
 }

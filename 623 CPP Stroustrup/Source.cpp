@@ -2,6 +2,7 @@
 // Example of C++ based on C++ Tour
 //
 // 2017-03-17..28	PV
+// 2017-04-29		PV	GitHub and Linux; if constexpr not supported by g++
 
 #define _SCL_SECURE_NO_WARNINGS
 
@@ -297,12 +298,18 @@ void TestDuplicate() {
 
 extern int x;   // no definition of x required
 int f() {
+#ifdef _WIN32
+	// g++ doesn't accept this syntax
 	if constexpr (true)
 		return 0;
-	else if (x)
+	else 
+	if (x)
 		return x;
 	else
 		return -x;
+#else
+	return 0;
+#endif
 }
 
 
@@ -311,6 +318,8 @@ int main() {
 	TestDuplicate();
 
 
-	cout<<"\n(Pause)";
+#ifdef _WIN32
+	cout << "\n(Pause)";
 	cin.get();
+#endif
 }

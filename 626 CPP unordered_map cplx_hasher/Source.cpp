@@ -2,6 +2,7 @@
 // Example of use of unordered_map with complex class not supporting operator <
 //
 // 2017-04-08	PV
+// 2017-04-29	PV	GitHub and Linux
 
 #include <iostream>
 #include <unordered_map>
@@ -41,6 +42,9 @@ int main() {
 
 	cout << cm[1.0i] << endl;
 
+
+#ifdef _WIN32
 	cout << "\n(Pause)";
 	cin.get();
+#endif
 }

@@ -1,5 +1,6 @@
 // 550b C++ Copy and Move constructors
 // More examples
+//
 // 2017-01-22	PV
 // 2017-04-29	PV		GitHub and Linux
 
@@ -91,10 +92,10 @@ int main() {
 	cout << "\nmove assignment \n";
 	baz = C();
 
+
 #ifdef _WIN32
 	cout << "\n(Pause)";
 	cin.get();
 #endif
-
 	return 0;
 }

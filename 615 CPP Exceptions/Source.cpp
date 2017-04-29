@@ -1,8 +1,11 @@
 // CPP615 Exceptions
 // Test of try/catch in C++
+//
 // 2017-02-04	PV
+// 2017-04-29	PV	GitHub and Linux
 
 #include <iostream>
+#include <limits>
 
 using namespace std;
 
@@ -25,7 +28,9 @@ int main() {
 	}
 
 
+#ifdef _WIN32
 	cout << "\n(Pause)";
 	cin.get();
+#endif
 	return 0;
 }

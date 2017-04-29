@@ -152,10 +152,10 @@ int main() {
 	});
 	cout << endl;
 
+
 #ifdef _WIN32
 	cout << "(Pause)";
 	getchar();
 #endif
-
 	return 0;
 }

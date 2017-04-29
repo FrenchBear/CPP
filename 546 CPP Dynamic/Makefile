@@ -1,5 +1,3 @@
-CXXFLAGS=-Wall -std=gnu++14
-#LDFLAGS=-static-libgcc
-#LDFLAGS=-shared-libgcc
+CXXFLAGS=-Wall -std=gnu++17
 
 make:	Source

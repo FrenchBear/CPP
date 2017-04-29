@@ -1,8 +1,10 @@
 // 614 CPP Range-based loops
 // Example of enumerable classes
+//
 // 2017-02-04	PV
 // 2017-02-07	PV		Range example
 // 2017-02-10	PV		ZipRange and template Zip
+// 2017-04-29	PV		GitHub and Linux
 
 #include<iostream>
 #include<limits>
@@ -325,8 +327,9 @@ int main() {
 	cout << endl;
 
 
+#ifdef _WIN32
 	cout << "\n(Pause)";
 	cin.get();
-
+#endif
 	return 0;
 }
