@@ -2,6 +2,7 @@
 // Examples of && in C++ 11
 //
 // 2016-10-06	PV
+// 2017-04-29	PV		GitHub and Linux
 
 #define _SCL_SECURE_NO_WARNINGS		// Otherwise use of copy generated a deprecated error
 
@@ -34,15 +35,29 @@ public:
 int main() {
 	string &r1 = one;
 	//string &r2 = two;			// refused, would lose const qualifier
-	string &r3 = three();		// should be refused, rvalue, but accepted...
+#ifdef _WIN32
+	string &r3 = three();		// should be refused, rvalue, but accepted by VS...
+#else
+	const string& cr3 = three();
+	string &r3 = const_cast<string &>(cr3);
+#endif
 	//string &r4 = four();		// refused, rvalue, and would lose const qualifier
 
 	cout << r3 << endl;
 
+// gcc doesn't like following code:
+// Source.cpp:48:34: error: invalid initialization of non-const reference of type complexe& from an rvalue of type complexe
+//  complexe &rc = complexe(3.0, 4.0);
+//                                  ^
+#ifdef _WIN32
 	complexe &rc = complexe(3.0, 4.0);
+#endif
 	//complexe *pc = &complexe(3.0, 4.0);
 	//cout << pc->real() << ", " << pc->imag() << endl;
 	
+#ifdef _WIN32
+	cout << "(Pause)";
 	getchar();
+#endif
 	return 0;
 }

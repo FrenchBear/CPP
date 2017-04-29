@@ -41,7 +41,9 @@ void keep_if(vector<T>& v, Predicate pred) {
 
 	// Note the bug, notpref instead of notpred in next line, VCC doesn't even report a warning with EnableAllWarnings (/Wall)
 	// since it's never used, while gcc consider it as a compilation error
+#ifdef _WIN32
 	v.erase(remove_if(v.begin(), v.end(), notpref), v.end());
+#endif
 }
 
 template <typename Container>

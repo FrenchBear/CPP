@@ -3,8 +3,11 @@
 //
 // 2016-10-12	PV
 // 2017-02-03	PV		Extra containers (map, ...)
+// 2017-04-29	PV		GitHub and Linux
 
+#ifdef _WIN32
 #include <Windows.h>
+#endif
 
 #include <iostream>
 #include <string>
@@ -81,8 +84,9 @@ template <typename C, class T> void FindIt(const C& c, T val) {
 
 
 int main() {
+#ifdef _WIN32
 	SetConsoleOutputCP(1250);			// Show ANSI accents correctly in 8-bit char mode
-
+#endif
 
 	vector<int> v1{ 2, 3, 5, 7, 11, 13 };
 	cout << "vector<int>\r\n";
@@ -354,8 +358,10 @@ int main() {
 
 
 
+#ifdef _WIN32
 	cout << "\r\n(Pause)";
 	cin.get();
+#endif
 
 	return 0;
 }
