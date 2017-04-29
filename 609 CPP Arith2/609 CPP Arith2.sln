@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Arith2CPP", "Arith2CPP.vcxproj", "{98469F72-3805-4A09-B138-099ECCA9C63F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "609 CPP Arith2", "CppArith2.vcxproj", "{98469F72-3805-4A09-B138-099ECCA9C63F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

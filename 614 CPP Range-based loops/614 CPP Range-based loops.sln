@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CPP614 Range-based loops", "CPP614 Range-based loops.vcxproj", "{A9698FFA-B7D3-464C-B49D-5A44D454A8A1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppRangeBasedLoops", "CppRangeBasedLoops.vcxproj", "{A9698FFA-B7D3-464C-B49D-5A44D454A8A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
