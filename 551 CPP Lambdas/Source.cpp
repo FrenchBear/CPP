@@ -3,7 +3,7 @@
 //
 // 2016-10-04	PV
 // 2017-01-14	PV		Higher order lambdas example; removed trigraphs code
-
+// 2017-04-29	PV		GitHub and Linux
 
 #define _SCL_SECURE_NO_WARNINGS		// Otherwise use of copy generated a deprecated error
 
@@ -15,6 +15,7 @@
 #include <functional>
 
 using namespace std;
+
 
 struct LambdaFunctor {
 	void operator() (int n) const {
@@ -149,8 +150,10 @@ int main() {
 	});
 	cout << endl;
 
-
+#ifdef _WIN32
 	cout << "(Pause)";
 	getchar();
+#endif
+
 	return 0;
 }
