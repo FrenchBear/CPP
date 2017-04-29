@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{C45E0B33-5159-4508-9B60-CA4ECE2673BA}</ProjectGuid>
-    <RootNamespace>Project1CPP</RootNamespace>
+    <RootNamespace>CPP623</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
     <ProjectName>623 CPP Stroustrup</ProjectName>
   </PropertyGroup>
