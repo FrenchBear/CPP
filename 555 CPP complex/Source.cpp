@@ -1,7 +1,7 @@
 // 555 CPP complex
 // Complex class with use of User-Defined Literals (suffix i)
 // 2016-10-13	PV
-// 2017-04-29	PV		GitHub and Linux
+// 2017-04-29	PV		GitHub and Linux; gpp doesn't like i suffix...
 
 #include <stdio.h>
 #include <iostream>
@@ -11,6 +11,7 @@
 
 using namespace std;
 
+
 typedef complex<double> cplx;
 
 /*
@@ -19,12 +20,21 @@ double module(const cplx &z) {
 }
 */
 
+
 int main() {
+#ifdef _WIN32
 	cplx z1 = 3.0 + 4.0i;
+#else
+	cplx z1 = cplx(3.0+ 4.0);
+#endif
 	cout << "z1: " << z1 << endl;
 	cout << "module z1: " << abs(z1) << endl;
 
+#ifdef _WIN32
 	cplx z2 = asin(2.0 + 0.0i);
+#else
+	cplx z2 = asin(cplx(2.0, 0.0));
+#endif
 	cout << "z2: " << z2 << endl;
 	cout << "sin(z2): " << sin(z2) << endl;
 
