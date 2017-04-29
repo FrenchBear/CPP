@@ -1,8 +1,10 @@
 ﻿// 548 CPP 14
 // Play with new C++ 14 features
+//
 // 2016-09-14	PV
-// 2017-02-11	PV		Continue in VS2017, much better support!
-// 2017-03-18	PV		const char* specialization of pi templace, myPow constexpr function
+// 2017-02-11	PV	Continue in VS2017, much better support!
+// 2017-03-18	PV	const char* specialization of pi templace, myPow constexpr function
+// 2017-04-29	PV	GitHut and Linux
 
 #include <iostream>
 #include <vector>
@@ -12,10 +14,10 @@
 #include <complex>
 #include <functional>
 
-
 using namespace std;
 
 
+// Constructors can be constexpr
 template<typename T>
 class MyTemplatedClass {
 public:
@@ -35,6 +37,7 @@ auto my_const_2 = MyTemplatedClass<vector<short>>(14);
 
 
 
+// Can use templates to define constants
 template<typename T>
 constexpr T pi = T(3.141592653589793238462643383);
 
@@ -43,13 +46,15 @@ template<>
 constexpr const char* pi<const char*> = "pi";
 
 
+// Variadic templates...
 template<template<typename...> class Seq>
 Seq<int> primes = { 2, 3, 5, 7, 11, 13, 17, 19 };
 
 
-
+// "Official" C++ 14 deprecated attribute
 [[deprecated]] void f() {}
 [[deprecated("cette fonction est depreciee")]] void g() {}
+
 
 
 // do not need constexpr, a const can be initialized using this function
@@ -62,7 +67,7 @@ const int f5 = factorial(5);
 
 
 
-// int, for, if are accepted in VS 2017 (but rejected by VS 2015)
+// int, for, if are accepted in VS 2017 constexpr functions (but rejected by VS 2015)
 constexpr int min(std::initializer_list<int> xs) {
 	int min = std::numeric_limits<int>::max();
 	for (int x : xs) {
@@ -88,6 +93,7 @@ static constexpr Tint myPow(Tint x, int p)
 auto const f5b = myPow(10ll, 13);
 
 
+// Template use auto and forward return type
 template<typename LHS, typename RHS>
 auto add(LHS lhs, RHS rhs) -> decltype(lhs + rhs) {
 	return lhs + rhs;
@@ -104,6 +110,7 @@ int two = 2;
 int&& foo() { return (int &&)two; }
 
 
+// operator ""
 class my_class {
 	char value{};
 public:
@@ -319,8 +326,9 @@ int main() {
 	auto z = 1i;				// auto deduces complex<double>
 
 
-
+#ifdef _WIN32
 	cout << "\n(Pause)";
 	cin.get();
-	//return 0;
+#endif
+	//return 0;		// Actually not needed for main function
 }
