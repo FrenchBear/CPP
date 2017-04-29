@@ -222,8 +222,9 @@ int main() {
 	auto vec = primes<std::vector>;
 	auto list = primes<std::list>;
 
-	// Cause compilation error (deprecated), while this should be a warning...
+	// Cause compilation error in VS (deprecated), while this should be a warning...
 	// Found the problem: caused by option SDL checks (/sdl) that was set for some reason (it's not the default)
+	// with g++, f is not reported as deprecated but g is...
 	f();
 	g();
 
