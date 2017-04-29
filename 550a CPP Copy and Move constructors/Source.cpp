@@ -54,6 +54,7 @@
 // 2016-10-02	PV
 // 2016-10-11	PV		Complete class T with six special member functions and purr/meow examples
 // 2017-01-22	PV		More comments; Restored toolset 140 (has switcher to toolset 141 after install of Visual Studio 2017 RC preventing build)
+// 2017-04-29	PV		GitHub and Linux
 
 
 #define _SCL_SECURE_NO_WARNINGS		// Otherwise use of copy generated a deprecated error
@@ -356,12 +357,14 @@ int main() {
 	baz = AutoDefault();        // move assignment 
 
 
-
+#ifdef _WIN32
 	cout << "\n(Pause)";
 	cin.get();
+#endif
 
 	return 0;
 }
+
 
 AutoDefault fn()
 {
