@@ -10,6 +10,8 @@
 #include <initializer_list>
 #include <random>
 #include <chrono>
+#include <climits>
+#include <exception>
 
 #include "InfInt.h"
 
@@ -73,7 +75,7 @@ public:
 		if (s.length() > digits)
 		{
 			auto msg = string("Invalid argument, len>") + std::to_string(digits);
-			throw exception(msg.c_str());
+			throw runtime_error(msg);
 		}
 		stringtointegral(val, s);
 	}
@@ -169,7 +171,7 @@ public:
 		if (s.length() > digits)
 		{
 			auto msg = string("Invalid argument, len>") + std::to_string(digits);
-			throw exception(msg.c_str());
+			throw runtime_error(msg);
 		}
 
 		if (s.length() > T::digits) {
