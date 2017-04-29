@@ -1,6 +1,7 @@
 // 555 CPP complex
 // Complex class with use of User-Defined Literals (suffix i)
 // 2016-10-13	PV
+// 2017-04-29	PV		GitHub and Linux
 
 #include <stdio.h>
 #include <iostream>
@@ -27,8 +28,10 @@ int main() {
 	cout << "z2: " << z2 << endl;
 	cout << "sin(z2): " << sin(z2) << endl;
 
+#ifdef _WIN32
 	cout << "\n(Pause)";
 	cin.get();
+#endif
 
 	return 0;
 }
