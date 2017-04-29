@@ -20,10 +20,10 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{B586730D-1724-4625-B916-04FBDB1A76A1}</ProjectGuid>
+    <ProjectGuid>{822AB613-AE7B-482C-8680-05B8C319DBEB}</ProjectGuid>
     <RootNamespace>CPP630</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
-    <ProjectName>630 CPP parallelism</ProjectName>
+    <ProjectName>630 CPP Parallelism</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

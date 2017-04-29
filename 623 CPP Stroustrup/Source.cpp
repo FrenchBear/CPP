@@ -298,8 +298,8 @@ void TestDuplicate() {
 
 extern int x;   // no definition of x required
 int f() {
-#ifdef _WIN32
-	// g++ doesn't accept this syntax
+#if false
+	// g++ and VS don't accept this syntax
 	if constexpr (true)
 		return 0;
 	else 

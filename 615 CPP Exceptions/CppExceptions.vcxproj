@@ -22,7 +22,7 @@
     <ProjectGuid>{7AB5779C-C50B-4EC4-A851-12BAD16020DC}</ProjectGuid>
     <RootNamespace>CPP615</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>CPP615 Exceptions</ProjectName>
+    <ProjectName>615 CPP Exceptions</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

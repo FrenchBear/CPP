@@ -10,6 +10,9 @@
 
 using namespace std;
 
+#ifdef _WIN32
+#pragma warning(disable: 4566)		// Warning	C4566: Character represented by universal - character - name '\u2502' cannot be represented in the current code page(1252)
+#endif
 
 // My own tests
 /*

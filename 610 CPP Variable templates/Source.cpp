@@ -4,6 +4,7 @@
 // 2017-01-17	PV
 // 2017-04-29	PV		GitHub and Linux
 
+
 template <typename T>
 T t16[16];
 
@@ -27,10 +28,4 @@ int main() {
 	ip[0] = 12;
 	cp[0] = 'a';
 	dp[0] = pi<double>;
-
-
-#ifdef _WIN32
-	cout << "\n(Pause)";
-	cin.get();
-#endif
 }

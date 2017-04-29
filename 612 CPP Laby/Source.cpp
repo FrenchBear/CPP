@@ -1,4 +1,4 @@
-﻿// laby.cpp
+﻿// C12 CPP Laby.cpp
 // C++ implementation of labyrinth using digging method
 //
 // 2016-06-03	PV
@@ -20,6 +20,8 @@
 
 #define DefaultASCIIMode true
 #define DefaultMonochrome true
+
+#pragma warning(disable: 4566)		// Warning	C4566: Character represented by universal - character - name '\u2502' cannot be represented in the current code page(1252)
 #else
 // Linux
 #include <getopt.h>
@@ -554,7 +556,7 @@ int main(int argc, char **argv) {
 				break;
 
 			case 'd':
-				srand(time(NULL));
+				srand((unsigned int)time(NULL));
 				break;
 
 			case 'r':

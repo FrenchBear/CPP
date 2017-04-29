@@ -23,7 +23,7 @@
     <ProjectGuid>{143BABCA-D9B3-4F4A-977D-FE23D1F53C6F}</ProjectGuid>
     <RootNamespace>CPP616</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
-    <ProjectName>CPP616 Strings</ProjectName>
+    <ProjectName>616 CPP Strings</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
