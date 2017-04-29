@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CPP550", "CPP550.vcxproj", "{AD516353-D695-4DDD-8D3C-F6FC8D063B44}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "550a CPP Copy and Move constructors", "CppCopyAndMoveConstructorsA.vcxproj", "{03D76342-EF96-4B9E-BB23-C43C9B420638}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AD516353-D695-4DDD-8D3C-F6FC8D063B44}.Debug|x64.ActiveCfg = Debug|x64
-		{AD516353-D695-4DDD-8D3C-F6FC8D063B44}.Debug|x64.Build.0 = Debug|x64
-		{AD516353-D695-4DDD-8D3C-F6FC8D063B44}.Debug|x86.ActiveCfg = Debug|Win32
-		{AD516353-D695-4DDD-8D3C-F6FC8D063B44}.Debug|x86.Build.0 = Debug|Win32
-		{AD516353-D695-4DDD-8D3C-F6FC8D063B44}.Release|x64.ActiveCfg = Release|x64
-		{AD516353-D695-4DDD-8D3C-F6FC8D063B44}.Release|x64.Build.0 = Release|x64
-		{AD516353-D695-4DDD-8D3C-F6FC8D063B44}.Release|x86.ActiveCfg = Release|Win32
-		{AD516353-D695-4DDD-8D3C-F6FC8D063B44}.Release|x86.Build.0 = Release|Win32
+		{03D76342-EF96-4B9E-BB23-C43C9B420638}.Debug|x64.ActiveCfg = Debug|x64
+		{03D76342-EF96-4B9E-BB23-C43C9B420638}.Debug|x64.Build.0 = Debug|x64
+		{03D76342-EF96-4B9E-BB23-C43C9B420638}.Debug|x86.ActiveCfg = Debug|Win32
+		{03D76342-EF96-4B9E-BB23-C43C9B420638}.Debug|x86.Build.0 = Debug|Win32
+		{03D76342-EF96-4B9E-BB23-C43C9B420638}.Release|x64.ActiveCfg = Release|x64
+		{03D76342-EF96-4B9E-BB23-C43C9B420638}.Release|x64.Build.0 = Release|x64
+		{03D76342-EF96-4B9E-BB23-C43C9B420638}.Release|x86.ActiveCfg = Release|Win32
+		{03D76342-EF96-4B9E-BB23-C43C9B420638}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

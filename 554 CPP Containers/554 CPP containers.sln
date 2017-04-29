@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "554 CPP Vector", "554 CPP Vector.vcxproj", "{D388352A-9051-4D13-8484-A2B0709FFE83}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "554 CPP containers", "554 CPP containers.vcxproj", "{375A64B9-8269-4903-8E22-D9380175633E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D388352A-9051-4D13-8484-A2B0709FFE83}.Debug|x64.ActiveCfg = Debug|x64
-		{D388352A-9051-4D13-8484-A2B0709FFE83}.Debug|x64.Build.0 = Debug|x64
-		{D388352A-9051-4D13-8484-A2B0709FFE83}.Debug|x86.ActiveCfg = Debug|Win32
-		{D388352A-9051-4D13-8484-A2B0709FFE83}.Debug|x86.Build.0 = Debug|Win32
-		{D388352A-9051-4D13-8484-A2B0709FFE83}.Release|x64.ActiveCfg = Release|x64
-		{D388352A-9051-4D13-8484-A2B0709FFE83}.Release|x64.Build.0 = Release|x64
-		{D388352A-9051-4D13-8484-A2B0709FFE83}.Release|x86.ActiveCfg = Release|Win32
-		{D388352A-9051-4D13-8484-A2B0709FFE83}.Release|x86.Build.0 = Release|Win32
+		{375A64B9-8269-4903-8E22-D9380175633E}.Debug|x64.ActiveCfg = Debug|x64
+		{375A64B9-8269-4903-8E22-D9380175633E}.Debug|x64.Build.0 = Debug|x64
+		{375A64B9-8269-4903-8E22-D9380175633E}.Debug|x86.ActiveCfg = Debug|Win32
+		{375A64B9-8269-4903-8E22-D9380175633E}.Debug|x86.Build.0 = Debug|Win32
+		{375A64B9-8269-4903-8E22-D9380175633E}.Release|x64.ActiveCfg = Release|x64
+		{375A64B9-8269-4903-8E22-D9380175633E}.Release|x64.Build.0 = Release|x64
+		{375A64B9-8269-4903-8E22-D9380175633E}.Release|x86.ActiveCfg = Release|Win32
+		{375A64B9-8269-4903-8E22-D9380175633E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

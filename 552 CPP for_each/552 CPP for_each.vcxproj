@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3B3F53A5-6C1A-4731-9977-B460DEFC754D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>My552CPPfor_each</RootNamespace>
+    <RootNamespace>CPP552</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
