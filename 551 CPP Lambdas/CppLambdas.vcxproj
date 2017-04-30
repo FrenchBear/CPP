@@ -22,7 +22,7 @@
     <ProjectGuid>{8361BACF-7B53-45D9-8CCA-161C8CC33E1D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>CPP551</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
     <ProjectName>551 CPP Lambdas</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

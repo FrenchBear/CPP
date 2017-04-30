@@ -22,7 +22,7 @@
     <ProjectGuid>{8D96FC34-1A46-4A30-AF7F-26939C7D52B1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>CPP538</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
     <ProjectName>538 CppStack</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
