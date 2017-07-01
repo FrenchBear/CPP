@@ -1,4 +1,4 @@
-// CPP Factorial
+// 102 CPP Dynamic
 // An implementation of factorial in C++ at compile-time based on template
 // Also show type restictor to limit accepted types from a template
 //

@@ -1,4 +1,4 @@
-// 538 CppStack.cpp
+// 100 CppStack.cpp
 // First play in C++ after years using stack from STL
 //
 // 2017-04-28	PV	Simplified version for GitHub/Linux sharing

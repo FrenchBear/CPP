@@ -19,11 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B5531283-A0CC-487F-A332-97FC034B86C3}</ProjectGuid>
+    <ProjectGuid>{939BCB16-6462-444D-884F-4B64EE0E7F3D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>CPP545</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
-    <ProjectName>545 CPP Smart Pointers</ProjectName>
+    <ProjectName>101 CPP Smart Pointers</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
