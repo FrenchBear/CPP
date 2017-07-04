@@ -36,7 +36,7 @@ struct REMOVE_REFERENCE<_Ty&&>
 // Note than argument cannot be const T, const T& or const T&& by definition (otherwise couldn't move it)
 template<class _Ty> inline
 constexpr typename REMOVE_REFERENCE<_Ty>::type&&
-MOVE(_Ty&& _Arg) _NOEXCEPT
+MOVE(_Ty&& _Arg) noexcept
 {	// FORWARD _Arg as movable
 	return (static_cast<typename REMOVE_REFERENCE<_Ty>::type&&>(_Arg));
 }
@@ -46,14 +46,14 @@ MOVE(_Ty&& _Arg) _NOEXCEPT
 // TEMPLATE FUNCTION FORWARD
 template<class _Ty> inline
 constexpr _Ty&& FORWARD(
-	typename REMOVE_REFERENCE<_Ty>::type& _Arg) _NOEXCEPT
+	typename REMOVE_REFERENCE<_Ty>::type& _Arg) noexcept
 {	// FORWARD an lvalue as either an lvalue or an rvalue
 	return (static_cast<_Ty&&>(_Arg));
 }
 
 template<class _Ty> inline
 constexpr _Ty&& FORWARD(
-	typename REMOVE_REFERENCE<_Ty>::type&& _Arg) _NOEXCEPT
+	typename REMOVE_REFERENCE<_Ty>::type&& _Arg) noexcept
 {	// FORWARD an rvalue as an rvalue
 	static_assert(!is_lvalue_reference<_Ty>::value, "bad FORWARD call");
 	return (static_cast<_Ty&&>(_Arg));

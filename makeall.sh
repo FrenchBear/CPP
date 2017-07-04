@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for dir in ~/GitHub/CPP/*/
+for dir in ~/Development/GitHub/CPP/*/
 do 
 	echo "$dir"
 	cd "$dir" && make
