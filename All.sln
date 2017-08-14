@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "609 CPP Arith2", "609 CPP Arith2\CppArith2.vcxproj", "{98469F72-3805-4A09-B138-099ECCA9C63F}"
 EndProject
@@ -68,6 +68,14 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "103 CPP CPP14", "103 CPP CPP14\Cpp14.vcxproj", "{EC228590-3639-472D-9836-5440AD57C3C1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "632 CPP Move Implementation", "632 CPP Move Implementation\CPP Move Implementation.vcxproj", "{8EC3B927-CD8A-48B8-9ABD-114CC437A492}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "156 CPP Pentamino", "156 CPP Pentamino\156 Pentamino.vcxproj", "{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "304 CPP pi1line", "304 CPP pi1line\304 CPP pi1line.vcxproj", "{3A404FFD-79EB-4F99-8DB9-EBC4FA1C412A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "521_1 CPP Pi", "521_1 CPP Pi\521_1 CPP Pi.vcxproj", "{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "521_2 CPP Pi1Line", "521_2 CPP Pi1Line\521_2 CPP Pi1Line.vcxproj", "{4AF931ED-FA31-4AC6-A158-F63DB74745BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -341,6 +349,30 @@ Global
 		{8EC3B927-CD8A-48B8-9ABD-114CC437A492}.Release|x64.Build.0 = Release|x64
 		{8EC3B927-CD8A-48B8-9ABD-114CC437A492}.Release|x86.ActiveCfg = Release|Win32
 		{8EC3B927-CD8A-48B8-9ABD-114CC437A492}.Release|x86.Build.0 = Release|Win32
+		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Debug|x64.ActiveCfg = Debug|Win32
+		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Debug|x86.ActiveCfg = Debug|Win32
+		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Debug|x86.Build.0 = Debug|Win32
+		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Release|x64.ActiveCfg = Release|Win32
+		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Release|x86.ActiveCfg = Release|Win32
+		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Release|x86.Build.0 = Release|Win32
+		{3A404FFD-79EB-4F99-8DB9-EBC4FA1C412A}.Debug|x64.ActiveCfg = Debug|Win32
+		{3A404FFD-79EB-4F99-8DB9-EBC4FA1C412A}.Debug|x86.ActiveCfg = Debug|Win32
+		{3A404FFD-79EB-4F99-8DB9-EBC4FA1C412A}.Debug|x86.Build.0 = Debug|Win32
+		{3A404FFD-79EB-4F99-8DB9-EBC4FA1C412A}.Release|x64.ActiveCfg = Release|Win32
+		{3A404FFD-79EB-4F99-8DB9-EBC4FA1C412A}.Release|x86.ActiveCfg = Release|Win32
+		{3A404FFD-79EB-4F99-8DB9-EBC4FA1C412A}.Release|x86.Build.0 = Release|Win32
+		{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}.Debug|x64.ActiveCfg = Debug|Win32
+		{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}.Debug|x86.ActiveCfg = Debug|Win32
+		{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}.Debug|x86.Build.0 = Debug|Win32
+		{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}.Release|x64.ActiveCfg = Release|Win32
+		{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}.Release|x86.ActiveCfg = Release|Win32
+		{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}.Release|x86.Build.0 = Release|Win32
+		{4AF931ED-FA31-4AC6-A158-F63DB74745BE}.Debug|x64.ActiveCfg = Debug|Win32
+		{4AF931ED-FA31-4AC6-A158-F63DB74745BE}.Debug|x86.ActiveCfg = Debug|Win32
+		{4AF931ED-FA31-4AC6-A158-F63DB74745BE}.Debug|x86.Build.0 = Debug|Win32
+		{4AF931ED-FA31-4AC6-A158-F63DB74745BE}.Release|x64.ActiveCfg = Release|Win32
+		{4AF931ED-FA31-4AC6-A158-F63DB74745BE}.Release|x86.ActiveCfg = Release|Win32
+		{4AF931ED-FA31-4AC6-A158-F63DB74745BE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
