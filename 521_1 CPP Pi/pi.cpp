@@ -130,7 +130,7 @@ int tiszero()
 }
 
 
-int _tmain(int argc, _TCHAR* argv[])
+int main(int argc, char* argv[])
 {
 	time_t startime, endtime;
 	register int i;

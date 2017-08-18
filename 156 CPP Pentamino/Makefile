@@ -1,0 +1,5 @@
+CXXFLAGS=-Wall -std=gnu++17 -Wno-unused-but-set-variable -Wno-unused-variable -Wno-deprecated-declarations -Wno-unknown-pragmas
+
+make:	Pentamino
+
+Pentamino:	Pentamino.o Piece.o Carre55.o

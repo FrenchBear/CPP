@@ -1,7 +1,9 @@
 #!/bin/bash
 
-for dir in ~/Development/GitHub/CPP/*/
+for dir in */
 do 
 	echo "$dir"
-	cd "$dir" && make
+	pushd "$dir"
+	make
+	popd
 done

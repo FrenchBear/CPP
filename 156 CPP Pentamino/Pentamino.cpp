@@ -1,11 +1,12 @@
 // pentamino.cpp
 // Résolution de problèmes de pentaminos (pavage)
 // 1998-12-26	PV
-// 2006-10-01   PV  VS2005
-// 2012-02-25   PV  VS2010
+// 2006-10-01   PV	VS2005
+// 2012-02-25   PV	VS2010
 // 2017-04-30	PV	VS2017 and Git
+// 2017-08-18   PV  Compile on Debian, case-sensitive FS updates
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include <time.h>
 #include <memory.h>
 
@@ -198,7 +199,7 @@ int main(int argc, char* argv[])
 	Pavage(0, 0, j, (1 << MAXPIECE) - 1);
 	time_t t1 = time(0L);
 
-	printf("%llds execution\n", t1 - t0);
+	printf("%lds execution\n", t1 - t0);
 	printf("%d solutions\n", iNbSol);
 	printf("%d appels à Pavage\n", iNbAppelPavage);
 

@@ -5,11 +5,6 @@
 
 #pragma once
 
-#include "targetver.h"
-
 #include <stdio.h>
-#include <tchar.h>
 #include <time.h>
 
-
-// TODO: reference additional headers your program requires here

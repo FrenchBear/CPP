@@ -18,7 +18,7 @@ public:
 	int	iNbt;			// Nb de transformations
 
 
-	Piece::Piece(short hNP, char cP,
+	Piece(short hNP, char cP,
 		int i00, int i01, int i02, int i03, int i04,
 		int i10, int i11, int i12, int i13, int i14,
 		int i20, int i21, int i22, int i23, int i24);

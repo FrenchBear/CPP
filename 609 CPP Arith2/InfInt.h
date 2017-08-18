@@ -1167,16 +1167,16 @@ inline bool InfInt::equalizeSigns()
             if (val[i] < 0)
             {
                 int k = 0, index = i + 1;
-                for (; (size_t)(index) < val.size() && val[index] == 0; ++k, ++index); // count adjacent zeros on left
+                for (; (size_t)(index) < val.size() && val[index] == 0; ++k, ++index) {}; // count adjacent zeros on left
                 //if ((size_t)(index) < val.size() && val[index] > 0)
-                { // number on the left is positive
+                //{ // number on the left is positive
                     val[index] -= 1;
                     val[i] += BASE;
                     for (; k > 0; --k)
                     {
                         val[i + k] = UPPER_BOUND;
                     }
-                }
+                //}
             }
         }
     }
@@ -1187,16 +1187,16 @@ inline bool InfInt::equalizeSigns()
             if (val[i] > 0)
             {
                 int k = 0, index = i + 1;
-                for (; (size_t)(index) < val.size() && val[index] == 0; ++k, ++index); // count adjacent zeros on right
+                for (; (size_t)(index) < val.size() && val[index] == 0; ++k, ++index) {}; // count adjacent zeros on right
                 //if ((size_t)(index) < val.size() && val[index] < 0)
-                { // number on the left is negative
+                //{ // number on the left is negative
                     val[index] += 1;
                     val[i] -= BASE;
                     for (; k > 0; --k)
                     {
                         val[i + k] = -UPPER_BOUND;
                     }
-                }
+                //}
             }
         }
     }
