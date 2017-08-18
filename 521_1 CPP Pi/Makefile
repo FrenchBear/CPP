@@ -1,3 +1,4 @@
-CXXFLAGS=-Wall -std=gnu++17 -Wno-unused-but-set-variable -Wno-unused-variable -Wno-deprecated-declarations
+STDCPP?=gnu++17
+CXXFLAGS=-Wall -std=$(STDCPP) -Wno-unused-but-set-variable -Wno-unused-variable -Wno-deprecated-declarations
 
 make:	pi

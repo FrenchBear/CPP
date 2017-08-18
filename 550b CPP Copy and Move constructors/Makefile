@@ -1,3 +1,4 @@
-CXXFLAGS=-Wall -std=gnu++17 -Wno-unused-but-set-variable -Wno-unused-variable
+STDCPP?=gnu++17
+CXXFLAGS=-Wall -std=$(STDCPP) -Wno-unused-but-set-variable -Wno-unused-variable
 
 make:	Source

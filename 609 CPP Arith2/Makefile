@@ -1,4 +1,5 @@
-CXXFLAGS=-Wall -std=gnu++17 -Wno-reorder
+STDCPP?=gnu++17
+CXXFLAGS=-Wall -std=$(STDCPP) -Wno-reorder
 
 make:	Source
 
