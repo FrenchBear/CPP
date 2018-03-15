@@ -605,7 +605,7 @@ int main(int argc, char **argv) {
 	if (optind < argc) {
 		for (int i = optind; i < argc; i++)
 			cerr << "laby: unknown argument " << argv[i] << endl;
-		cerr << "Use laby -h to gt usage" << endl;
+		cerr << "Use laby -h to get usage" << endl;
 		return 1;
 	}
 

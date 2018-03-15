@@ -201,7 +201,7 @@ int main(int argc, char* argv[])
 
 	printf("%lds execution\n", t1 - t0);
 	printf("%d solutions\n", iNbSol);
-	printf("%d appels à Pavage\n", iNbAppelPavage);
+	printf(u8"%d appels à Pavage\n", iNbAppelPavage);
 
 	printf("\n(pause) ");
 	getchar();
