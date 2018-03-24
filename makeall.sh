@@ -7,6 +7,6 @@ for dir in */
 do 
 	echo "$dir"
 	pushd "$dir"
-	make
+	make $*
 	popd
 done

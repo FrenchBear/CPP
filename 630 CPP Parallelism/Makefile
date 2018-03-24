@@ -5,3 +5,6 @@ make:	Source
 
 Source:	Source.o File.o
 		g++ Source.o File.o -lpthread -o Source
+
+clean:
+	rm -f Source Source.o File.o

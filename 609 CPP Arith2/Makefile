@@ -8,3 +8,6 @@ Source:	Source.o
 
 Source.o:	Source.cpp InfInt.h
 	g++ $(CXXFLAGS) -c Source.cpp -o Source.o
+
+clean:
+	rm -f Source Source.o

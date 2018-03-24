@@ -11,3 +11,6 @@ Circle.o:	Circle.cpp Circle.h
 
 Shape.o:	Shape.cpp Shape.h
 			g++ $(CXXFLAGS) -c Shape.cpp
+
+clean:
+	rm -f Source Source.o Circle.o Shape.o

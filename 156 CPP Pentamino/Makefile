@@ -4,3 +4,6 @@ CXXFLAGS=-Wall -std=$(STDCPP) -Wno-unused-but-set-variable -Wno-unused-variable 
 make:	Pentamino
 
 Pentamino:	Pentamino.o Piece.o Carre55.o
+
+clean:
+	rm -f Pentamino *.o
