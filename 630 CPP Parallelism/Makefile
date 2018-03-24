@@ -1,5 +1,5 @@
 STDCPP?=gnu++17
-CXXFLAGS=-Wall -std=$(STDCPP) -Wno-unused-variable
+CXXFLAGS=-Wall -std=$(STDCPP) -Wno-unused-variable -Wno-psabi
 
 make:	Source
 
