@@ -253,3 +253,8 @@ paket-files/
 
 # FPVI Specific
 Source
+Pentamino
+pi_con
+Pi1Line
+pi
+*.o
