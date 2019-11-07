@@ -258,3 +258,5 @@ pi_con
 Pi1Line
 pi
 *.o
+*.obj
+*.exe
