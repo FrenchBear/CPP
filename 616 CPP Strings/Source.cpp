@@ -45,8 +45,7 @@ void Test1() {
 
 										// c:\temp\project1cpp\source.cpp(31) : warning C4566 : character represented by universal - character - name '\u0302' cannot be represented in the current code page(1252)
 										// c:\temp\project1cpp\source.cpp(31) : warning C4566 : character represented by universal - character - name '\U0001F34C' cannot be represented in the current code page(1252)
-	char *t6 = R"(Où ça?
-ĤLà🍌!)";
+	char *t6 = R"(Où ça? ĤLà🍌!)";
 
 	// c:\temp\project1cpp\source.cpp(25) : warning C4566 : character represented by universal - character - name '\u0302' cannot be represented in the current code page(1252)
 	// c:\temp\project1cpp\source.cpp(25) : warning C4566 : character represented by universal - character - name '\U0001F34C' cannot be represented in the current code page(1252)
