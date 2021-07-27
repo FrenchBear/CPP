@@ -1,5 +1,5 @@
 // pentamino.cpp
-// Résolution de problèmes de pentaminos (pavage)
+// Rï¿½solution de problï¿½mes de pentaminos (pavage)
 // 1998-12-26	PV
 // 2006-10-01   PV	VS2005
 // 2012-02-25   PV	VS2010
@@ -27,7 +27,7 @@ int iNbAppelPavage = 0;
 // Plan de jeu
 typedef char Jeu[MAXLIG][MAXCOL];
 
-// Tableau de pointeurs sur les pentaminos à utiliser pour le problème
+// Tableau de pointeurs sur les pentaminos ï¿½ utiliser pour le problï¿½me
 Piece *tP[MAXPIECE];
 
 
@@ -43,12 +43,12 @@ void __inline Pavage(int lstart, int cstart, Jeu &jeu, int iMasquePieces)
 
 	iNbAppelPavage++;
 
-	// On cherche une case vide à couvrir, de gauche à droite, de haut en bas
+	// On cherche une case vide ï¿½ couvrir, de gauche ï¿½ droite, de haut en bas
 	for (l = 0; l < MAXLIG; l++)
 	{
 		for (c = 0; c < MAXCOL; c++)
 		{
-			if (l == 0 && c == 0)	  // Accélération, on part de la dernière case vide trouvée
+			if (l == 0 && c == 0)	  // Accï¿½lï¿½ration, on part de la derniï¿½re case vide trouvï¿½e
 			{
 				l = lstart;
 				c = cstart;
@@ -64,12 +64,12 @@ void __inline Pavage(int lstart, int cstart, Jeu &jeu, int iMasquePieces)
 			break;
 	}
 
-	// Si on n'en a pas trouvé, c'est que le pavage est terminé !
+	// Si on n'en a pas trouvï¿½, c'est que le pavage est terminï¿½ !
 	if (l == MAXLIG && c == MAXCOL)
 	{
 		iNbSol++;
 		/*
-		printf("Solution %d trouvée:\n", iNbSol);
+		printf("Solution %d trouvï¿½e:\n", iNbSol);
 		for (l=0 ; l<MAXLIG; l++)
 		{
 		for (c=0 ; c<MAXCOL ; c++)
@@ -78,7 +78,7 @@ void __inline Pavage(int lstart, int cstart, Jeu &jeu, int iMasquePieces)
 		}
 
 		FILE *f = fopen("Solution pentamino.txt", "a");
-		fprintf(f, "Solution %d trouvée:\n", iNbSol);
+		fprintf(f, "Solution %d trouvï¿½e:\n", iNbSol);
 		for (l=0 ; l<MAXLIG; l++)
 		{
 		for (c=0 ; c<MAXCOL ; c++)
@@ -90,7 +90,7 @@ void __inline Pavage(int lstart, int cstart, Jeu &jeu, int iMasquePieces)
 		return;
 	}
 
-	// On cherche parmi toutes les pieces qui restent une pièce pour couvrir la case vide
+	// On cherche parmi toutes les pieces qui restent une piï¿½ce pour couvrir la case vide
 	int i, j;
 	for (i = 0; i < MAXPIECE; i++)
 		if (iMasquePieces & (1 << i))
@@ -103,14 +103,14 @@ void __inline Pavage(int lstart, int cstart, Jeu &jeu, int iMasquePieces)
 				int bContinue = FALSE;
 				if (c + ca.cmax - ca.iOffsetCol > MAXCOL || // Trop large
 					l + ca.lmax > MAXLIG ||				  // Trop haut
-					c < ca.iOffsetCol)				  // Doit être décalée trop à gauche
+					c < ca.iOffsetCol)				  // Doit ï¿½tre dï¿½calï¿½e trop ï¿½ gauche
 					continue;
 
 				bCollision = FALSE;
 				for (l2 = 0; l2 < ca.lmax; l2++)
 				{
 					for (c2 = 0; c2 < ca.cmax; c2++)
-						if (ca.tMotif[l2][c2] && jeu[l + l2][c + c2 - ca.iOffsetCol])  // Case déjà occupée
+						if (ca.tMotif[l2][c2] && jeu[l + l2][c + c2 - ca.iOffsetCol])  // Case dï¿½jï¿½ occupï¿½e
 						{
 							bCollision = TRUE;
 							break;
@@ -121,7 +121,7 @@ void __inline Pavage(int lstart, int cstart, Jeu &jeu, int iMasquePieces)
 
 				if (!bCollision)
 				{
-					// Pièce valable ! On la place
+					// Piï¿½ce valable ! On la place
 					Jeu jeu2;
 					memcpy(jeu2, jeu, sizeof(Jeu));
 
@@ -129,7 +129,7 @@ void __inline Pavage(int lstart, int cstart, Jeu &jeu, int iMasquePieces)
 						for (c2 = 0; c2 < ca.cmax; c2++)
 							if (ca.tMotif[l2][c2]) jeu2[l + l2][c + c2 - ca.iOffsetCol] = i + 1;
 
-					// On continue avec les pièces qui restent
+					// On continue avec les piï¿½ces qui restent
 					Pavage(l, c, jeu2, iMasquePieces & ~(1 << i));
 				}
 			}
@@ -138,7 +138,7 @@ void __inline Pavage(int lstart, int cstart, Jeu &jeu, int iMasquePieces)
 
 int main(int argc, char* argv[])
 {
-	// Préparation des pièces
+	// Prï¿½paration des piï¿½ces
 	Piece P1(1, 'I', 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 	Piece P2(2, 'L', 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0);
 	Piece P3(3, 'Y', 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0);
@@ -170,11 +170,11 @@ int main(int argc, char* argv[])
 
 	if (MAXLIG*MAXCOL != 5 * MAXPIECE)
 	{
-		printf("Constantes MAXLIG/MAXCOL/MAXPIECE incohérentes !\n");
+		printf("Constantes MAXLIG/MAXCOL/MAXPIECE incohÃ©rentes !\n");
 		return 1;
 	}
 
-	// Plan à paver
+	// Plan ï¿½ paver
 	Jeu j;
 	int l, c;
 	for (l = 0; l < MAXLIG; l++)
@@ -201,7 +201,7 @@ int main(int argc, char* argv[])
 
 	printf("%lds execution\n", t1 - t0);
 	printf("%d solutions\n", iNbSol);
-	printf(u8"%d appels à Pavage\n", iNbAppelPavage);
+	printf("%d appels Ã  Pavage\n", iNbAppelPavage);
 
 	printf("\n(pause) ");
 	getchar();
