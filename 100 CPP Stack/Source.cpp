@@ -28,7 +28,7 @@ int main()
 
 #ifdef _WIN32
 	cout << "\n(Pause) ";
-	getchar();
+	(void)getchar();
 #endif
 	return 0;
 }
