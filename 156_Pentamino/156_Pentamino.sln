@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31612.314
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "156_Pentamino", "156_Pentamino.vcxproj", "{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Debug|x64.ActiveCfg = Debug|x64
+		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Debug|x64.Build.0 = Debug|x64
+		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Release|x64.ActiveCfg = Release|x64
+		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5AD62CE4-3812-44F0-BB91-5F48AD1EDC21}
+	EndGlobalSection
+EndGlobal
