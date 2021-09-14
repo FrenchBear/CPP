@@ -7,8 +7,9 @@
 // only lead to recompilation of Complex.cpp, no change is visible in Complex.h, 
 // avoiding cascade recompilations/rebuilds after an implementation change.
 //
-// 2017-02-02	PV	First version, also worked hard to output UTF-16/Unicode on console...
-// 2017-04-29	PV	GitHub and Linux
+// 2017-02-02	PV		First version, also worked hard to output UTF-16/Unicode on console...
+// 2017-04-29	PV		GitHub and Linux
+// 2021-09-14	PV		Visual Studio 2022
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -69,7 +70,7 @@ int main() {
 	// Without this, unicode characters block output on wcout
 	// With this, wcout can output unicode characters...  but then cout crashes on an internal error!!!!!!!!!!!!!!
 #ifdef _WIN32
-	_setmode(_fileno(stdout), _O_U16TEXT);
+	(void)_setmode(_fileno(stdout), _O_U16TEXT);
 #endif
 
 	Test();

@@ -3,6 +3,7 @@
 //
 // 2016-10-13	PV
 // 2017-04-29	PV		GitHub and Linux; gpp doesn't like i suffix...
+// 2021-09-14	PV		Visual Studio 2022
 
 #include <stdio.h>
 #include <iostream>

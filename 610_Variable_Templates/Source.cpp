@@ -3,7 +3,7 @@
 //
 // 2017-01-17	PV
 // 2017-04-29	PV		GitHub and Linux
-
+// 2021-09-14	PV		Visual Studio 2022
 
 template <typename T>
 T t16[16];

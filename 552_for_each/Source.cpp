@@ -3,6 +3,7 @@
 //
 // 2016-10-04	PV
 // 2017-04-29	PV		GitHub and Linux
+// 2021-09-14	PV		Visual Studio 2022
 
 #define _SCL_SECURE_NO_WARNINGS		// Otherwise use of copy generated a deprecated error
 
@@ -113,7 +114,7 @@ int main() {
 
 #ifdef _WIN32
 	cout << "(Pause)";
-	getchar();
+	(void)getchar();
 #endif
 	return 0;
 }

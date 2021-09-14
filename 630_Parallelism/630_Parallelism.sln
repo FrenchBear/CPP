@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "630 CPP Parallelism", "CppParallelism.vcxproj", "{822AB613-AE7B-482C-8680-05B8C319DBEB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "630_Parallelism", "630_Parallelism.vcxproj", "{822AB613-AE7B-482C-8680-05B8C319DBEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

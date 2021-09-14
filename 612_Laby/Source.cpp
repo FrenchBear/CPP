@@ -2,9 +2,10 @@
 // C++ implementation of labyrinth using digging method
 //
 // 2016-06-03	PV
-// 2017-01-27	PV	Windows version (CPP 612 Laby)
-// 2017-02-01	PV	Added recursive dividing algorithm
-// 2017-04-29	PV	GitHub and Linux
+// 2017-01-27	PV		Windows version (CPP 612 Laby)
+// 2017-02-01	PV		Added recursive dividing algorithm
+// 2017-04-29	PV		GitHub and Linux
+// 2021-09-14	PV		Visual Studio 2022
 
 #include <stdlib.h>
 #include <time.h>
@@ -519,7 +520,7 @@ void Solve() {
 inline bool isInteger(const char *s) {
 	if ((s == NULL) || (s[0] == 0) || ((!isdigit(s[0]) && (s[0] != '-') && (s[0] != '+')))) return false;
 	char *p;
-	strtol(s, &p, 10);
+	(void)strtol(s, &p, 10);
 	return *p == 0;
 }
 

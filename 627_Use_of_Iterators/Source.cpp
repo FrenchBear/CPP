@@ -1,7 +1,8 @@
 // 627 CPP use of iterators
 //
 // 2017-04-08	PV
-// 2017-04-29	PV	GitHub and Linux
+// 2017-04-29	PV		GitHub and Linux
+// 2021-09-14	PV		Visual Studio 2022
 
 // Avoid iterator checking for the end exception in debug mode
 #define 	_ITERATOR_DEBUG_LEVEL 0

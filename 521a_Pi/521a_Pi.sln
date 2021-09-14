@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "521_1 CPP Pi", "521_1 CPP Pi.vcxproj", "{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "521a_Pi", "521a_Pi.vcxproj", "{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

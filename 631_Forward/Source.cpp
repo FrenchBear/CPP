@@ -1,5 +1,7 @@
 // 631 CPP Forward
 // Play fith std::forward
+//
+// 2021-09-14	PV		Visual Studio 2022
 
 #include <iostream>
 

@@ -158,7 +158,7 @@ int main(int argc, char* argv[])
 	printf("\n");
 	printf("%d seconds to compute %d digits of pi\n", (int)(endtime - startime), q);
 
-	getchar();
+	(void)getchar();
 	return 0;
 }
 

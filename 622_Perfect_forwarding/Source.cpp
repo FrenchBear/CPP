@@ -1,7 +1,8 @@
 // 622 CPP Perfect forwarding
 // Play with this concept
 //
-// 2017-04-29	PV	GitHub and Linux
+// 2017-04-29	PV		GitHub and Linux
+// 2021-09-14	PV		Visual Studio 2022
 
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -23,7 +24,7 @@ public:
 		cout << "c copy constructor\n";
 	}
 
-	c(c&& other) {
+	c(c&& other) noexcept {
 		cout << "c move constructor\n";
 	}
 

@@ -55,6 +55,7 @@
 // 2016-10-11	PV		Complete class T with six special member functions and purr/meow examples
 // 2017-01-22	PV		More comments; Restored toolset 140 (has switcher to toolset 141 after install of Visual Studio 2017 RC preventing build)
 // 2017-04-29	PV		GitHub and Linux
+// 2021-09-14	PV		Visual Studio 2022
 
 
 #define _SCL_SECURE_NO_WARNINGS		// Otherwise use of copy generated a deprecated error
@@ -118,7 +119,7 @@ public:
 	}
 
 	// Move constructor
-	T(T&& other)
+	T(T&& other) noexcept
 	{
 		cout << "T Move constructor\n";
 		//__debugbreak();
@@ -163,7 +164,7 @@ public:
 	}
 
 	// Move assignment
-	T& operator=(T&& other)
+	T& operator=(T&& other) noexcept
 	{
 		cout << "T Move assignment operator\n";
 		if (this != &other)
@@ -225,7 +226,7 @@ public:
 			t2 = other.t2;
 	}
 
-	U(U&& other) {
+	U(U&& other) noexcept {
 		cout << "U Move constructor\n";
 		if (this != &other)
 		{
@@ -245,7 +246,7 @@ public:
 
 	//U& operator=(U&& other) = default;		// Correctly calls T move assignment operator
 
-	U& operator=(U&& other) {
+	U& operator=(U&& other) noexcept {
 		cout << "U Move assignment operator\n";
 		if (this != &other) {
 			t1 = move(other.t1);	// Without move, no way it knows it has to call move
@@ -295,8 +296,8 @@ public:
 	AutoDefault& operator=(const AutoDefault&) = default;
 
 	// move operations
-	AutoDefault(AutoDefault&&) = default;
-	AutoDefault& operator=(AutoDefault&&) = default;
+	AutoDefault(AutoDefault&&) noexcept = default;
+	AutoDefault& operator=(AutoDefault&&) noexcept = default;
 };
 
 

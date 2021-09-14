@@ -3,69 +3,69 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "632_Move_Implementation", "632_Move_Implementation\CPP Move Implementation.vcxproj", "{8EC3B927-CD8A-48B8-9ABD-114CC437A492}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "632_Move_Implementation", "632_Move_Implementation\632_Move_Implementation.vcxproj", "{8EC3B927-CD8A-48B8-9ABD-114CC437A492}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "631_Forward", "631_Forward\631 CPP Forward.vcxproj", "{53491397-1FC1-4BC9-B89B-0164596AEA69}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "631_Forward", "631_Forward\631_Forward.vcxproj", "{53491397-1FC1-4BC9-B89B-0164596AEA69}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "630_Parallelism", "630_Parallelism\CppParallelism.vcxproj", "{822AB613-AE7B-482C-8680-05B8C319DBEB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "630_Parallelism", "630_Parallelism\630_Parallelism.vcxproj", "{822AB613-AE7B-482C-8680-05B8C319DBEB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "629_Misc", "629_Misc\CppMisc.vcxproj", "{B586730D-1724-4625-B916-04FBDB1A76A1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "629_Misc", "629_Misc\629_Misc.vcxproj", "{B586730D-1724-4625-B916-04FBDB1A76A1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "628_Stream_Iterators", "628_Stream_Iterators\CppStreamIterators.vcxproj", "{A179D47D-45CA-4891-9BC3-79F308FC261B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "628_Stream_Iterators", "628_Stream_Iterators\628_Stream_Iterators.vcxproj", "{A179D47D-45CA-4891-9BC3-79F308FC261B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "626_Unordered_map_cplx_hasher", "626_Unordered_map_cplx_hasher\CppUnorderedMapHasher.vcxproj", "{306F18CD-23B6-459C-BBE3-C35CE639E406}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "627_Use_of_Iterators", "627_Use_of_Iterators\627_Use_of_Iterators.vcxproj", "{741262C5-D566-42F8-8CE1-F68467E48B0D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "625_IOStream", "625_IOStream\CppIOStream.vcxproj", "{07FA7E07-1BCC-42B9-91AF-64A076A5BF2A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "626_Unordered_map_cplx_hasher", "626_Unordered_map_cplx_hasher\626_Unordered_map_cplx_hasher.vcxproj", "{306F18CD-23B6-459C-BBE3-C35CE639E406}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "624_Regex", "624_Regex\CppRegex.vcxproj", "{6CD68363-04E7-4CAF-B06A-048C2B045ABF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "625_IOStream", "625_IOStream\625_IOStream.vcxproj", "{07FA7E07-1BCC-42B9-91AF-64A076A5BF2A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "623_Stroustrup", "623_Stroustrup\CppStroustrup.vcxproj", "{C45E0B33-5159-4508-9B60-CA4ECE2673BA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "624_Regex", "624_Regex\624_Regex.vcxproj", "{6CD68363-04E7-4CAF-B06A-048C2B045ABF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "622_Perfect_forwarding", "622_Perfect_forwarding\CppPerfectForwarding.vcxproj", "{211DB4B4-08C2-4B77-8560-A49FD5EBE2C7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "623_Stroustrup", "623_Stroustrup\623_Stroustrup.vcxproj", "{C45E0B33-5159-4508-9B60-CA4ECE2673BA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "621_Variadic", "621_Variadic\CPPVariadic.vcxproj", "{5CBDF24C-DF37-49C5-A556-8E8A221DA594}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "622_Perfect_forwarding", "622_Perfect_forwarding\622_Perfect_forwarding.vcxproj", "{211DB4B4-08C2-4B77-8560-A49FD5EBE2C7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "620_Interfaces_using_abstract", "620_Interfaces_using_abstract\CppInterfaces.vcxproj", "{F7F21525-213D-46CD-AD40-17B54BC0F1EA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "621_Variadic", "621_Variadic\621_Variadic.vcxproj", "{5CBDF24C-DF37-49C5-A556-8E8A221DA594}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "618_Pointer_to_member", "618_Pointer_to_member\CppPointerToMember.vcxproj", "{7320F6BB-AE22-4FA5-8509-3C9A2679F647}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "620_Interfaces_using_abstract", "620_Interfaces_using_abstract\620_Interfaces_using_abstract.vcxproj", "{F7F21525-213D-46CD-AD40-17B54BC0F1EA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "617_Ref_RefRef_Ref-Spec", "617_Ref_RefRef_Ref-Spec\CppRefRef.vcxproj", "{54A1E671-01C5-49A1-8069-8BA0ABE6D6F1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "618_Pointer_to_member", "618_Pointer_to_member\618_Pointer_to_member.vcxproj", "{7320F6BB-AE22-4FA5-8509-3C9A2679F647}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "616_Strings", "616_Strings\CppStrings.vcxproj", "{143BABCA-D9B3-4F4A-977D-FE23D1F53C6F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "617_Ref_RefRef_Ref-Spec", "617_Ref_RefRef_Ref-Spec\617_Ref_RefRef_Ref-Spec.vcxproj", "{54A1E671-01C5-49A1-8069-8BA0ABE6D6F1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "615_Exceptions", "615_Exceptions\CppExceptions.vcxproj", "{7AB5779C-C50B-4EC4-A851-12BAD16020DC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "616_Strings", "616_Strings\616_Strings.vcxproj", "{143BABCA-D9B3-4F4A-977D-FE23D1F53C6F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "614_Range-Based_Loops", "614_Range-Based_Loops\CppRangeBasedLoops.vcxproj", "{A9698FFA-B7D3-464C-B49D-5A44D454A8A1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "615_Exceptions", "615_Exceptions\615_Exceptions.vcxproj", "{7AB5779C-C50B-4EC4-A851-12BAD16020DC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "613_Pimpl_Complex", "613_Pimpl_Complex\CppPimplComplex.vcxproj", "{DC378800-6BFB-4A11-A31E-A91FA269DE29}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "614_Range-Based_Loops", "614_Range-Based_Loops\614_Range-Based_Loops.vcxproj", "{A9698FFA-B7D3-464C-B49D-5A44D454A8A1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "612_Laby", "612_Laby\CppLaby.vcxproj", "{55374C4A-85FB-4587-9FE7-243D506C33CB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "613_Pimpl_Complex", "613_Pimpl_Complex\613_Pimpl_Complex.vcxproj", "{DC378800-6BFB-4A11-A31E-A91FA269DE29}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "610_Variable_Templates", "610_Variable_Templates\CppVariableTemplates.vcxproj", "{A760CA20-4903-421F-91C3-241BEF1DC266}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "612_Laby", "612_Laby\612_Laby.vcxproj", "{55374C4A-85FB-4587-9FE7-243D506C33CB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "609_Arith2", "609_Arith2\CppArith2.vcxproj", "{98469F72-3805-4A09-B138-099ECCA9C63F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "610_Variable_Templates", "610_Variable_Templates\610_Variable_Templates.vcxproj", "{A760CA20-4903-421F-91C3-241BEF1DC266}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "555_Complex", "555_Complex\CppComplex.vcxproj", "{B8971B99-39F1-41A1-AE42-07A663033D48}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "609_Arith2", "609_Arith2\609_Arith2.vcxproj", "{98469F72-3805-4A09-B138-099ECCA9C63F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "554_Containers", "554_Containers\CppContainers.vcxproj", "{375A64B9-8269-4903-8E22-D9380175633E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "555_Complex", "555_Complex\555_Complex.vcxproj", "{B8971B99-39F1-41A1-AE42-07A663033D48}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "553_Rvalues_References", "553_Rvalues_References\CppRValuesReferences.vcxproj", "{2319B099-0CB6-430B-B8DD-ED7FA51C9778}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "554_Containers", "554_Containers\554_Containers.vcxproj", "{375A64B9-8269-4903-8E22-D9380175633E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "552_for_each", "552_for_each\CppForEach.vcxproj", "{3B3F53A5-6C1A-4731-9977-B460DEFC754D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "553_Rvalues_References", "553_RValues_References\553_RValues_References.vcxproj", "{2319B099-0CB6-430B-B8DD-ED7FA51C9778}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "551_Lambdas", "551_Lambdas\CppLambdas.vcxproj", "{8361BACF-7B53-45D9-8CCA-161C8CC33E1D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "552_for_each", "552_for_each\552_for_each.vcxproj", "{3B3F53A5-6C1A-4731-9977-B460DEFC754D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "550b_Copy_and_Move_Constructors", "550b_Copy_and_Move_Constructors\CppCopyAndMoveConstructorsB.vcxproj", "{88DB2A8E-D313-467B-8388-BBAE40E80B5A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "551_Lambdas", "551_Lambdas\551_Lambdas.vcxproj", "{8361BACF-7B53-45D9-8CCA-161C8CC33E1D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "550a_Copy_and_Move_Constructors", "550a_Copy_and_Move_Constructors\CppCopyAndMoveConstructorsA.vcxproj", "{03D76342-EF96-4B9E-BB23-C43C9B420638}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "550b_Copy_and_Move_Constructors", "550b_Copy_and_Move_Constructors\550b_Copy_and_Move_Constructors.vcxproj", "{88DB2A8E-D313-467B-8388-BBAE40E80B5A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "521b_Pi1Line", "521b_Pi1Line\521_2 CPP Pi1Line.vcxproj", "{4AF931ED-FA31-4AC6-A158-F63DB74745BE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "550a_Copy_and_Move_Constructors", "550a_Copy_and_Move_Constructors\550a_Copy_and_Move_Constructors.vcxproj", "{03D76342-EF96-4B9E-BB23-C43C9B420638}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "521a_Pi", "521a_Pi\521_1 CPP Pi.vcxproj", "{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "521b_Pi1Line", "521b_Pi1Line\521b_Pi1Line.vcxproj", "{4AF931ED-FA31-4AC6-A158-F63DB74745BE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "304_Pi1Line", "304_Pi1Line\304 CPP pi1line.vcxproj", "{3A404FFD-79EB-4F99-8DB9-EBC4FA1C412A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "521a_Pi", "521a_Pi\521a_Pi.vcxproj", "{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "156_Pentamino", "156_Pentamino\156_Pentamino.vcxproj", "{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "304_Pi1Line", "304_Pi1Line\304_Pi1Line.vcxproj", "{3A404FFD-79EB-4F99-8DB9-EBC4FA1C412A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "103_CPP14", "103_CPP14\103_CPP14.vcxproj", "{EC228590-3639-472D-9836-5440AD57C3C1}"
 EndProject
@@ -75,7 +75,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "101_Smart_Pointers", "101_S
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "100_Stack", "100_Stack\100_Stack.vcxproj", "{25D42DC9-BFFD-4828-BA03-D733135B63D0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "627_Use_of_Iterators", "627_Use_of_Iterators\CppUseOfIterators.vcxproj", "{741262C5-D566-42F8-8CE1-F68467E48B0D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "156_Pentamino", "156_Pentamino\156_Pentamino.vcxproj", "{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -125,6 +125,14 @@ Global
 		{A179D47D-45CA-4891-9BC3-79F308FC261B}.Release|x64.Build.0 = Release|x64
 		{A179D47D-45CA-4891-9BC3-79F308FC261B}.Release|x86.ActiveCfg = Release|Win32
 		{A179D47D-45CA-4891-9BC3-79F308FC261B}.Release|x86.Build.0 = Release|Win32
+		{741262C5-D566-42F8-8CE1-F68467E48B0D}.Debug|x64.ActiveCfg = Debug|x64
+		{741262C5-D566-42F8-8CE1-F68467E48B0D}.Debug|x64.Build.0 = Debug|x64
+		{741262C5-D566-42F8-8CE1-F68467E48B0D}.Debug|x86.ActiveCfg = Debug|Win32
+		{741262C5-D566-42F8-8CE1-F68467E48B0D}.Debug|x86.Build.0 = Debug|Win32
+		{741262C5-D566-42F8-8CE1-F68467E48B0D}.Release|x64.ActiveCfg = Release|x64
+		{741262C5-D566-42F8-8CE1-F68467E48B0D}.Release|x64.Build.0 = Release|x64
+		{741262C5-D566-42F8-8CE1-F68467E48B0D}.Release|x86.ActiveCfg = Release|Win32
+		{741262C5-D566-42F8-8CE1-F68467E48B0D}.Release|x86.Build.0 = Release|Win32
 		{306F18CD-23B6-459C-BBE3-C35CE639E406}.Debug|x64.ActiveCfg = Debug|x64
 		{306F18CD-23B6-459C-BBE3-C35CE639E406}.Debug|x64.Build.0 = Debug|x64
 		{306F18CD-23B6-459C-BBE3-C35CE639E406}.Debug|x86.ActiveCfg = Debug|Win32
@@ -309,34 +317,30 @@ Global
 		{03D76342-EF96-4B9E-BB23-C43C9B420638}.Release|x64.Build.0 = Release|x64
 		{03D76342-EF96-4B9E-BB23-C43C9B420638}.Release|x86.ActiveCfg = Release|Win32
 		{03D76342-EF96-4B9E-BB23-C43C9B420638}.Release|x86.Build.0 = Release|Win32
-		{4AF931ED-FA31-4AC6-A158-F63DB74745BE}.Debug|x64.ActiveCfg = Debug|x64
-		{4AF931ED-FA31-4AC6-A158-F63DB74745BE}.Debug|x64.Build.0 = Debug|x64
+		{4AF931ED-FA31-4AC6-A158-F63DB74745BE}.Debug|x64.ActiveCfg = Debug|Win32
+		{4AF931ED-FA31-4AC6-A158-F63DB74745BE}.Debug|x64.Build.0 = Debug|Win32
 		{4AF931ED-FA31-4AC6-A158-F63DB74745BE}.Debug|x86.ActiveCfg = Debug|Win32
 		{4AF931ED-FA31-4AC6-A158-F63DB74745BE}.Debug|x86.Build.0 = Debug|Win32
-		{4AF931ED-FA31-4AC6-A158-F63DB74745BE}.Release|x64.ActiveCfg = Release|Win32
+		{4AF931ED-FA31-4AC6-A158-F63DB74745BE}.Release|x64.ActiveCfg = Release|x64
+		{4AF931ED-FA31-4AC6-A158-F63DB74745BE}.Release|x64.Build.0 = Release|x64
 		{4AF931ED-FA31-4AC6-A158-F63DB74745BE}.Release|x86.ActiveCfg = Release|Win32
 		{4AF931ED-FA31-4AC6-A158-F63DB74745BE}.Release|x86.Build.0 = Release|Win32
 		{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}.Debug|x64.ActiveCfg = Debug|x64
 		{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}.Debug|x64.Build.0 = Debug|x64
 		{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}.Debug|x86.ActiveCfg = Debug|Win32
 		{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}.Debug|x86.Build.0 = Debug|Win32
-		{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}.Release|x64.ActiveCfg = Release|Win32
+		{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}.Release|x64.ActiveCfg = Release|x64
+		{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}.Release|x64.Build.0 = Release|x64
 		{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}.Release|x86.ActiveCfg = Release|Win32
 		{392FF1C9-C6DD-4F3D-B1FB-92BA2588B968}.Release|x86.Build.0 = Release|Win32
 		{3A404FFD-79EB-4F99-8DB9-EBC4FA1C412A}.Debug|x64.ActiveCfg = Debug|x64
 		{3A404FFD-79EB-4F99-8DB9-EBC4FA1C412A}.Debug|x64.Build.0 = Debug|x64
 		{3A404FFD-79EB-4F99-8DB9-EBC4FA1C412A}.Debug|x86.ActiveCfg = Debug|Win32
 		{3A404FFD-79EB-4F99-8DB9-EBC4FA1C412A}.Debug|x86.Build.0 = Debug|Win32
-		{3A404FFD-79EB-4F99-8DB9-EBC4FA1C412A}.Release|x64.ActiveCfg = Release|Win32
+		{3A404FFD-79EB-4F99-8DB9-EBC4FA1C412A}.Release|x64.ActiveCfg = Release|x64
+		{3A404FFD-79EB-4F99-8DB9-EBC4FA1C412A}.Release|x64.Build.0 = Release|x64
 		{3A404FFD-79EB-4F99-8DB9-EBC4FA1C412A}.Release|x86.ActiveCfg = Release|Win32
 		{3A404FFD-79EB-4F99-8DB9-EBC4FA1C412A}.Release|x86.Build.0 = Release|Win32
-		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Debug|x64.ActiveCfg = Debug|x64
-		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Debug|x64.Build.0 = Debug|x64
-		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Debug|x86.ActiveCfg = Debug|Win32
-		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Debug|x86.Build.0 = Debug|Win32
-		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Release|x64.ActiveCfg = Release|Win32
-		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Release|x86.ActiveCfg = Release|Win32
-		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Release|x86.Build.0 = Release|Win32
 		{EC228590-3639-472D-9836-5440AD57C3C1}.Debug|x64.ActiveCfg = Debug|x64
 		{EC228590-3639-472D-9836-5440AD57C3C1}.Debug|x64.Build.0 = Debug|x64
 		{EC228590-3639-472D-9836-5440AD57C3C1}.Debug|x86.ActiveCfg = Debug|Win32
@@ -369,14 +373,14 @@ Global
 		{25D42DC9-BFFD-4828-BA03-D733135B63D0}.Release|x64.Build.0 = Release|x64
 		{25D42DC9-BFFD-4828-BA03-D733135B63D0}.Release|x86.ActiveCfg = Release|Win32
 		{25D42DC9-BFFD-4828-BA03-D733135B63D0}.Release|x86.Build.0 = Release|Win32
-		{741262C5-D566-42F8-8CE1-F68467E48B0D}.Debug|x64.ActiveCfg = Debug|x64
-		{741262C5-D566-42F8-8CE1-F68467E48B0D}.Debug|x64.Build.0 = Debug|x64
-		{741262C5-D566-42F8-8CE1-F68467E48B0D}.Debug|x86.ActiveCfg = Debug|Win32
-		{741262C5-D566-42F8-8CE1-F68467E48B0D}.Debug|x86.Build.0 = Debug|Win32
-		{741262C5-D566-42F8-8CE1-F68467E48B0D}.Release|x64.ActiveCfg = Release|x64
-		{741262C5-D566-42F8-8CE1-F68467E48B0D}.Release|x64.Build.0 = Release|x64
-		{741262C5-D566-42F8-8CE1-F68467E48B0D}.Release|x86.ActiveCfg = Release|Win32
-		{741262C5-D566-42F8-8CE1-F68467E48B0D}.Release|x86.Build.0 = Release|Win32
+		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Debug|x64.ActiveCfg = Debug|x64
+		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Debug|x64.Build.0 = Debug|x64
+		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Debug|x86.ActiveCfg = Debug|Win32
+		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Debug|x86.Build.0 = Debug|Win32
+		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Release|x64.ActiveCfg = Release|x64
+		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Release|x64.Build.0 = Release|x64
+		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Release|x86.ActiveCfg = Release|Win32
+		{3CDD08F2-45EB-4B46-A300-4EC2C5D4C058}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

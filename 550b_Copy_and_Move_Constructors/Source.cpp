@@ -3,6 +3,7 @@
 //
 // 2017-01-22	PV
 // 2017-04-29	PV		GitHub and Linux
+// 2021-09-14	PV		Visual Studio 2022
 
 #include <stdio.h>
 #include <string>
@@ -38,7 +39,7 @@ public:
 	}
 
 	// Move constructor
-	C(C&& other)
+	C(C&& other) noexcept
 	{
 		cout << "C Move constructor\n";
 		v = std::move(other.v);
@@ -59,7 +60,7 @@ public:
 	}
 
 	// Move assignment
-	C& operator=(C&& other)
+	C& operator=(C&& other) noexcept
 	{
 		cout << "C Move assignment operator\n";
 		v = std::move(other.v);

@@ -2,8 +2,9 @@
 // Example of smart pointers in C++
 //
 // 2016-08-13	PV
-// 2016-10-12	PV	Expanded code
-// 2017-04-29	PV	GitHub/Linux sharing
+// 2016-10-12	PV		Expanded code
+// 2017-04-29	PV		GitHub/Linux sharing
+// 2021-09-14	PV		Visual Studio 2022
 
 #include <stdio.h>
 #include <iostream>
@@ -68,7 +69,7 @@ int main() {
 
 #ifdef _WIN32
 	cout << "\n(Pause) ";
-	getchar();
+	(void)getchar();
 #endif
 	return 0;
 }

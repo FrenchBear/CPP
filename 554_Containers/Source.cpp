@@ -4,6 +4,7 @@
 // 2016-10-12	PV
 // 2017-02-03	PV		Extra containers (map, ...)
 // 2017-04-29	PV		GitHub and Linux
+// 2021-09-14	PV		Visual Studio 2022
 
 #ifdef _WIN32
 #include <Windows.h>

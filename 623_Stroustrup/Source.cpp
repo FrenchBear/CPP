@@ -2,7 +2,8 @@
 // Example of C++ based on C++ Tour
 //
 // 2017-03-17..28	PV
-// 2017-04-29		PV	GitHub and Linux; if constexpr not supported by g++
+// 2017-04-29		PV		GitHub and Linux; if constexpr not supported by g++
+// 2021-09-14		PV		Visual Studio 2022
 
 #define _SCL_SECURE_NO_WARNINGS
 

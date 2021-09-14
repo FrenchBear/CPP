@@ -3,7 +3,8 @@
 // Stroustrup Tour of C++, §10.4
 //
 // 2017-04-09	PV
-// 2017-04-29	PV	GitHub and Linux
+// 2017-04-29	PV		GitHub and Linux
+// 2021-09-14	PV		Visual Studio 2022
 
 #include <iostream>
 #include <iterator>

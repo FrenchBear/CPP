@@ -2,7 +2,8 @@
 // Example of use of unordered_map with complex class not supporting operator <
 //
 // 2017-04-08	PV
-// 2017-04-29	PV	GitHub and Linux
+// 2017-04-29	PV		GitHub and Linux
+// 2021-09-14	PV		Visual Studio 2022
 
 #include <iostream>
 #include <unordered_map>

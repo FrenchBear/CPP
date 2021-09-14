@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
 	long a = 10000, b, c, d, e, *f, g;
 
 	printf("digits? ");
-	scanf("%ld", &c); getchar();
+	(void)scanf("%ld", &c); (void)getchar();
 	c *= 3.5; c -= c % 14;
 	f = (long *)malloc(4 * c + 4);
 	for (b = 0; b - c;)f[b++] = a / 5;
@@ -19,6 +19,6 @@ int main(int argc, char* argv[])
 	printf("\n");
 
 	printf("\n(pause) ");
-	getchar();
+	(void)getchar();
 	return 0;
 }

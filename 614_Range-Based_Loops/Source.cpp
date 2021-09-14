@@ -5,6 +5,7 @@
 // 2017-02-07	PV		Range example
 // 2017-02-10	PV		ZipRange and template Zip
 // 2017-04-29	PV		GitHub and Linux
+// 2021-09-14	PV		Visual Studio 2022
 
 #include<iostream>
 #include<limits>

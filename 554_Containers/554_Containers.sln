@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "554 CPP containers", "CppContainers.vcxproj", "{375A64B9-8269-4903-8E22-D9380175633E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "554_Containers", "554_Containers.vcxproj", "{375A64B9-8269-4903-8E22-D9380175633E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

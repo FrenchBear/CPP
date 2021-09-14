@@ -2,7 +2,8 @@
 // An implementation of factorial in C++ at compile-time based on template
 // Also show type restictor to limit accepted types from a template
 //
-// 2017-04-09	PV	Added constexpr version, static_assert, GitHub, Linux support
+// 2017-04-09	PV		Added constexpr version, static_assert, GitHub, Linux support
+// 2021-09-14	PV		Visual Studio 2022
 
 #include <stdio.h>
 #include <iostream>
@@ -35,7 +36,7 @@ void TestFactorial()
 {
 	int x = Factorial<10>::value;	// 3628800, known at compile time
 	cout << "Factorial<10>::value = " << x << endl;
-	int y = fact(10);				// 3628800, also known at compile time
+	constexpr int y = fact(10);				// 3628800, also known at compile time
 	cout << "fact(10) = " << y << endl << endl;;
 
 	// Check that both are computed at compile-time
@@ -64,10 +65,9 @@ int main() {
 	double d = distance<double>(x1, y1, x2, y2);
 	cout << d << endl;
 
-
 #ifdef _WIN32
 	cout << "\n(Pause) ";
-	getchar();
+	(void)getchar();
 #endif
 	return 0;
 }

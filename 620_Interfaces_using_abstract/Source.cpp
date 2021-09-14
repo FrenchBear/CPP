@@ -5,7 +5,8 @@
 // specified in base class does NOT allow this trick (see http://www.gotw.ca/gotw/039.htm for a possible solution)
 //
 // 2017-03-14	PV
-// 2017-04-29	PV	GitHub and Linux; g++ does not support abstract, tampered with code (badly)
+// 2017-04-29	PV		GitHub and Linux; g++ does not support abstract, tampered with code (badly)
+// 2021-09-14	PV		Visual Studio 2022
 
 #define _SCL_SECURE_NO_WARNINGS
 #include <iostream>
@@ -64,11 +65,11 @@ public:
 
 #ifdef _WIN32
 	int IList<T>::Count() {
-		return v.size();
+		return (int)(v.size());
 	}
 
 	int ICollection<T>::Count() {
-		return v.size();
+		return (int)(v.size());
 	}
 #else
 	int Count() {

@@ -2,8 +2,9 @@
 // Metaprogramming and pairs in C++
 //
 // 2017-01-23	PV
-// 2017-01-24	PV	Int4d --> template IntBase
-// 2017-04-29	PV	GitHub and Linux
+// 2017-01-24	PV		Int4d --> template IntBase
+// 2017-04-29	PV		GitHub and Linux
+// 2021-09-14	PV		Visual Studio 2022
 
 #include <iostream>
 #include <string>
@@ -87,7 +88,7 @@ public:
 	}
 
 	// Move constructor
-	IntBase(IntBase&& other) {
+	IntBase(IntBase&& other) noexcept {
 		val = other.val;
 	}
 
@@ -98,7 +99,7 @@ public:
 	}
 
 	// Move assignment operator
-	IntBase& operator =(IntBase&& other) {
+	IntBase& operator =(IntBase&& other) noexcept {
 		val = other.val;
 		return *this;
 	}
@@ -191,7 +192,7 @@ public:
 	}
 
 	// Move constructor (makes performance in Debug build worse)
-	DA(DA&& other) {
+	DA(DA&& other) noexcept {
 		high = move(other.high);
 		low = move(other.low);
 	}
@@ -204,7 +205,7 @@ public:
 	}
 
 	// Move assignment operator (makes performance in Debug build worse)
-	DA& operator =(DA&& other) {
+	DA& operator =(DA&& other) noexcept {
 		high = move(other.high);
 		low = move(other.low);
 		return *this;

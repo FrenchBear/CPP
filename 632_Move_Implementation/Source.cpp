@@ -3,6 +3,7 @@
 // Copied (shamelessly) in fact from STL code...
 //
 // 2017-06-25	PV
+// 2021-09-14	PV		Visual Studio 2022
 
 #include <iostream>
 #include <utility>		// FORWARD

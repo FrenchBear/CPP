@@ -1,8 +1,9 @@
 // 618 CPP Pointer to member
 //
 // 2017-02-16	PV
-// 2017-03-14	PV	Added Window example
-// 2017-04-29	PV	GitHub and Linux
+// 2017-03-14	PV		Added Window example
+// 2017-04-29	PV		GitHub and Linux
+// 2021-09-14	PV		Visual Studio 2022
 
 #include <iostream>
 using namespace std;
