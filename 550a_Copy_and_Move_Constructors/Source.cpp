@@ -56,11 +56,11 @@
 // 2017-01-22	PV		More comments; Restored toolset 140 (has switcher to toolset 141 after install of Visual Studio 2017 RC preventing build)
 // 2017-04-29	PV		GitHub and Linux
 // 2021-09-14	PV		Visual Studio 2022
+// 2022-07-13	PV		Modern C++ cleanup
 
 
 #define _SCL_SECURE_NO_WARNINGS		// Otherwise use of copy generated a deprecated error
 
-#include <stdio.h>
 #include <string>
 #include <sstream>
 #include <iostream>
@@ -358,10 +358,10 @@ int main() {
 	baz = AutoDefault();        // move assignment 
 
 
-#ifdef _WIN32
-	cout << "\n(Pause)";
-	cin.get();
-#endif
+//#ifdef _WIN32
+//	cout << "\n(Pause)";
+//	cin.get();
+//#endif
 
 	return 0;
 }

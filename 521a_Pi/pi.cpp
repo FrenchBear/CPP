@@ -1,32 +1,34 @@
 // pi.cpp : Implementation of pi calculation
-// 2014-03-26	PV	Port to VS 2013
 //
+// 2014-03-26	PV		Port to VS 2013
+// 2022-07-13	PV		Modern C++ cleanup
 
-#include "stdafx.h"
+#include <iostream>
+#include <chrono>
 
-#define	MAXPRC	4001
+using namespace std;
+using namespace std::chrono;
+
+constexpr int MAXPRC = 4001;
 char p[MAXPRC];
 char t[MAXPRC];
 int q;
 
-#define	FALSE	0
-#define	TRUE	1
-
 void add();
 void sub();
-void mul(register int multiplier);
+void mul(int multiplier);
 void div(int divisor);
 void mul4();
 void div4();
 int tiszero();
 
 
-void arctan(register int s)
+void arctan(int s)
 {
-	register int n;
+	int n;
 
 	t[0] = 1;
-	div(s);			/* t[] = 1/s */
+	div(s);			// t[] = 1/s
 	add();
 	n = 1;
 	do {
@@ -42,7 +44,7 @@ void arctan(register int s)
 
 void add()
 {
-	register int j;
+	int j;
 
 	for (j = q; j >= 0; j--)
 		if (t[j] + p[j] > 9) {
@@ -55,7 +57,7 @@ void add()
 
 void sub()
 {
-	register int j;
+	int j;
 
 	for (j = q; j >= 0; j--)
 		if (p[j] < t[j]) {
@@ -66,99 +68,93 @@ void sub()
 			p[j] -= t[j];
 }
 
-void mul(register int multiplier)
+void mul(int multiplier)
 {
 	int b;
-	register int i;
+	int i;
 	int carry = 0, digit = 0;
 
 	for (i = q; i >= 0; i--) {
 		b = (t[i] * multiplier + carry);
 		digit = b % 10;
 		carry = b / 10;
-		t[i] = digit;
+		t[i] = static_cast<char>(digit);
 	}
 }
 
-/* t[] /= l */
-
+// t[] /= l
 void div(int divisor)
 {
-	register int i, b;
+	int i, b;
 	int quotient, remainder = 0;
 
 	for (i = 0; i <= q; i++) {
 		b = (10 * remainder + t[i]);
 		quotient = b / divisor;
 		remainder = b % divisor;
-		t[i] = quotient;
+		t[i] = static_cast<char>(quotient);
 	}
 }
 
 void div4()
 {
-	register int i, c, d = 0;
+	int i, c, d = 0;
 
 	for (i = 0; i <= q; i++) {
 		c = (10 * d + p[i]) / 4;
 		d = (10 * d + p[i]) % 4;
-		p[i] = c;
+		p[i] = static_cast<char>(c);
 	}
 }
 
 void mul4()
 {
-	register int i, c, d;
+	int i, c, d;
 
 	d = c = 0;
 
 	for (i = q; i >= 0; i--) {
 		d = (p[i] * 4 + c) % 10;
 		c = (p[i] * 4 + c) / 10;
-		p[i] = d;
+		p[i] = static_cast<char>(d);
 	}
 }
 
 int tiszero()
 {
-	register int k;
+	int k;
 
 	for (k = 0; k <= q; k++)
 		if (t[k] != 0)
-			return(FALSE);
-	return(TRUE);
+			return false;
+	return true;
 }
 
 
-int main(int argc, char* argv[])
+int main()
 {
-	time_t startime, endtime;
-	register int i;
-
 	// Nb of decimals
 	q = 4000;
 
 	if (q >= MAXPRC) {
-		printf("Precision too large\n");
-		return(66);
+		cout << "Precision too large\n";
+		return 66;
 	}
 
-	/* compute pi */
-	time(&startime);
+	// Compute pi
+	auto t0 = high_resolution_clock::now();
 	arctan(2);
 	arctan(3);
 	mul4();
-	time(&endtime);
+	auto t1 = high_resolution_clock::now();
 
-	/* print pi */
+	// Print pi
+	cout << static_cast<int>(p[0]) << ".";
+	for (int i = 1; i <= q; i++)
+		cout << static_cast<int>(p[i]);
+	cout << endl;
+	cout << "Duration: " << fixed << setprecision(3) << duration_cast<milliseconds>(t1 - t0).count() << "ms for " << q << " digits of pi\n";
 
-	printf("%d", p[0]);
-	for (i = 1; i <= q; i++)
-		printf("%d", p[i]);
-	printf("\n");
-	printf("%d seconds to compute %d digits of pi\n", (int)(endtime - startime), q);
-
-	(void)getchar();
 	return 0;
 }
 

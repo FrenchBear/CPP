@@ -6,7 +6,6 @@
 // 2017-04-29	PV		GitHub/Linux sharing
 // 2021-09-14	PV		Visual Studio 2022
 
-#include <stdio.h>
 #include <iostream>
 #include <memory>
 
@@ -65,11 +64,11 @@ int main() {
 	pb = nullptr;
 
 	a->method1();
-	a = nullptr;		// Only a this point A destructor is called
+	a = nullptr;		// Only at this point A destructor is called
 
-#ifdef _WIN32
-	cout << "\n(Pause) ";
-	(void)getchar();
-#endif
+//#ifdef _WIN32
+//	cout << "\n(Pause) ";
+//	(void)getchar();
+//#endif
 	return 0;
 }

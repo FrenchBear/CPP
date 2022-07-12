@@ -4,8 +4,8 @@
 // 2017-01-22	PV
 // 2017-04-29	PV		GitHub and Linux
 // 2021-09-14	PV		Visual Studio 2022
+// 2022-07-13	PV		Modern C++ cleanup
 
-#include <stdio.h>
 #include <string>
 #include <iostream>
 #include <vector>

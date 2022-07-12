@@ -5,7 +5,6 @@
 // 2017-04-09	PV		Added constexpr version, static_assert, GitHub, Linux support
 // 2021-09-14	PV		Visual Studio 2022
 
-#include <stdio.h>
 #include <iostream>
 #include <cmath>
 
@@ -24,8 +23,16 @@ template <> struct Factorial<0> // required for terminating condition
 };
 
 
-// constepr-based version
+// constepr version
 constexpr long fact(long n) {
+	long res = 1;
+	while (n > 1)
+		res *= n--;
+	return res;
+}
+
+// consteval version
+consteval long cfact(long n) {
 	long res = 1;
 	while (n > 1)
 		res *= n--;
@@ -34,13 +41,16 @@ constexpr long fact(long n) {
 
 void TestFactorial()
 {
-	int x = Factorial<10>::value;	// 3628800, known at compile time
+	int x = Factorial<10>::value;		// 3628800, known at compile time
 	cout << "Factorial<10>::value = " << x << endl;
-	constexpr int y = fact(10);				// 3628800, also known at compile time
-	cout << "fact(10) = " << y << endl << endl;;
+	constexpr int y = fact(10);			// 3628800, also known at compile time
+	cout << "fact(10) = " << y << endl;
+	int z = cfact(10);					// 3628800, also known at compile time
+	cout << "cfact(10) = " << z << endl << endl;;
 
 	// Check that both are computed at compile-time
 	static_assert(fact(5) == Factorial<5>::value, "There is a problem");
+	static_assert(fact(5) == cfact(5), "There is another problem");
 }
 
 
@@ -65,9 +75,9 @@ int main() {
 	double d = distance<double>(x1, y1, x2, y2);
 	cout << d << endl;
 
-#ifdef _WIN32
-	cout << "\n(Pause) ";
-	(void)getchar();
-#endif
+//#ifdef _WIN32
+//	cout << "\n(Pause) ";
+//	(void)getchar();
+//#endif
 	return 0;
 }

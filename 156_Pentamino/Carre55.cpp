@@ -1,12 +1,16 @@
 // Carre55.cpp: implementation of the Carre55 class
 // Représente une grille 5x5 et implantes des transformations de base (rotation/symétrie)
+//
 // 1998-12-26	PV
-// 2006-10-01   PV  VS2005
-// 2012-02-25   PV  VS2010
-// 2017-08-18   PV  Compile on Debian, case-sensitive FS updates
+// 2006-10-01   PV		VS2005
+// 2012-02-25   PV		VS2010
+// 2017-08-18   PV		Compile on Debian, case-sensitive FS updates
+// 2022-07-13	PV		Modern C++ cleanup
 
-#include "StdAfx.h"
+#include <iostream>
 #include "Carre55.h"
+
+using namespace std;
 
 
 // Transformations
@@ -85,8 +89,8 @@ void Carre55::Dessin()
 	for (l = 0; l < 5; l++)
 	{
 		for (c = 0; c < 5; c++)
-			printf("%s", tMotif[l][c] ? "\xdb\xdb" : "\xfa\xfa");
-		printf("\n");
+			cout << tMotif[l][c] ? "\xdb\xdb" : "\xfa\xfa";
+		cout << '\n';
 	}
-	printf("Offset: %d\n", iOffsetCol);
+	cout << "Offset: " <<  iOffsetCol << endl;
 }

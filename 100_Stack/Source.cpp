@@ -4,7 +4,6 @@
 // 2017-04-28	PV		Simplified version for GitHub/Linux sharing
 // 2021-09-14	PV		Visual Studio 2022
 
-#include <stdio.h>
 #include <iostream>
 #include <stack>
 
@@ -27,9 +26,9 @@ int main()
 		myStack.pop();
 	}
 
-#ifdef _WIN32
-	cout << "\n(Pause) ";
-	(void)getchar();
-#endif
+//#ifdef _WIN32
+//	cout << "\n(Pause) ";
+//	(void)getchar();
+//#endif
 	return 0;
 }

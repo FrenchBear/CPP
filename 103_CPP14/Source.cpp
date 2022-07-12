@@ -221,7 +221,7 @@ int main() {
 
 	// Uncomment it causes compiler internal error in VS2015, not in VS15
 	auto vec = primes<std::vector>;
-	auto list = primes<std::list>;
+	auto &list = primes<std::list>;
 
 	// Cause compilation error in VS (deprecated), while this should be a warning...
 	// Found the problem: caused by option SDL checks (/sdl) that was set for some reason (it's not the default)
@@ -328,9 +328,9 @@ int main() {
 	auto z = 1i;				// auto deduces complex<double>
 
 
-#ifdef _WIN32
-	cout << "\n(Pause)";
-	cin.get();
-#endif
+//#ifdef _WIN32
+//	cout << "\n(Pause)";
+//	cin.get();
+//#endif
 	//return 0;		// Actually not needed for main function
 }

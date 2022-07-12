@@ -4,6 +4,7 @@
 // 2016-10-04	PV
 // 2017-04-29	PV		GitHub and Linux
 // 2021-09-14	PV		Visual Studio 2022
+// 2022-07-12	PC		C++ 20 range-based loop with initializer
 
 #define _SCL_SECURE_NO_WARNINGS		// Otherwise use of copy generated a deprecated error
 
@@ -112,9 +113,14 @@ int main() {
 	cout << "The int average of the elements of v1 is:\n Average ( v1mod2 ) = "
 		<< avemod2i << "." << endl;
 
-#ifdef _WIN32
-	cout << "(Pause)";
-	(void)getchar();
-#endif
+	cout << "\nC++ 20 range-based loop with initializer\n";
+	for (int a[3] = { 1,2,3 }; int& i: a)
+		cout << i << ' ';
+	cout << endl;
+
+//#ifdef _WIN32
+//	cout << "(Pause)";
+//	(void)getchar();
+//#endif
 	return 0;
 }

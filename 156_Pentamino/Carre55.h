@@ -1,20 +1,15 @@
 // Carre55.h: interface for the Carre55 class.
 //
-//////////////////////////////////////////////////////////////////////
+// 2022-07-13	PV		Modern C++ cleanup
 
-#if !defined(AFX_CARRE55_H__2480A265_9CFB_11D2_8D8E_0060086AA0DA__INCLUDED_)
-#define AFX_CARRE55_H__2480A265_9CFB_11D2_8D8E_0060086AA0DA__INCLUDED_
-
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
 
 class Carre55
 {
 public:
 	char	tMotif[5][5];
-	int	lmax, cmax;		// Encombrement de la pièce
-	int	iOffsetCol;		// Décalage de colonne pour occuper la cellule [0][0]
+	int		lmax, cmax;		// Encombrement de la pièce
+	int		iOffsetCol;		// Décalage de colonne pour occuper la cellule [0][0]
 
 
 	Carre55()
@@ -27,9 +22,9 @@ public:
 		iOffsetCol = 0;
 	}
 
-	Carre55(int i00, int i01, int i02, int i03, int i04,
-		int i10, int i11, int i12, int i13, int i14,
-		int i20, int i21, int i22, int i23, int i24)
+	Carre55(char i00, char i01, char i02, char i03, char i04,
+			char i10, char i11, char i12, char i13, char i14,
+			char i20, char i21, char i22, char i23, char i24)
 	{
 		tMotif[0][0] = i00; tMotif[0][1] = i01; tMotif[0][2] = i02; tMotif[0][3] = i03; tMotif[0][4] = i04;
 		tMotif[1][0] = i10; tMotif[1][1] = i11; tMotif[1][2] = i12; tMotif[1][3] = i13; tMotif[1][4] = i14;
@@ -87,4 +82,3 @@ public:
 	void Dessin();
 };
 
-#endif // !defined(AFX_CARRE55_H__2480A265_9CFB_11D2_8D8E_0060086AA0DA__INCLUDED_)

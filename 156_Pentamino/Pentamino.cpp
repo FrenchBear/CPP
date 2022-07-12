@@ -1,16 +1,22 @@
 // pentamino.cpp
 // Résolution de problèmes de pentaminos (pavage)
+//
 // 1998-12-26	PV
 // 2006-10-01   PV		VS2005
 // 2012-02-25   PV		VS2010
 // 2017-04-30	PV		VS2017 and Git
 // 2017-08-18   PV		Compile on Debian, case-sensitive FS updates
-// 2021è09-14	PV		VS2022; Fixed warnings; 64-bit compilation; Source UTF-8, it contains French accents...
+// 2021-09-14	PV		VS2022; Fixed warnings; 64-bit compilation; Source UTF-8, it contains French accents...
+// 2022-07-13	PV		Modern C++ cleanup
 
-#include "StdAfx.h"
-#include <time.h>
-#include <memory.h>
+#include <iostream>
+#include <ctime>
+#include <memory>
 #include <stdexcept>
+#include <chrono>
+
+using namespace std;
+using namespace std::chrono;
 
 // To avoid compiler useless Warning C6386: Buffer overrun while writing to 'jeu2':  the writable size is '60' bytes, but '70' bytes might be written.
 #pragma warning(disable: 6385)
@@ -43,7 +49,7 @@ Piece* tP[MAXPIECE];
 void __inline Pavage(int lstart, int cstart, Jeu& jeu, int iMasquePieces)
 {
 	int l, c;
-	int bTrouve = FALSE;
+	int bTrouve = false;
 
 	if (iNbSol > MAXSOLUTION) return;
 
@@ -62,7 +68,7 @@ void __inline Pavage(int lstart, int cstart, Jeu& jeu, int iMasquePieces)
 
 			if (jeu[l][c] == 0)
 			{
-				bTrouve = TRUE;
+				bTrouve = true;
 				break;
 			}
 		}
@@ -74,25 +80,6 @@ void __inline Pavage(int lstart, int cstart, Jeu& jeu, int iMasquePieces)
 	if (l == MAXLIG && c == MAXCOL)
 	{
 		iNbSol++;
-		/*
-		printf("Solution %d trouv�e:\n", iNbSol);
-		for (l=0 ; l<MAXLIG; l++)
-		{
-		for (c=0 ; c<MAXCOL ; c++)
-		printf("%2d", tP[jeu[l][c]-1]->hNumPiece);
-		printf("\n");
-		}
-
-		FILE *f = fopen("Solution pentamino.txt", "a");
-		fprintf(f, "Solution %d trouv�e:\n", iNbSol);
-		for (l=0 ; l<MAXLIG; l++)
-		{
-		for (c=0 ; c<MAXCOL ; c++)
-		fprintf(f, "%2d", tP[jeu[l][c]-1]->hNumPiece);
-		fprintf(f, "\n");
-		}
-		fclose(f);
-		*/
 		return;
 	}
 
@@ -106,20 +93,20 @@ void __inline Pavage(int lstart, int cstart, Jeu& jeu, int iMasquePieces)
 				int l2, c2;
 				int bCollision;
 
-				int bContinue = FALSE;
+				//int bContinue = false;
 				if (c + ca.cmax - ca.iOffsetCol > MAXCOL || // Trop large
 					l + ca.lmax > MAXLIG ||					// Trop haut
 					c < ca.iOffsetCol)						// Doit être décalée trop à gauche
 					continue;
 
-				bCollision = FALSE;
+				bCollision = false;
 				for (l2 = 0; l2 < ca.lmax; l2++)
 				{
 					for (c2 = 0; c2 < ca.cmax; c2++)
 					{
 						if (ca.tMotif[l2][c2] && jeu[l + l2][c + c2 - ca.iOffsetCol])  // Case déjà occupée
 						{
-							bCollision = TRUE;
+							bCollision = true;
 							break;
 						}
 					}
@@ -135,7 +122,7 @@ void __inline Pavage(int lstart, int cstart, Jeu& jeu, int iMasquePieces)
 
 					for (l2 = 0; l2 < ca.lmax; l2++)
 						for (c2 = 0; c2 < ca.cmax; c2++)
-							if (ca.tMotif[l2][c2]) jeu2[l + l2][c + c2 - ca.iOffsetCol] = i + 1;
+							if (ca.tMotif[l2][c2]) jeu2[l + l2][c + c2 - ca.iOffsetCol] = (char)(i + 1);
 
 					// On continue avec les pièces qui restent
 					Pavage(l, c, jeu2, iMasquePieces & ~(1 << i));
@@ -144,7 +131,7 @@ void __inline Pavage(int lstart, int cstart, Jeu& jeu, int iMasquePieces)
 }
 
 
-int main(int argc, char* argv[])
+int main()
 {
 	// Préparation des pièces
 	Piece P1(1, 'I', 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -173,18 +160,17 @@ int main(int argc, char* argv[])
 	P10.Dessin();
 	P11.Dessin();
 	P12.Dessin();
-	(void)getchar();
 	*/
 
-	if (MAXLIG * MAXCOL != 5 * MAXPIECE)
+	if constexpr (MAXLIG * MAXCOL != 5 * MAXPIECE)
 	{
-		printf("Constantes MAXLIG/MAXCOL/MAXPIECE incohérentes !\n");
+		cout << "Constantes MAXLIG/MAXCOL/MAXPIECE incohérentes !\n";
 		return 1;
 	}
 
 	// Plan à paver
 	Jeu j;
-	memset(&j, 0, MAXLIG * MAXCOL);
+	memset(&j, 0, static_cast<size_t>(MAXLIG * MAXCOL));
 
 	// Pieces à utiliser
 	tP[0] = &P2;
@@ -200,17 +186,17 @@ int main(int argc, char* argv[])
 	tP[10] = &P7;
 	tP[11] = &P12;
 
-	time_t t0 = time(0L);
+	auto t0 = high_resolution_clock::now();
 	Pavage(0, 0, j, (1 << MAXPIECE) - 1);
-	time_t t1 = time(0L);
+	auto t1 = high_resolution_clock::now();
 	auto duration = t1 - t0;
 
-	printf("%llds execution\n", duration);
-	printf("%d solutions\n", iNbSol);
-	printf("%d appels a Pavage\n", iNbAppelPavage);
+	cout << "Duration " << duration_cast<milliseconds>(t1 - t0).count() << "ms\n";
+	cout << iNbSol << " solutions\n";
+	cout << iNbAppelPavage << " calls to Pavage()\n";
 
-	printf("\n(pause) ");
-	(void)getchar();
+	//printf("\n(pause) ");
+	//(void)getchar();
 
 	return 0;
 }
