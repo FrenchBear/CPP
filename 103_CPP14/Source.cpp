@@ -159,8 +159,9 @@ enum Color {
 	Bleu,
 	Blanc,
 	Rouge = Somielle(5)
-} MyColor, *MyColorPtr, &MyColorRef = MyColor, &&MyColorRefRef = Blanc;
-
+} MyColor, * MyColorPtr;
+Color& MyColorRef = MyColor;
+Color&& MyColorRefRef = Blanc;
 
 enum class Speed {
 	Slow,
@@ -226,6 +227,8 @@ int main() {
 	// Cause compilation error in VS (deprecated), while this should be a warning...
 	// Found the problem: caused by option SDL checks (/sdl) that was set for some reason (it's not the default)
 	// with g++, f is not reported as deprecated but g is...
+#pragma warning (disable: 4996)			// To keep VS quiet (see below)
+
 	f();
 	g();
 

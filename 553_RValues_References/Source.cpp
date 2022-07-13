@@ -6,6 +6,7 @@
 // 2021-09-14	PV		Visual Studio 2022
 
 #define _SCL_SECURE_NO_WARNINGS		// Otherwise use of copy generated a deprecated error
+#pragma warning(suppress: 4189)		// Unused variables
 
 #include <stdio.h>
 #include <string>
@@ -34,11 +35,12 @@ public:
 };
 
 int main() {
+#pragma warning(suppress: 4189)
 	string &r1 = one;
 	//string &r2 = two;			// refused, would lose const qualifier
 #ifdef _WIN32
+#pragma warning (suppress: 4239)			// To keep VS quiet (see below)
 	string &r3 = three();		// should be refused, rvalue, but accepted by VS (with a warning): Warning C4239: nonstandard extension used: 'initializing': conversion from 'std::string' to 'std::string &'
-
 #else
 	const string& cr3 = three();
 	string &r3 = const_cast<string &>(cr3);
@@ -52,6 +54,7 @@ int main() {
 //  complexe &rc = complexe(3.0, 4.0);
 //                                  ^
 #ifdef _WIN32
+#pragma warning (suppress: 4239 4189)			// To keep VS quiet
 	complexe &rc = complexe(3.0, 4.0);
 #endif
 	//complexe *pc = &complexe(3.0, 4.0);
