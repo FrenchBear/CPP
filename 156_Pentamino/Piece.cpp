@@ -8,10 +8,15 @@
 // 2022-07-13	PV		Modern C++ cleanup
 
 #include <iostream>
-#include <format>       // std::format
 
 #include "Carre55.h"
 #include "Piece.h"
+
+#ifdef _WIN32
+#include <format>       // std::format
+#else
+#include "gpp_format.h"
+#endif
 
 using namespace std;
 

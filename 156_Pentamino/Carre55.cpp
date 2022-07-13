@@ -89,7 +89,7 @@ void Carre55::Dessin()
 	for (l = 0; l < 5; l++)
 	{
 		for (c = 0; c < 5; c++)
-			cout << tMotif[l][c] ? "\xdb\xdb" : "\xfa\xfa";
+			cout << (tMotif[l][c] ? "\xdb\xdb" : "\xfa\xfa");
 		cout << '\n';
 	}
 	cout << "Offset: " <<  iOffsetCol << endl;

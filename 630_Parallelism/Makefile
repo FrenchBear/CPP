@@ -1,10 +1,14 @@
-STDCPP?=gnu++17
-CXXFLAGS=-Wall -std=$(STDCPP) -Wno-unused-variable -Wno-psabi
+CXX=g++-10
+STDCPP?=gnu++2a
+CXXFLAGS=-Wall -std=$(STDCPP) -Wno-unused-but-set-variable -Wno-unused-variable -Wno-deprecated-declarations -Wno-unknown-pragmas 
+LDFLAGS=/usr/lib/x86_64-linux-gnu/libpthread.so
 
-make:	Source
+T=Source
 
-Source:	Source.o File.o
-		g++ Source.o File.o -lpthread -o Source
+make:	$(T)
+
+$(T):	$(T).o File.o
+	$(CXX) -o $@ $^ $(LDFLAGS)
 
 clean:
-	rm -f Source Source.o File.o
+	rm -f $(T) *.o

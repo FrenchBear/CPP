@@ -1,10 +1,14 @@
-STDCPP?=gnu++17
-CXXFLAGS=-Wall -std=$(STDCPP)
+CXX=g++-10
+STDCPP?=gnu++2a
+CXXFLAGS=-Wall -std=$(STDCPP) -Wno-unused-but-set-variable -Wno-unused-variable -Wno-deprecated-declarations -Wno-unknown-pragmas 
+#LDFLAGS=/usr/lib/x86_64-linux-gnu/libfmt.a
 
-make:	Source
+T=Source
 
-Source:	Source.o Complex.o
-		g++ Source.o Complex.o -o Source
+make:	$(T)
+
+$(T):	$(T).o Complex.o
+	$(CXX) -o $@ $^ $(LDFLAGS)
 
 clean:
-	rm -f Source Source.o Complex.o
+	rm -f $(T) *.o

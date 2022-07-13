@@ -12,15 +12,20 @@
 #include <iostream>
 #include <ctime>
 #include <memory>
+#include <cstring>
 #include <stdexcept>
 #include <chrono>
 
-using namespace std;
-using namespace std::chrono;
-
+#ifdef _WIN32
 // To avoid compiler useless Warning C6386: Buffer overrun while writing to 'jeu2':  the writable size is '60' bytes, but '70' bytes might be written.
 #pragma warning(disable: 6385)
 #pragma warning(disable: 6386)
+#else
+#include "gpp_format.h"
+#endif
+
+using namespace std;
+using namespace std::chrono;
 
 const int MAXLIG = 12;
 const int MAXCOL = 5;

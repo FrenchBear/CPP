@@ -1,12 +1,14 @@
-CPP=g++
-CXXFLAGS=-Wall -std=gnu++17
+CXX=g++-10
+STDCPP?=gnu++2a
+CXXFLAGS=-Wall -std=$(STDCPP) -Wno-unused-but-set-variable -Wno-unused-variable -Wno-deprecated-declarations -Wno-unknown-pragmas 
+#LDFLAGS=/usr/lib/x86_64-linux-gnu/libfmt.a
 
-make:	pcpp
+T=auto
 
-pcpp:		pcpp.o
-		g++ -o $@ $^
+make:	$(T)
 
-pcpp.o:	*.h
+#$(T):	$(T).o module.o
+#	$(CXX) -o $@ $^ $(LDFLAGS)
 
-clean:	
-		rm -f pcpp.o pcpp
+clean:
+	rm -f $(T) *.o

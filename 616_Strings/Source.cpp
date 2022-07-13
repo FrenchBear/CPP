@@ -34,25 +34,25 @@ void Test1() {
 
 	// c:\temp\project1cpp\source.cpp(32) : warning C4566 : character represented by universal - character - name '\u0302' cannot be represented in the current code page(1252)
 	// c:\temp\project1cpp\source.cpp(32) : warning C4566 : character represented by universal - character - name '\U0001F34C' cannot be represented in the current code page(1252)
-	char *t1 = "Où ça? ĤLà🍌!";			// The type of an unprefixed string literal is const char[]
+	const char *t1 = "Où ça? ĤLà🍌!";			// The type of an unprefixed string literal is const char[]
 
-	char *t2 = u8"Où ça? ĤLà🍌!";		// The type of a u8"..." string literal is const char[]
+	auto t2 = u8"Où ça? ĤLà🍌!";		// The type of a u8"..." string literal is const char[]
 
-	wchar_t *t3 = L"Où ça? ĤLà🍌!";		// The type of a L"..." string literal is const wchar_t[]
+	const wchar_t *t3 = L"Où ça? ĤLà🍌!";		// The type of a L"..." string literal is const wchar_t[]
 
-	char16_t *t4 = u"Où ça? ĤLà🍌!";	// UTF-16	The type of a u"..." string literal is const char16_t[]
+	const char16_t *t4 = u"Où ça? ĤLà🍌!";	// UTF-16	The type of a u"..." string literal is const char16_t[]
 
-	char32_t *t5 = U"Où ça? ĤLà🍌!";	// UTF-32	The type of a U"..." string literal is const char32_t[]
+	const char32_t *t5 = U"Où ça? ĤLà🍌!";	// UTF-32	The type of a U"..." string literal is const char32_t[]
 
 										// c:\temp\project1cpp\source.cpp(31) : warning C4566 : character represented by universal - character - name '\u0302' cannot be represented in the current code page(1252)
 										// c:\temp\project1cpp\source.cpp(31) : warning C4566 : character represented by universal - character - name '\U0001F34C' cannot be represented in the current code page(1252)
-	char *t6 = R"(Où ça? ĤLà🍌!)";
+	const char *t6 = R"(Où ça? ĤLà🍌!)";
 
 	// c:\temp\project1cpp\source.cpp(25) : warning C4566 : character represented by universal - character - name '\u0302' cannot be represented in the current code page(1252)
 	// c:\temp\project1cpp\source.cpp(25) : warning C4566 : character represented by universal - character - name '\U0001F34C' cannot be represented in the current code page(1252)
-	string s1 = "Où ça? ĤLà🍌!";
+	string s1 = "Où ça? ĤLà🍌!"s;
 
-	string s2 = u8"Où ça? ĤLà🍌!";
+	auto s2 = u8"Où ça? ĤLà🍌!"s;
 
 	wstring s3 = L"Où ça? ĤLà🍌!";
 
@@ -62,19 +62,26 @@ void Test1() {
 
 
 	cout << "cout t1: " << t1 << endl;
+
+#ifdef _WIN32
 	cout << "cout t2: " << t2 << endl;
 	cout << "cout t3: " << t3 << endl;
 	cout << "cout t4: " << t4 << endl;
 	cout << "cout t5: " << t5 << endl;
+#endif
 
 	wcout << "wcout t1: " << t1 << endl;
+#ifdef _WIN32
 	wcout << "wcout t2: " << t2 << endl;
 	wcout << "wcout t3: " << t3 << endl;
 	wcout << "wcout t4: " << t4 << endl;
 	wcout << "wcout t5: " << t5 << endl;
+#endif
 
 	cout << "cout s1: " << s1 << endl;
+#ifdef _WIN32
 	cout << "cout s2: " << s2 << endl;
+#endif
 	//cout << "cout s3: " << s3 << endl;
 	//cout << "cout s4: " << s4 << endl;
 	//cout << "cout s5: " << s5 << endl;

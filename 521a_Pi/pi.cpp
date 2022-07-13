@@ -4,6 +4,7 @@
 // 2022-07-13	PV		Modern C++ cleanup
 
 #include <iostream>
+#include <iomanip>
 #include <chrono>
 
 using namespace std;

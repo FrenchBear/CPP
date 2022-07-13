@@ -1,7 +1,14 @@
-STDCPP?=gnu++17
-CXXFLAGS=-Wall -std=$(STDCPP) -Wno-unused-but-set-variable -Wno-unused-variable -Wno-deprecated-declarations
+CXX=g++-10
+STDCPP?=gnu++2a
+CXXFLAGS=-Wall -std=$(STDCPP) -Wno-unused-but-set-variable -Wno-unused-variable -Wno-deprecated-declarations -Wno-unknown-pragmas -Wno-parentheses
+#LDFLAGS=/usr/lib/x86_64-linux-gnu/libfmt.a
 
-make:	pi_con
+T=pi_con
+
+make:	$(T)
+
+#$(T):	$(T).o module.o
+#	$(CXX) -o $@ $^ $(LDFLAGS)
 
 clean:
-	rm -f pi_con
+	rm -f $(T) *.o

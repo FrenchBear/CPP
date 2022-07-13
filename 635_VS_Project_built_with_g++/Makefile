@@ -1,7 +1,14 @@
-STDCPP?=gnu++17
-CXXFLAGS=-Wall -std=$(STDCPP)
+CXX=g++-10
+STDCPP?=gnu++2a
+CXXFLAGS=-Wall -std=$(STDCPP) -Wno-unused-but-set-variable -Wno-unused-variable -Wno-deprecated-declarations -Wno-unknown-pragmas 
+#LDFLAGS=/usr/lib/x86_64-linux-gnu/libfmt.a
 
-make:	f1
+T=f1
+
+make:	$(T)
+
+#$(T):	$(T).o module.o
+#	$(CXX) -o $@ $^ $(LDFLAGS)
 
 clean:
-	rm -f f1
+	rm -f $(T) *.o
