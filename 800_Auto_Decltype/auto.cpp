@@ -5,11 +5,13 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 
-using namespace std;
+#pragma warning (disable: 4189)
 
 #include <iostream>
 #include <string>
 #include <vector>
+
+using namespace std;
 
 int main()
 {

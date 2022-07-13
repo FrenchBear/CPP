@@ -5,10 +5,11 @@
 // 2017-01-14	PV		Higher order lambdas example; removed trigraphs code
 // 2017-04-29	PV		GitHub and Linux
 // 2021-09-14	PV		Visual Studio 2022
+// 2022-07-13	PV		Modern C++ refresh
 
 #define _SCL_SECURE_NO_WARNINGS		// Otherwise use of copy generated a deprecated error
+#pragma warning (disable: 4189 4100 4101)
 
-#include <stdio.h>
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -39,12 +40,6 @@ void keep_if(vector<T>& v, Predicate pred) {
 	auto notpred = [&](const T& t) {
 		return !pred(t);
 	};
-
-	// Note the bug, notpref instead of notpred in next line, VCC doesn't even report a warning with EnableAllWarnings (/Wall)
-	// since it's never used, while gcc consider it as a compilation error
-#ifdef _WIN32
-	v.erase(remove_if(v.begin(), v.end(), notpref), v.end());
-#endif
 }
 
 template <typename Container>
@@ -78,7 +73,7 @@ int main() {
 	int sum1 = f1(100);
 	cout << "sum1: " << sum1 << endl;
 
-	int sum2;
+	int sum2 = 0;
 	auto f2 = [&sum2](int n) {sum2 = 0; for (int i = 1; i <= n; i++) sum2 += i; };
 	f2(100);
 	cout << "sum2: " << sum2 << endl;
@@ -87,7 +82,6 @@ int main() {
 	[]() {}();
 	[]()->void {}();
 	[] {}();
-
 
 
 	// Higher order lambdas (need #include <functional>)
@@ -129,7 +123,7 @@ int main() {
 
 
 	// iso464
-	if (2 > 0 or 3 > 0) cout << endl;
+	if constexpr (2 > 0 or 3 > 0) cout << endl;
 
 	ActionInt(42, [](int n) {cout << n << endl; });
 	LambdaFunctor()(12);
@@ -153,10 +147,28 @@ int main() {
 	});
 	cout << endl;
 
+	// Variables can be initialized in the lambda capture clause
+	int a = 1;
+	[&, b = 2] { a += b; }();	// can skip parentheses if lambda has no parameters
+	cout << a << endl;	// 3
 
-#ifdef _WIN32
-	cout << "(Pause)";
-	(void)getchar();
-#endif
+	auto x = [] { return 3; };
+	// Default construct new lambda of same type
+	decltype(x) y = x; // valid in C++20
+
+	// Make copy of lambda
+	auto copy = x;
+	// Assign copy to x since they have same type
+	x = copy; // valid in C++20
+
+	// In C++ 20 can use lambdas in unevaluated contexts
+	// Default construct inlined lambda
+	decltype([] { return 17; }) aa{}; // valid in C++20; although its use...
+	cout << aa() << endl;	// 17
+
+//#ifdef _WIN32
+//	cout << "(Pause)";
+//	(void)getchar();
+//#endif
 	return 0;
 }
