@@ -13,7 +13,7 @@
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "externalConsole": false,
+            "console": "integratedTerminal",
             "preLaunchTask": "cl.exe build active file"
         }
     ]
