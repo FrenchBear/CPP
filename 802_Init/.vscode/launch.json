@@ -8,13 +8,13 @@
             "name": "Build and debug active file",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/cpptuple.exe",
+            "program": "${workspaceFolder}/init.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "console": "integratedTerminal",
-            "preLaunchTask": "cl.exe build active file"
+            "preLaunchTask": "build"
         }
     ]
 }
