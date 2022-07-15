@@ -8,8 +8,8 @@ class Carre55
 {
 public:
 	char	tMotif[5][5];
-	int		lmax, cmax;		// Encombrement de la pièce
-	int		iOffsetCol;		// Décalage de colonne pour occuper la cellule [0][0]
+	int		lmax, cmax;		// Encombrement de la piï¿½ce
+	int		iOffsetCol;		// Dï¿½calage de colonne pour occuper la cellule [0][0]
 
 
 	Carre55()
@@ -46,8 +46,8 @@ public:
 	}
 
 
-	// Détermine la propriété iOffsetCol, c'est à dire le nombre de colonnes qu'il
-	// faut translater le dessin à gauche pour occuper la cellule [0][0]
+	// Dï¿½termine la propriï¿½tï¿½ iOffsetCol, c'est ï¿½ dire le nombre de colonnes qu'il
+	// faut translater le dessin ï¿½ gauche pour occuper la cellule [0][0]
 	void MkOffset()
 	{
 		if (tMotif[0][0])
@@ -63,8 +63,8 @@ public:
 	}
 
 
-	// Opérateur de comparaison
-	int operator == (const Carre55 &k)
+	// Opï¿½rateur de comparaison
+	int operator == (const Carre55 &k) const
 	{
 		return lmax == k.lmax && cmax == k.cmax &&
 			tMotif[0][0] == k.tMotif[0][0] && tMotif[0][1] == k.tMotif[0][1] && tMotif[0][2] == k.tMotif[0][2] && tMotif[0][3] == k.tMotif[0][3] && tMotif[0][4] == k.tMotif[0][4] &&
@@ -75,10 +75,10 @@ public:
 	}
 
 	// Transformations
-	int TL(int iT, int l, int c);
-	int TC(int iT, int l, int c);
-	Carre55 Transformation(int iT);
+	int TL(int iT, int l, int c) const;
+	int TC(int iT, int l, int c) const;
+	Carre55 Transformation(int iT) const;
 
-	void Dessin();
+	void Dessin() const;
 };
 

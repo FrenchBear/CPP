@@ -31,7 +31,7 @@ const int MAXLIG = 12;
 const int MAXCOL = 5;
 const int MAXPIECE = 12;
 
-const int MAXSOLUTION = 1000;
+const int MAXSOLUTION = 5000;
 
 
 #include "Carre55.h"
@@ -51,7 +51,7 @@ Piece* tP[MAXPIECE];
 #pragma inline_recursion(on)
 #pragma inline_depth(12)
 
-void __inline Pavage(int lstart, int cstart, Jeu& jeu, int iMasquePieces)
+void inline Pavage(int lstart, int cstart, Jeu& jeu, int iMasquePieces)
 {
 	int l, c;
 	int bTrouve = false;
@@ -199,9 +199,6 @@ int main()
 	cout << "Duration " << duration_cast<milliseconds>(t1 - t0).count() << "ms\n";
 	cout << iNbSol << " solutions\n";
 	cout << iNbAppelPavage << " calls to Pavage()\n";
-
-	//printf("\n(pause) ");
-	//(void)getchar();
 
 	return 0;
 }

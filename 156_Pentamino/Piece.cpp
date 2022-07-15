@@ -21,10 +21,6 @@
 using namespace std;
 
 
-//////////////////////////////////////////////////////////////////////
-// Construction/Destruction
-//////////////////////////////////////////////////////////////////////
-
 Piece::Piece(short hNP, char cP,
 			char i00, char i01, char i02, char i03, char i04,
 			char i10, char i11, char i12, char i13, char i14,
@@ -35,18 +31,15 @@ Piece::Piece(short hNP, char cP,
 	c[0] = Carre55(i00, i01, i02, i03, i04, i10, i11, i12, i13, i14, i20, i21, i22, i23, i24);
 	iNbt = 1;
 	if (i00 + i01 + i02 + i03 + i04 + i10 + i11 + i12 + i13 + i14 + i20 + i21 + i22 + i23 + i24 != 5)
-		cout << "Définition de la pièce " << hNP << " incorrecte\n";
+		cout << "DÃ©finition de la piÃ¨ce " << hNP << " incorrecte\n";
 
-	// On génère le tableau des transformations possibles
-	int i, j;
-
-
-	for (i = 1; i < 8; i++)
+	// On gÃ©nÃ¨re le tableau des transformations possibles
+	for (int i = 1; i < 8; i++)
 	{
-		Carre55 ct = c[0].Transformation(i);
+		Carre55 &&ct = c[0].Transformation(i);
 		int bDejaVu = false;
 
-		for (j = 0; j < iNbt; j++)
+		for (int j = 0; j < iNbt; j++)
 			if (c[j] == ct)
 			{
 				bDejaVu = true;
@@ -60,7 +53,7 @@ Piece::Piece(short hNP, char cP,
 
 
 // Traces
-void Piece::Dessin()
+void Piece::Dessin() const
 {
-	cout << std::format("Pièce {} {} iNbt={}\n", hNumPiece, cPiece, iNbt);
+	cout << std::format("Piï¿½ce {} {} iNbt={}\n", hNumPiece, cPiece, iNbt);
 }

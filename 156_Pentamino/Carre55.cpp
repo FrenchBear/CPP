@@ -1,5 +1,5 @@
 // Carre55.cpp: implementation of the Carre55 class
-// Représente une grille 5x5 et implantes des transformations de base (rotation/symétrie)
+// Reprï¿½sente une grille 5x5 et implantes des transformations de base (rotation/symï¿½trie)
 //
 // 1998-12-26	PV
 // 2006-10-01   PV		VS2005
@@ -14,49 +14,49 @@ using namespace std;
 
 
 // Transformations
-// 0: Identité
-// 1: 90°  sens horaire
-// 2: 180°
-// 3: 270° sens horaire
+// 0: IdentitÃ©
+// 1: 90Â°  sens horaire
+// 2: 180Â°
+// 3: 270Â° sens horaire
 // 4: miroir Hz
-// 5: miroir Hz + 90°  sens horaire
-// 6: miroir Hz + 180°
-// 7: miroir Hz + 270° sens horaire
+// 5: miroir Hz + 90Â°  sens horaire
+// 6: miroir Hz + 180Â°
+// 7: miroir Hz + 270Â° sens horaire
 
 // Transformation de ligne  
-int Carre55::TL(int iT, int l, int c)
+int Carre55::TL(int iT, int l, int c) const
 {
 	switch (iT)
 	{
-	case 1:  return c;
-	case 2:  return l < lmax ? lmax - 1 - l : l;
-	case 3:  return c < cmax ? cmax - 1 - c : c;
-	case 4:  return l;
-	case 5:  return c < cmax ? cmax - 1 - c : c;
-	case 6:  return l < lmax ? lmax - 1 - l : c;
-	case 7:  return c;
+		case 1:  return c;
+		case 2:  return l < lmax ? lmax - 1 - l : l;
+		case 3:  return c < cmax ? cmax - 1 - c : c;
+		case 4:  return l;
+		case 5:  return c < cmax ? cmax - 1 - c : c;
+		case 6:  return l < lmax ? lmax - 1 - l : c;
+		case 7:  return c;
 	}
 	return l;	// cas 0
 }
 
 // Transformation de colonne
-int Carre55::TC(int iT, int l, int c)
+int Carre55::TC(int iT, int l, int c) const
 {
 	switch (iT)
 	{
-	case 1:  return l < lmax ? lmax - 1 - l : l;
-	case 2:  return c < cmax ? cmax - 1 - c : c;
-	case 3:  return l;
-	case 4:  return c < cmax ? cmax - 1 - c : c;
-	case 5:  return l < lmax ? lmax - 1 - l : l;
-	case 6:  return c;
-	case 7:  return l;
+		case 1:  return l < lmax ? lmax - 1 - l : l;
+		case 2:  return c < cmax ? cmax - 1 - c : c;
+		case 3:  return l;
+		case 4:  return c < cmax ? cmax - 1 - c : c;
+		case 5:  return l < lmax ? lmax - 1 - l : l;
+		case 6:  return c;
+		case 7:  return l;
 	}
 	return c;	// cas 0
 }
 
 
-Carre55 Carre55::Transformation(int iT)
+Carre55 Carre55::Transformation(int iT) const
 {
 	Carre55 ct;
 	int		l, c;
@@ -82,7 +82,7 @@ Carre55 Carre55::Transformation(int iT)
 }
 
 
-void Carre55::Dessin()
+void Carre55::Dessin() const
 {
 	int l, c;
 

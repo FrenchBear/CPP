@@ -81,6 +81,26 @@ public:
 		y += other.y;
 		return *this;
 	}
+
+	V2(initializer_list<int> il)
+	{
+		cout << "initializer_list<int> constructor -> " << this << endl;
+		int i = 0;
+		x = y = 0.0;
+		for (auto m : il)
+		{
+			switch (i)
+			{
+			case 0:
+				x = m;
+				break;
+			case 1:
+				y = m;
+				break;
+			}
+			i++;
+		}
+	}
 };
 
 V2::V2() : x(0.0), y(0.0)
@@ -104,7 +124,11 @@ int main()
 	V2 v5 = v1;		  // copy constructor
 	v4 = v1;		  // Copy assignment operator
 	V2 v6 = move(v5); // Move constructor 'force called'
-//	V2 v7(v1 + v2);	  // Optimized by compiler, only one call to (double, double) constructor in operator+
-	v6 = v4+v2;		  // Move assignment operator
+					  //	V2 v7(v1 + v2);	  // Optimized by compiler, only one call to (double, double) constructor in operator+
+	v6 = v4 + v2;	  // Move assignment operator
+	V2 v7{};		  // Parameterless constructor
+	V2 v8 = {1, 2};	  // initializer_list<int> constructor
+	//V2 v9 {.x=3.2, .y=1.5};	// designated initialization can only be used to initialize aggregate class types
+
 	return 0;
 }
