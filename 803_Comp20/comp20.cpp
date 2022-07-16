@@ -6,8 +6,13 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
-#include <format>
 #include <compare>
+
+#ifdef _WIN32
+#include <format>       // std::format
+#else
+#include "gpp_format.h"
+#endif
 
 using namespace std;
 
@@ -83,16 +88,16 @@ public:
 
 int main()
 {
-	cout << "C++ 20 <=> operator" << endl;
+	cout << "C++ 20 <=> operator\n\n";
 
 	LengthDouble ld1(7);
 	LengthDouble ld2(11);
 
 	cout << "Partial order\n";
-	cout << "partial_ordering::unordered  " << static_cast<int>(partial_ordering::unordered._Value) << endl;
-	cout << "partial_ordering::equivalent " << static_cast<int>(partial_ordering::equivalent._Value) << endl;
-	cout << "partial_ordering::less       " << static_cast<int>(partial_ordering::less._Value) << endl;
-	cout << "partial_ordering::greater    " << static_cast<int>(partial_ordering::greater._Value) << endl << endl;
+//	cout << "partial_ordering::unordered  " << static_cast<int>(partial_ordering::unordered._Value) << endl;
+//	cout << "partial_ordering::equivalent " << static_cast<int>(partial_ordering::equivalent._Value) << endl;
+//	cout << "partial_ordering::less       " << static_cast<int>(partial_ordering::less._Value) << endl;
+//	cout << "partial_ordering::greater    " << static_cast<int>(partial_ordering::greater._Value) << endl << endl;
 
 
 	cout << "ld1<=>ld2 " << PartialOrderingToString(ld1 <=> ld2) << endl;
@@ -103,12 +108,12 @@ int main()
 	cout << "ld1==l2   " << (ld1 == ld2) << endl;
 	cout << "ld1!=l2   " << (ld1 != ld2) << endl << endl;
 
-	cout << "\nStrong order\n";
+	cout << "Strong order\n";
 
-	cout << "strong_ordering::equal      " << static_cast<int>(strong_ordering::equal._Value) << endl;
-	cout << "strong_ordering::equivalent " << static_cast<int>(strong_ordering::equivalent._Value) << endl;
-	cout << "strong_ordering::less       " << static_cast<int>(strong_ordering::less._Value) << endl;
-	cout << "strong_ordering::greater    " << static_cast<int>(strong_ordering::greater._Value) << endl << endl;
+//	cout << "strong_ordering::equal      " << static_cast<int>(strong_ordering::equal._Value) << endl;
+//	cout << "strong_ordering::equivalent " << static_cast<int>(strong_ordering::equivalent._Value) << endl;
+//	cout << "strong_ordering::less       " << static_cast<int>(strong_ordering::less._Value) << endl;
+//	cout << "strong_ordering::greater    " << static_cast<int>(strong_ordering::greater._Value) << endl << endl;
 
 	LengthInt li1(7);
 	LengthInt li2(11);
@@ -121,7 +126,7 @@ int main()
 	cout << "li1==l2   " << (li1 == li2) << endl;
 	cout << "li1!=l2   " << (li1 != li2) << endl << endl;
 
-	cout << "\nAuto-generated comparisons\n";
+	cout << "Auto-generated comparisons\n";
 	Version::Test(Version{ 1,2,3 }, Version{ 1,2,4 });
 	Version::Test(Version{ .major = 3,.minor = 5,.build = 0 }, Version{ .major = 1,.minor = 2,.build = 4 });	// designated initialization
 	Version::Test(Version{ 2,5 }, Version{ 2,5,0 });

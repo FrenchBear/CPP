@@ -7,7 +7,12 @@
 
 #include <iostream>
 #include <string>
-#include <format>
+
+#ifdef _WIN32
+#include <format>       // std::format
+#else
+#include "gpp_format.h"
+#endif
 
 using namespace std;
 
