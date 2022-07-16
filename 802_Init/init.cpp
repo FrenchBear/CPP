@@ -17,7 +17,12 @@ public:
 	double x, y;
 	V2();
 	V2(double, double);
-	~V2() { cout << "Destruction of " << this << endl; }
+	~V2() { cout << "Destruction of " << ToString() << endl; }
+
+	string ToString() const
+	{
+		return format("{} ({}, {})", (void *)this, x, y);
+	}
 
 	// Copy constructor
 	// It is called when a new object is created from an existing object, as a copy of the existing object
@@ -34,83 +39,77 @@ public:
 	// Copy constructor
 	V2(const V2 &other)
 	{
-		cout << "Copy constructor, this=" << this << ", other=" << &other << endl;
 		x = other.x;
 		y = other.y;
+		cout << "Copy constructor, this=" << ToString() << ", other=" << other.ToString() << endl;
 	}
 
 	// Copy assignment operator
-	V2 &operator=(const V2 &other)
+	V2 &operator=(const V2 &other) noexcept
 	{
-		cout << "Copy assignment operator, this=" << this << ", other=" << &other << endl;
 		x = other.x;
 		y = other.y;
+		cout << "Copy assignment operator, this=" << ToString() << ", other=" << other.ToString() << endl;
 		return *this;
 	}
 
 	// Move constructor
-	V2(const V2 &&other)
+	V2(V2 &other) noexcept
 	{
-		cout << "Move constructor, this=" << this << ", other=" << &other << endl;
 		x = other.x;
 		y = other.y;
+		cout << "Move constructor, this=" << ToString() << ", other=" << other.ToString() << endl;
 		// Actually there is nothing to steal and initialize in this class
 	}
 
 	// Move assignment operator
-	V2 &operator=(V2 &&other)
+	V2 &operator=(V2 &other) noexcept
 	{
-		cout << "Move assignment operator, this=" << this << ", other=" << &other << endl;
+		cout << "Move assignment operator, this=" << ToString() << ", other=" << other.ToString();
 		x = other.x;
 		y = other.y;
+		cout << " -> " << this->ToString() << endl;
 		return *this;
 		// Actually there is nothing to steal and initialize in this class
 	}
 
 	V2 operator+(const V2 &other) const
 	{
-		cout << "Operator+, this=" << this << ", other=" << &other << endl;
-		return V2(x + other.x, y + other.y);
+		auto res = V2(x + other.x, y + other.y);
+		cout << "Operator+, this=" << ToString() << ", other=" << other.ToString() << " -> " << res.ToString() << endl;
+		return res;
 		// return V2(*this) += other;
 	}
 
 	V2 &operator+=(const V2 &other)
 	{
-		cout << "Operator+=, this=" << this << ", other=" << &other << endl;
+		cout << "Operator+=, this=" << ToString() << ", other=" << other.ToString();
 		x += other.x;
 		y += other.y;
+		cout << " -> " << this->ToString() << endl;
 		return *this;
 	}
 
 	V2(initializer_list<int> il)
 	{
-		cout << "initializer_list<int> constructor -> " << this << endl;
-		int i = 0;
-		x = y = 0.0;
-		for (auto m : il)
-		{
-			switch (i)
-			{
-			case 0:
-				x = m;
-				break;
-			case 1:
-				y = m;
-				break;
-			}
-			i++;
-		}
+		auto ip = il.begin();
+		x = *ip;
+		if (++ip == il.end())
+			y = 0;
+		else
+			y = *ip;
+		cout << "initializer_list<int> constructor -> " << ToString() << endl;
 	}
 };
 
 V2::V2() : x(0.0), y(0.0)
 {
-	cout << "Parameterless constructor -> " << this << endl;
+	cout << "Parameterless constructor -> " << ToString() << endl;
 }
 
 V2::V2(double a, double b) : x(a), y(b)
 {
-	cout << "(double, double) constructor -> " << this << endl;
+	cout << "(double, double) constructor -> " << ToString() << endl;
 }
 
 int main()
