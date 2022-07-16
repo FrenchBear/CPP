@@ -25,6 +25,8 @@
         "tuple": "cpp",
         "charconv": "cpp",
         "format": "cpp",
-        "xloctime": "cpp"
+        "xloctime": "cpp",
+        "ostream": "cpp",
+        "compare": "cpp"
     }
 }

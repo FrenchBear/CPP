@@ -1,11 +1,12 @@
 ﻿// CS803_Comp20.cpp
-// Play with new comparison operator <=> of C++ 20 and partial/strong ordering
+// Play with new comparison operator <=> of C++ 20 and partial/strong ordering and designated initialization
 //
 // 2022-07-16	PV		First version
 
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
+#include <format>
 #include <compare>
 
 using namespace std;
@@ -18,11 +19,11 @@ private:
 
 public:
 	LengthDouble(double d = 0.0) : l(d) {}
-	partial_ordering operator <=>(const LengthDouble& other) const noexcept { return l <=> other.l; }
-	bool operator ==(const LengthDouble& other) const noexcept { return l == other.l; }	// Operator <=> does not support == and !=
+	partial_ordering operator <=>(const LengthDouble& other) const noexcept { return l <=> other.l; }	// Defines < <= > >=
+	bool operator ==(const LengthDouble& other) const noexcept { return l == other.l; }					// Defines == and !=
 };
 
-// Partially ordered class, since double comparison with #NaN are undefined
+// Strongly ordered class, since int is a strongly ordered type
 class LengthInt
 {
 private:
@@ -30,8 +31,8 @@ private:
 
 public:
 	LengthInt(int d = 0.0) : l(d) {}
-	strong_ordering operator <=>(const LengthInt& other) const noexcept { return l <=> other.l; }
-	bool operator ==(const LengthInt& other) const noexcept { return l == other.l; }	// Operator <=> does not support == and !=
+	strong_ordering operator <=>(const LengthInt& other) const noexcept { return l <=> other.l; }		// Defines < <= > >=
+	bool operator ==(const LengthInt& other) const noexcept { return l == other.l; }					// Defines == and !=
 };
 
 const char* PartialOrderingToString(partial_ordering res)
@@ -62,12 +63,37 @@ const char* StrongOrderingToString(strong_ordering res)
 	return "???";
 }
 
+
+// C++ 20 auto-generated operators and designated initialization (since it's a simple aggregate type)
+class Version
+{
+public:
+	int major = 0, minor = 0, build = 0;
+	strong_ordering operator <=>(const Version& other) const noexcept = default;		// Defines < <= > >=
+	bool operator ==(const Version& other) const noexcept = default;					// Defines == and !=
+
+	string ToString() { return format("{}.{}.{}", major, minor, build); }
+
+	static void Test(Version&& v1, Version&& v2)
+	{
+		cout << v1.ToString() << [](auto x, auto y) { return (x < y) ? " < " : (x > y) ? " > " : " = "; }(v1, v2) << v2.ToString() << endl;
+	}
+};
+
+
 int main()
 {
-	cout << "C++ <=> op" << endl;
+	cout << "C++ 20 <=> operator" << endl;
 
 	LengthDouble ld1(7);
 	LengthDouble ld2(11);
+
+	cout << "Partial order\n";
+	cout << "partial_ordering::unordered  " << static_cast<int>(partial_ordering::unordered._Value) << endl;
+	cout << "partial_ordering::equivalent " << static_cast<int>(partial_ordering::equivalent._Value) << endl;
+	cout << "partial_ordering::less       " << static_cast<int>(partial_ordering::less._Value) << endl;
+	cout << "partial_ordering::greater    " << static_cast<int>(partial_ordering::greater._Value) << endl << endl;
+
 
 	cout << "ld1<=>ld2 " << PartialOrderingToString(ld1 <=> ld2) << endl;
 	cout << "ld1<l2    " << (ld1 < ld2) << endl;
@@ -76,6 +102,13 @@ int main()
 	cout << "ld1>=l2   " << (ld1 >= ld2) << endl;
 	cout << "ld1==l2   " << (ld1 == ld2) << endl;
 	cout << "ld1!=l2   " << (ld1 != ld2) << endl << endl;
+
+	cout << "\nStrong order\n";
+
+	cout << "strong_ordering::equal      " << static_cast<int>(strong_ordering::equal._Value) << endl;
+	cout << "strong_ordering::equivalent " << static_cast<int>(strong_ordering::equivalent._Value) << endl;
+	cout << "strong_ordering::less       " << static_cast<int>(strong_ordering::less._Value) << endl;
+	cout << "strong_ordering::greater    " << static_cast<int>(strong_ordering::greater._Value) << endl << endl;
 
 	LengthInt li1(7);
 	LengthInt li2(11);
@@ -86,7 +119,12 @@ int main()
 	cout << "li1>l2    " << (li1 > li2) << endl;
 	cout << "li1>=l2   " << (li1 >= li2) << endl;
 	cout << "li1==l2   " << (li1 == li2) << endl;
-	cout << "li1!=l2   " << (li1 != li2) << endl;
+	cout << "li1!=l2   " << (li1 != li2) << endl << endl;
+
+	cout << "\nAuto-generated comparisons\n";
+	Version::Test(Version{ 1,2,3 }, Version{ 1,2,4 });
+	Version::Test(Version{ .major = 3,.minor = 5,.build = 0 }, Version{ .major = 1,.minor = 2,.build = 4 });	// designated initialization
+	Version::Test(Version{ 2,5 }, Version{ 2,5,0 });
 
 	return 0;
 }
