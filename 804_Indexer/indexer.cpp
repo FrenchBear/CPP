@@ -6,6 +6,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <cassert>
 
@@ -35,7 +36,10 @@ public:
 		int i = 0;
 		for (auto c : l)
 		{
-			coeffs.push_back(c);
+			if (i == 0)
+				coeffs[i] = c;
+			else
+				coeffs.push_back(c);
 			i++;
 		}
 		degre = i - 1;
@@ -106,27 +110,50 @@ public:
 			neg[i] = -coeffs[i];
 		return neg;
 	}
+
+	virtual operator string() const
+	{
+		string res = "";
+		bool first = true;
+		for (int i = degre; i >= 0; i--)
+		{
+			double c = coeffs[i];
+			if (c != 0.0 || degre == 0)
+			{
+				if (c > 0 && !first)
+					res += '+';
+				if (c != 1.0 || i == 0)
+					res += format("{}", c);
+				if (i == 1)
+					res += 'x';
+				else if (i >= 2)
+					res += format("x^{}", i);
+			}
+			first = false;
+		}
+		return res;
+	}
+
+	bool operator==(const Polynome& other) const
+	{
+		for (int i = max(degre, other.degre); i >= 0; i--)
+			if ((*this)[i] != other[i])
+				return false;
+		return true;
+	}
+
+	double operator()(double x) const
+	{
+		double res = coeffs[degre];
+		for (int i = degre; --i >= 0;)
+			res = (res * x) + coeffs[i];
+		return res;
+	}
 };
 
 ostream& operator <<(ostream& out, const Polynome& p)
 {
-	bool first = true;
-	for (int i = p.Degre(); i >= 0; i--)
-	{
-		double c = p[i];
-		if (c != 0.0 || p.Degre() == 0)
-		{
-			if (c > 0 && !first)
-				out << '+';
-			if (c != 1.0 || i == 0)
-				out << c;
-			if (i == 1)
-				cout << 'x';
-			else if (i >= 2)
-				cout << "x^" << i;
-		}
-		first = false;
-	}
+	out << (string)p;
 	return out;
 }
 
@@ -134,18 +161,23 @@ int main()
 {
 	cout << "C++ 20 indexers\n\n";
 
-	Polynome p1{ 0, 1, 2 };
-	cout << p1 << "   degre=" << p1.Degre() << endl;
-	//p1[4] = -6.0;
-	//cout << p1 << "   degre=" << p1.Degre() << endl;
+	Polynome p1{ 6, -5, 1 };
+	cout << "p1: " << p1 << endl;
 
 	Polynome p2{ -2,1,-2,3 };
-	cout << p2 << "   degre=" << p1.Degre() << endl;
+	cout << "p2: " << p2 << endl;
 
 	Polynome s = p1 + p2;
-	cout << s << "   degre=" << s.Degre() << endl;
+	cout << "p1+p2: " << p1 << endl;
 
-	cout << s + (-s) << endl;
+	cout << "s+(-s): " << s + (-s) << endl;
+	Polynome p3 = Polynome{ 6 } + Polynome{ 0,-5 } + Polynome{ 0,0,1 };
+	cout << "p3: " << p3 << endl;
+	cout << "p1==p3 " << (p1 == p3) << endl;
+
+	cout << "\nEval f1 from 1 to 4\n";
+	for (double d = 1; d <= 4.0; d += 0.25)
+		cout << fixed << setprecision(3) << d << "  " << p1(d) << endl;
 
 	return 0;
 }
