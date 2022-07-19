@@ -76,17 +76,18 @@ class MyBoxSp
 {
 public:
 	T a;
-	template <class T>
 	void print()
 	{
 		std::cout << a;
 	}
-	template <>
-	void print<bool>()
-	{
-		std::cout << (a ? "true" : "false");
-	}
 };
+
+// Example of function specialization
+template <>
+void MyBoxSp<bool>::print()
+{
+	std::cout << (a ? "true" : "false");
+}
 
 // Variable templates
 template <class T>
@@ -131,7 +132,7 @@ int main()
 	cout << endl;
 
 	MyBoxSp<bool> boxSp = {false};
-	boxSp.print<bool>(); // "true"
+	boxSp.print(); // "true"
 	cout << endl;
 
 	int iPi = pi<int>;		 // 3
