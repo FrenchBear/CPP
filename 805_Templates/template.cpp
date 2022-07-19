@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 #ifdef _WIN32
 #include <format> // std::format
@@ -88,8 +89,25 @@ public:
 };
 
 // Variable templates
-template<class T>
+template <class T>
 constexpr T pi = T(3.1415926535897932384626433L);
+
+// Variadic template
+// Before C++20
+int sumA() { return 0; } // end condition
+template <class T0, class... Ts>
+decltype(auto) sumA(T0 first, Ts... rest)
+{
+	return first + sumA(rest...);
+}
+
+// Fold expression in C++20
+template <class... T>
+decltype(auto) sumB(T... args)
+{
+	// Unpacks to: a1 + (a2 + (a3 + a4))...
+	return (args + ...);
+}
 
 int main()
 {
@@ -116,10 +134,19 @@ int main()
 	boxSp.print<bool>(); // "true"
 	cout << endl;
 
-	int iPi = pi<int>; // 3
-	float fPi = pi<float>; // 3.14...
+	int iPi = pi<int>;		 // 3
+	float fPi = pi<float>;	 // 3.14...
 	double dPi = pi<double>; // 3.14...
-	cout << iPi << endl << fPi << endl << dPi <<endl;
+	cout << iPi << endl
+		 << fPi << endl
+		 << dPi << endl << endl;
+	
+	cout << sumA(1,3,5,7) << endl;
+	cout << sumB(1,3,5,7) << endl;
+
+	// Template lambda
+	auto get_size = []<typename T>(vector<T> const &v) { return v.size(); };
+	cout << get_size(vector<char> {'a','z','e','r','t','y'}) << endl;
 
 	return 0;
 }

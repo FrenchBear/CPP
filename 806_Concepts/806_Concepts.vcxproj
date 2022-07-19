@@ -19,10 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="indexer.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\806_Concepts\gpp_format.h" />
+    <ClCompile Include="concepts.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BDD2B38A-318A-41C5-A075-1EF39A2786CC}</ProjectGuid>

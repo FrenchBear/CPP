@@ -2,6 +2,7 @@
 // Play with C++, indexer operator and smart pointers
 //
 // 2022-07-18	PV		First version
+// 2022-07-19	PV		degre() as a function and not a private field (was wrong)
 
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -22,30 +23,22 @@ using namespace std;
 class Polynome
 {
 private:
-	int degre;
 	unique_ptr<vector<double>> coeffs = nullptr;
 
 public:
+	int degree() const { return static_cast<int>(coeffs->size()) - 1; }
+
 	Polynome()
 	{
 		coeffs = make_unique<vector<double>>();
-		Clear();
+		coeffs->push_back(0.0);;
 	}
 
 	Polynome(initializer_list<double> l)
 	{
 		coeffs = make_unique<vector<double>>();
-		Clear();
-		int i = 0;
 		for (auto c : l)
-		{
-			if (i == 0)
-				(*coeffs)[i] = c;
-			else
-				coeffs->push_back(c);
-			i++;
-		}
-		degre = i - 1;
+			coeffs->push_back(c);
 		Truncate();
 	}
 
@@ -53,76 +46,73 @@ public:
 	{
 		cout << "Copy constructor\n";
 		coeffs = make_unique<vector<double>>();
-		degre = other.degre;
-		for (int i = 0; i <= degre; i++)
+		int deg = other.degree();
+		for (int i = 0; i <= deg; i++)
 			coeffs->push_back((*other.coeffs)[i]);
 	}
 
 	Polynome(Polynome&& other) noexcept
 	{
 		cout << "Move constructor\n";
-		degre = other.degre;
 		coeffs = move(other.coeffs);
-		other.degre = -1;
 		other.coeffs = nullptr;
+	}
+
+	// Construction from double, enables simple conversion double -> Polynome, which 
+	// initializer_list<double> does not (without {})
+	Polynome(double d)
+	{
+		coeffs = make_unique<vector<double>>();
+		coeffs->push_back(d);
 	}
 
 	Polynome& operator=(const Polynome& other)
 	{
 		cout << "Operator =\n";
 		coeffs->clear();
-		degre = other.degre;
-		for (int i = 0; i <= degre; i++)
+		for (int i = 0; i <= degree(); i++)
 			coeffs->push_back((*other.coeffs)[i]);
 		return *this;
 	}
 
 
-	// Remove heading zero coefficients after an operation
+	// Remove heading zero coefficients after an operation for optimized representation
 	void Truncate()
 	{
-		while (degre > 0 && (*coeffs)[degre] == 0.0)
-		{
-			coeffs->erase(coeffs->begin() + degre);
-			degre--;
-		}
+		int deg = degree();
+		while (deg > 0 && (*coeffs)[deg] == 0.0)
+			coeffs->erase(coeffs->begin() + deg--);
 	}
 
-	void Clear()
-	{
-		degre = 0;
-		coeffs->clear();
-		coeffs->push_back(0.0);
-	}
-
-	int Degre() const { return degre; }
+	//void Clear()
+	//{
+	//	coeffs->clear();
+	//	coeffs->push_back(0.0);
+	//}
 
 	// Indexer on const polynomial returns a double
 	// Never change internal representation
 	double operator[](int index) const {
 		assert(index >= 0);
-		if (index > degre)
+		if (index > degree())
 			return 0.0;
 		else
 			return (*coeffs)[index];
 	}
 
 	// while indexer on non-constant polynomial returns a double&
-	// Update coeffs size if index>degre to provide a valid double&
+	// Update coeffs size if index>degree() to provide a valid double&
 	double& operator[](int index) {
 		assert(index >= 0);
-		while (degre < index)
-		{
+		while (degree() < index)
 			coeffs->push_back(0.0);
-			degre++;
-		}
 		return (*coeffs)[index];
 	}
 
 	Polynome operator+(const Polynome& other) const
 	{
 		Polynome sum(*this);
-		for (int i = 0; i <= other.degre; i++)
+		for (int i = 0; i <= other.degree(); i++)
 			sum[i] += other[i];
 		sum.Truncate();
 		return sum;
@@ -131,19 +121,24 @@ public:
 	Polynome operator-() const
 	{
 		Polynome neg;
-		for (int i = 0; i <= degre; i++)
+		for (int i = 0; i <= degree(); i++)
 			neg[i] = -(*coeffs)[i];
 		return neg;
+	}
+
+	Polynome operator-(const Polynome& other) const
+	{
+		return *this + (-other);		// Maybe not very efficient
 	}
 
 	virtual operator string() const
 	{
 		string res = "";
 		bool first = true;
-		for (int i = degre; i >= 0; i--)
+		for (int i = degree(); i >= 0; i--)
 		{
 			double c = (*coeffs)[i];
-			if (c != 0.0 || degre == 0)
+			if (c != 0.0 || degree() == 0)
 			{
 				if (c > 0 && !first)
 					res += '+';
@@ -161,7 +156,7 @@ public:
 
 	bool operator==(const Polynome& other) const
 	{
-		for (int i = max(degre, other.degre); i >= 0; i--)
+		for (int i = max(degree(), other.degree()); i >= 0; i--)
 			if ((*this)[i] != other[i])
 				return false;
 		return true;
@@ -169,8 +164,8 @@ public:
 
 	double operator()(double x) const
 	{
-		double res = (*coeffs)[degre];
-		for (int i = degre; --i >= 0;)
+		double res = (*coeffs)[degree()];
+		for (int i = degree(); --i >= 0;)
 			res = (res * x) + (*coeffs)[i];
 		return res;
 	}
@@ -201,9 +196,11 @@ int main()
 	cout << "p1==p3 " << (p1 == p3) << endl;
 
 	s = Polynome{ 6,5,-1 };
-	cout << "\nEval f1 from 1 to 4\n";
+	cout << "\nEval p1 from 1 to 4\n";
 	for (double d = 1; d <= 4.0; d += 0.25)
 		cout << fixed << setprecision(3) << d << "  " << p1(d) << endl;
+
+	cout << endl << "p1-5: " << p1 - 5.0 << endl;
 
 	return 0;
 }
