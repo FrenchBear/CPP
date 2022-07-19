@@ -1,5 +1,5 @@
 ﻿// CS804_Indexer.cpp
-// Play with C++, indexer operator
+// Play with C++, indexer operator and smart pointers
 //
 // 2022-07-18	PV		First version
 
@@ -9,6 +9,7 @@
 #include <iomanip>
 #include <vector>
 #include <cassert>
+#include <memory>
 
 #ifdef _WIN32
 #include <format>       // std::format
@@ -22,24 +23,26 @@ class Polynome
 {
 private:
 	int degre;
-	vector<double> coeffs;
+	unique_ptr<vector<double>> coeffs = nullptr;
 
 public:
 	Polynome()
 	{
+		coeffs = make_unique<vector<double>>();
 		Clear();
 	}
 
 	Polynome(initializer_list<double> l)
 	{
+		coeffs = make_unique<vector<double>>();
 		Clear();
 		int i = 0;
 		for (auto c : l)
 		{
 			if (i == 0)
-				coeffs[i] = c;
+				(*coeffs)[i] = c;
 			else
-				coeffs.push_back(c);
+				coeffs->push_back(c);
 			i++;
 		}
 		degre = i - 1;
@@ -48,17 +51,39 @@ public:
 
 	Polynome(const Polynome& other)
 	{
+		cout << "Copy constructor\n";
+		coeffs = make_unique<vector<double>>();
 		degre = other.degre;
 		for (int i = 0; i <= degre; i++)
-			coeffs.push_back(other.coeffs[i]);
+			coeffs->push_back((*other.coeffs)[i]);
 	}
+
+	Polynome(Polynome&& other) noexcept
+	{
+		cout << "Move constructor\n";
+		degre = other.degre;
+		coeffs = move(other.coeffs);
+		other.degre = -1;
+		other.coeffs = nullptr;
+	}
+
+	Polynome& operator=(const Polynome& other)
+	{
+		cout << "Operator =\n";
+		coeffs->clear();
+		degre = other.degre;
+		for (int i = 0; i <= degre; i++)
+			coeffs->push_back((*other.coeffs)[i]);
+		return *this;
+	}
+
 
 	// Remove heading zero coefficients after an operation
 	void Truncate()
 	{
-		while (degre > 0 && coeffs[degre] == 0.0)
+		while (degre > 0 && (*coeffs)[degre] == 0.0)
 		{
-			coeffs.erase(coeffs.begin() + degre);
+			coeffs->erase(coeffs->begin() + degre);
 			degre--;
 		}
 	}
@@ -66,8 +91,8 @@ public:
 	void Clear()
 	{
 		degre = 0;
-		coeffs.clear();
-		coeffs.push_back(0.0);
+		coeffs->clear();
+		coeffs->push_back(0.0);
 	}
 
 	int Degre() const { return degre; }
@@ -79,7 +104,7 @@ public:
 		if (index > degre)
 			return 0.0;
 		else
-			return coeffs[index];
+			return (*coeffs)[index];
 	}
 
 	// while indexer on non-constant polynomial returns a double&
@@ -88,10 +113,10 @@ public:
 		assert(index >= 0);
 		while (degre < index)
 		{
-			coeffs.push_back(0.0);
+			coeffs->push_back(0.0);
 			degre++;
 		}
-		return coeffs[index];
+		return (*coeffs)[index];
 	}
 
 	Polynome operator+(const Polynome& other) const
@@ -107,7 +132,7 @@ public:
 	{
 		Polynome neg;
 		for (int i = 0; i <= degre; i++)
-			neg[i] = -coeffs[i];
+			neg[i] = -(*coeffs)[i];
 		return neg;
 	}
 
@@ -117,7 +142,7 @@ public:
 		bool first = true;
 		for (int i = degre; i >= 0; i--)
 		{
-			double c = coeffs[i];
+			double c = (*coeffs)[i];
 			if (c != 0.0 || degre == 0)
 			{
 				if (c > 0 && !first)
@@ -144,9 +169,9 @@ public:
 
 	double operator()(double x) const
 	{
-		double res = coeffs[degre];
+		double res = (*coeffs)[degre];
 		for (int i = degre; --i >= 0;)
-			res = (res * x) + coeffs[i];
+			res = (res * x) + (*coeffs)[i];
 		return res;
 	}
 };
@@ -175,6 +200,7 @@ int main()
 	cout << "p3: " << p3 << endl;
 	cout << "p1==p3 " << (p1 == p3) << endl;
 
+	s = Polynome{ 6,5,-1 };
 	cout << "\nEval f1 from 1 to 4\n";
 	for (double d = 1; d <= 4.0; d += 0.25)
 		cout << fixed << setprecision(3) << d << "  " << p1(d) << endl;
