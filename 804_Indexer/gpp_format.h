@@ -3,8 +3,13 @@
 //
 // 2022-07-13	PV
 
-#include <fmt/format.h>
+#pragma once
 
+#ifdef __APPLE__
+#include "/opt/homebrew/Cellar/fmt/8.1.1_1/include/fmt/format.h"
+using namespace fmt;
+#else
+#include <fmt/format.h>
 namespace std
 {
    template<typename... Args> \
@@ -13,3 +18,5 @@ namespace std
       return fmt::format(std::forward<Args>(args)...); \
    }
 }
+#endif
+
