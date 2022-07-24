@@ -16,6 +16,10 @@ using namespace utf8;
 
 int main()
 {
+#ifdef _WIN32
+    system("CHCP 65001 >NUL");
+#endif
+
     // Convert utf8 to utf32
     const char *u8str = "Aé♫山𝄞🐗";      // Do not use u8 prefix!!!  This source is already utf-8 encoded
     vector<int> utf32result;
@@ -27,5 +31,5 @@ int main()
     utf32to8(begin(utf32result), end(utf32result), back_inserter(utf8result));
     assert(strlen(u8str) == utf8result.size());
 
-	cout << u8str << endl;
+    cout << u8str << endl;
 }

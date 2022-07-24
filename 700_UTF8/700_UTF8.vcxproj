@@ -19,14 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="concepts.cpp" />
+    <ClCompile Include="cpputf8.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="utf8.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BDD2B38A-318A-41C5-A075-1EF39A2786CC}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>PermutatorCPP</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>806_Concepts</ProjectName>
+    <ProjectName>700_UTF8</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

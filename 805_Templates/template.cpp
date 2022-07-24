@@ -49,7 +49,7 @@ template <class T, unsigned int N>
 class MyBoxNum
 {
 public:
-	T store[N];
+	T store[N] = {};
 };
 
 // Class template specialization

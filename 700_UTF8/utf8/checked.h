@@ -1,5 +1,6 @@
 // Copyright 2006 Nemanja Trifunovic
-
+//
+//2022-07-24    PV      Added #pragma warning(disable : 4996) for windows
 /*
 Permission is hereby granted, free of charge, to any person or organization
 obtaining a copy of the software and accompanying documentation covered by
@@ -27,6 +28,10 @@ DEALINGS IN THE SOFTWARE.
 
 #ifndef UTF8_FOR_CPP_CHECKED_H_2675DCD0_9480_4c0c_B92A_CC14C027B731
 #define UTF8_FOR_CPP_CHECKED_H_2675DCD0_9480_4c0c_B92A_CC14C027B731
+
+#ifdef _WIN32
+#pragma warning(disable : 4996)
+#endif
 
 #include "core.h"
 #include <stdexcept>
