@@ -22,7 +22,7 @@
     <ClCompile Include="comp20.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{BDD2B38A-318A-41C5-A075-1EF39A2786CC}</ProjectGuid>
+    <ProjectGuid>{4EB3D67E-23F4-4147-BC5F-A4475A277EDB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>PermutatorCPP</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>

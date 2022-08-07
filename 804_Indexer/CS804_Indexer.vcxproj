@@ -25,7 +25,7 @@
     <ClInclude Include="..\806_Concepts\gpp_format.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{BDD2B38A-318A-41C5-A075-1EF39A2786CC}</ProjectGuid>
+    <ProjectGuid>{0C9C41D1-A349-4A79-BF0D-CA22D01BE39C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>PermutatorCPP</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
