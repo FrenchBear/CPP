@@ -6,7 +6,11 @@
 // 2022-07-13	PV		Modern C++ cleanup
 
 #include <iostream>
+#ifdef __APPLE__
+#include <memory.h>
+#else
 #include <malloc.h>
+#endif
 
 int main()
 {

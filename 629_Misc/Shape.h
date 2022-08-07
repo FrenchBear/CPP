@@ -10,6 +10,7 @@ public:
 
 public:
 	Shape() : Shape(nullptr) {}
+	virtual ~Shape() {}
 	Shape(const std::string n) : name(n) {}
 
 	virtual void print_name() const;

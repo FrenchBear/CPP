@@ -96,7 +96,7 @@ int main() {
 	cout << "\r\nvector<string>\r\n";
 	vector<string> v2;
 	v2.push_back("Il");
-	v2.push_back("était");
+	v2.push_back("etait");
 	v2.push_back("un");
 	v2.push_back("petit");
 	v2.push_back("navire");

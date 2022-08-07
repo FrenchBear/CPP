@@ -72,11 +72,11 @@ public:
 		return (int)(v.size());
 	}
 #else
-	int Count() {
+	int Count() override {
 		return v.size();
 	}
 
-	int Count2() {
+	int Count2() override {
 		return v.size();
 	}
 #endif

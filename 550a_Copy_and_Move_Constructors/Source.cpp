@@ -348,7 +348,14 @@ int main() {
 
 	// Test of AutoDefault
 
-	AutoDefault fn();           // Forward declare a function returning an AutoDefault object
+	AutoDefault fn(void);       // Forward declare a function returning an AutoDefault object
+								// void avoids the confusion with constructore call and following warning on Mac:
+//	Source.cpp:351:16: warning: empty parentheses interpreted as a function declaration [-Wvexing-parse]
+//			AutoDefault fn();       // Forward declare a function returning an AutoDefault object
+//						  ^~
+//	Source.cpp:351:16: note: replace parentheses with an initializer to declare a variable
+//			AutoDefault fn();       // Forward declare a function returning an AutoDefault object
+//						  ^~
 
 	AutoDefault foo;            // default constructor
 	AutoDefault barr(foo);      // copy constructor

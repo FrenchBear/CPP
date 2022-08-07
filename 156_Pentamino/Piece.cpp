@@ -55,5 +55,5 @@ Piece::Piece(short hNP, char cP,
 // Traces
 void Piece::Dessin() const
 {
-	cout << std::format("Pi�ce {} {} iNbt={}\n", hNumPiece, cPiece, iNbt);
+	cout << format("Pi�ce {} {} iNbt={}\n", hNumPiece, cPiece, iNbt);
 }
