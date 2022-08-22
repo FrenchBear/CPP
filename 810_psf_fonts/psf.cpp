@@ -9,6 +9,7 @@
 #include <cstdio>
 #include <cassert>
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 
 #ifdef _WIN32
@@ -139,14 +140,19 @@ ushort leftmost_bit(ushort row)
 // Returns a memory_font * or null in case of problem
 static memory_font* load_font(const char* filename)
 {
-	string file = "fonts/"s + filename;
+	string file = filename;
+
 	if (!file_exists(file))
 	{
-		file = "../../fonts/"s + filename;
+		file = "fonts/"s + filename;
 		if (!file_exists(file))
 		{
-			cerr << "Error: Can't find font file " << filename << endl;
-			return nullptr;
+			file = "../../fonts/"s + filename;
+			if (!file_exists(file))
+			{
+				cerr << "Error: Can't find font file " << filename << endl;
+				return nullptr;
+			}
 		}
 	}
 
@@ -206,9 +212,9 @@ static memory_font* load_font(const char* filename)
 		return nullptr;
 	}
 
-	if (mf->width >= 16)
+	if (mf->width > 16)
 	{
-		cerr << "Error: Width " << mf->width << " >= 16 not supported in file " << filename << endl;
+		cerr << "Error: Width " << mf->width << " > 16 not supported in file " << filename << endl;
 		fclose(f);
 		delete mf;
 		return nullptr;
@@ -239,7 +245,7 @@ static memory_font* load_font(const char* filename)
 			{
 				ushort row_m1 = leftmost_bit(row);
 				ushort row_m2 = rightmost_bit(row);
-				if (row_m1 > m1_variable) m1_variable=row_m1;
+				if (row_m1 > m1_variable) m1_variable = row_m1;
 				if (row_m2 < m2_variable) m2_variable = row_m2;
 			}
 		}
@@ -262,19 +268,26 @@ static memory_font* load_font(const char* filename)
 
 
 // Visual dump
-static void dump_font(memory_font* mf)
+static void dump_font(memory_font* mf, const char* target)
 {
-	cout << "Font " << mf->name << endl;
-	cout << "Num glyphs: " << mf->numglyphs << endl;
-	cout << "Width, Height: " << mf->width << ", " << mf->height << endl;
-	cout << "Stride: " << mf->stride << endl;
+	std::ofstream out(target, std::ofstream::out);
+	if (out.bad() || out.fail())
+	{
+		cerr << "Error creating output file " << target << ": " << strerror(errno) << endl;
+		return;
+	}
+
+	out << "Font " << mf->name << endl;
+	out << "Num glyphs: " << mf->numglyphs << endl;
+	out << "Width, Height: " << mf->width << ", " << mf->height << endl;
+	out << "Stride: " << mf->stride << endl;
 
 	for (unsigned int c = 0; c < mf->numglyphs; c++)
 	{
-		cout << "Char " << c;
+		out << "Char " << c;
 		if (c > 32 && c < 127)
-			cout << " " << (char)c;
-		cout << endl;
+			out << " " << (char)c;
+		out << endl;
 
 		struct memory_glyph* mg = mf->glyphs + c;
 		ushort* bufferptr = mg->rows;
@@ -282,15 +295,29 @@ static void dump_font(memory_font* mf)
 		{
 			string r = "";
 			ushort row = *bufferptr++;
-			cout << hex << setw((short)(2 * mf->stride)) << setfill('0') << row << resetiosflags(ios::showbase) << setfill(' ') << dec << "  ";
+			out << hex << setw((short)(2 * mf->stride)) << setfill('0') << row << resetiosflags(ios::showbase) << setfill(' ') << dec << "  ";
 			//ushort m1 = (ushort)1 << (8 * mf->stride - 1);
 			//ushort m2 = (ushort)1 << (8 * mf->stride - mf->width);
 			for (ushort m = mg->m1_variable; m >= mg->m2_variable; m >>= 1)
 				r += (((row & m) != 0) ? "# " : ". ");
-			cout << r << endl;
+			out << r << endl;
 		}
-		cout << endl;
+		out << endl;
 	}
+
+	out.close();
+}
+
+static void dump(const char* filename)
+{
+	cout << filename << endl;
+
+	char target[_MAX_PATH + 1];
+	strcpy(target, filename);
+	strcpy(target + strlen(target) - 3, "txt");
+
+	auto mf = load_font(filename);
+	dump_font(mf, target);
 }
 
 int main()
@@ -301,6 +328,55 @@ int main()
 
 	cout << "C++ 20 PSF dump\n\n";
 
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\5x7-ISO8859-1_7.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\5x8-ISO8859-1_8.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\6x9-ISO8859-1_9.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\cp850-8x8.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Tamsyn5x9b.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Tamsyn5x9r.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\zap-vga09.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-VGA8.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Tamsyn6x12b.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Tamsyn6x12r.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Tamsyn7x13b.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Tamsyn7x13r.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Tamsyn7x14r.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Tamsyn7x14b.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Tamsyn8x15r.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Tamsyn8x15b.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-Terminus12x6.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Tamsyn8x16r.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Tamsyn8x16b.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-Fixed13.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-Fixed14.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-Terminus14.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-TerminusBold14.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-TerminusBoldVGA14.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-VGA14.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-Fixed15.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-Fixed16.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-Terminus16.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-TerminusBold16.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-TerminusBoldVGA16.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-VGA16.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-Fixed18.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-Terminus18x10.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-TerminusBold18x10.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Tamsyn10x20b.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Tamsyn10x20r.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-Terminus20x10.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-TerminusBold20x10.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-Terminus22x11.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-TerminusBold22x11.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-Terminus24x12.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-TerminusBold24x12.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-VGA28x16.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-Terminus28x14.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-TerminusBold28x14.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-Terminus32x16.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-TerminusBold32x16.psf");
+	dump("C:\\Development\\GitHub\\CPP\\810_psf_fonts\\fonts\\Lat2-VGA32x16.psf");
+
 	/*
 	ushort n = 0x0C30;
 	ushort m1 = leftmost_bit(n);
@@ -310,7 +386,15 @@ int main()
 	printf("m2 = %08x\n", m2);
 	*/
 
-	auto mf = load_font("Lat2-VGA14.psf");
+	//auto mf = load_font("5x7-ISO8859-1_7.psf");
+	//auto mf = load_font("Tamsyn5x9r.psf");
+	//auto mf = load_font("cp850-8x8.psf");
+	//auto mf = load_font("Tamsyn6x12r.psf");
+	//auto mf = load_font("zap-vga09.psf");
+	//auto mf = load_font("Lat2-VGA8.psf");
+	//auto mf = load_font("Lat2-Terminus12x6.psf");
+	//auto mf = load_font("Lat2-Fixed13.psf");
+	//auto mf = load_font("Lat2-VGA14.psf");
 	//auto mf = load_font("Lat2-VGA28x16.psf");
 	//auto mf = load_font("Lat2-Terminus12x6.psf");
 	//auto mf = load_font("Lat2-TerminusBold18x10.psf");
@@ -318,8 +402,8 @@ int main()
 	//auto mf = load_font("Lat2-TerminusBold32x16.psf");
 	//auto mf = load_font("Lat2-TerminusBold24x12.psf");
 
-	if (mf)
-		dump_font(mf);
+	//if (mf)
+	//	dump_font(mf);
 
 	return 0;
 }
