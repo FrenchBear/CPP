@@ -2,6 +2,7 @@
 // Convert a font defined in C into a PSF file
 //
 // 2022-08-23	PV		First version
+// 2022-08-24	PV		Load_font V2, bitmast always left-aligned on ushort even if width<=8 rather than byte left-aligned
 
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -15,6 +16,7 @@
 #include "Crystalfontz.h"
 #include "Hitachi_HD44780A00_HD44780A02.h"
 #include "Matrix_orbital.h"
+#include "Motorola_6847_derived.h"
 
 using namespace std;
 //using ushort = unsigned short;
@@ -23,9 +25,9 @@ using ushort = uint16_t;
 bool verbose = false;
 
 
-// File headers
-
+// ---------------------------------------------------------------------------------------------
 // PSF1 format
+
 #define PSF1_MAGIC0     0x36
 #define PSF1_MAGIC1     0x04
 
@@ -44,6 +46,7 @@ struct psf1_header {
 };
 
 
+// ---------------------------------------------------------------------------------------------
 // PSF2 format
 #define PSF2_MAGIC0     0x72
 #define PSF2_MAGIC1     0xb5
@@ -72,22 +75,29 @@ struct psf2_header {
 };
 
 
+// ---------------------------------------------------------------------------------------------
+// memory_font
+
 // My own representation in memory, all rows are 2 bytes (ushort) independetly from stride/width
 struct memory_glyph {
 	ushort m1_fixed, m2_fixed;
 	ushort m1_variable, m2_variable;
-	ushort* rows;			// each row is stored on 2 bytes
+
+	ushort b1_fixed, b2_fixed;			// Start and stop bits for fixed width, b1_fixed=15 (always) and b2_fixed=b1-width+1 (b2 in [13..0])
+	ushort b1_variable, b2_variable;	// Start and stop bits for variable width, eliminating empty columns. b1_variable>=b1_fixed and b2_variable<=b2_fixed, b1_variable>=b2_variable
+
+	ushort* rows;						// Each row is stored on 2 bytes, dots start at bit 15 (b1_fixed) until b2_fixed 
 };
 
 struct memory_font {
 	memory_font(const char* filename, const char* format, ushort numglyphs, ushort width, ushort height)
 	{
 		name = _strdup(filename);
-		this->format = _strdup(format);
-		this->numglyphs = numglyphs;
-		this->width = width;
-		this->height = height;
-		stride = ((width + 7) / 8);
+		this->format = _strdup(format);		// "PSF1" or "PSF2"
+		this->numglyphs = numglyphs;				// usually 256 or 512, can be different for PSF2
+		this->width = width;						// 4..16
+		this->height = height;						// 5..32
+		stride = ((width + 7) / 8);					// 1 or 2 
 		glyphs = (struct memory_glyph*)malloc(sizeof(struct memory_glyph) * numglyphs);
 		assert(glyphs != nullptr);
 		memset(glyphs, 0, sizeof(struct memory_glyph) * numglyphs);
@@ -112,7 +122,93 @@ struct memory_font {
 
 };
 
-// Helper
+
+// ---------------------------------------------------------------------------------------------
+// Bit helpers
+
+
+// cout << "i\tl2(i)\tl_p2(i)\tr_p2(i)\tl_b(i)\tr_b(i)\n";
+// for (ushort i = 0; i <= 16; i++)
+// cout << i << '\t' << log2(i) << '\t' << leftmost_p2(i) << '\t' << rightmost_p2(i) << '\t' << leftmost_bit(i) << '\t' << rightmost_bit(i) << endl;
+// 
+//	i       l2(i)   l_p2(i) r_p2(i) l_b(i)  r_b(i)
+//	0       0       0       0       0       0
+//	1       0       1       1       0       0
+//	2       1       2       2       1       1
+//	3       1       2       1       1       0
+//	4       2       4       4       2       2
+//	5       2       4       1       2       0
+//	6       2       4       2       2       1
+//	7       2       4       1       2       0
+//	8       3       8       8       3       3
+//	9       3       8       1       3       0
+//	10      3       8       2       3       1
+//	11      3       8       1       3       0
+//	12      3       8       4       3       2
+//	13      3       8       1       3       0
+//	14      3       8       2       3       1
+//	15      3       8       1       3       0
+//	16      4       16      16      4       4
+
+
+// Returns log2 of integer = the highest power of 2 in n.  Returns 0 for 0 by convention.
+ushort log2(ushort n)
+{
+	if (n <= 1) return 0;
+	ushort r = 0;
+	while (n > 1)
+	{
+		r++;
+		n >>= 1;
+	}
+	return r;
+}
+
+
+// Returns the position of rightmost bit as a power of 2 (if rightmost bit is b3, returns 8) = the lowest power of 2 in row, and 0 for 0 by convention
+ushort rightmost_p2(ushort row)
+{
+	if (row == 0) return 0;
+	return row - (row & (row - 1));
+}
+
+// Bit variant, returns in [0..15] instead of power of 2, = log2(rightmost_p2)
+ushort rightmost_bit(ushort row)
+{
+	return log2(rightmost_p2(row));
+}
+
+// Returns the position of leftmost bit as a power of 2 (if leftmost bit is b15, returns 32768) = the highest power of 2 in row, and 0 for 0 by convention
+ushort leftmost_p2(ushort row)
+{
+	if (row == 0) return 0;
+	ushort r = 1;
+	while (row > 1)
+	{
+		row >>= 1;
+		r <<= 1;
+	}
+	return r;
+}
+
+// Bit variant, returns in [0..15] instead of power of 2, =log2(leftmost_p2)
+ushort leftmost_bit(ushort row)
+{
+	if (row == 0) return 0;
+	ushort r = 0;
+	while (row > 1)
+	{
+		row >>= 1;
+		r += 1;
+	}
+	return r;
+}
+
+
+// ---------------------------------------------------------------------------------------------
+// File helpers
+// 
+// Check if a file exists
 inline bool file_exists(const std::string& name) {
 	if (FILE* file = fopen(name.c_str(), "r"))
 	{
@@ -123,23 +219,10 @@ inline bool file_exists(const std::string& name) {
 		return false;
 }
 
-ushort rightmost_bit(ushort row)
-{
-	return row - (row & (row - 1));
-}
 
-ushort leftmost_bit(ushort row)
-{
-	ushort r = 1;
-	while (row > 1)
-	{
-		row >>= 1;
-		r <<= 1;
-	}
-	return r;
-}
-
-// Returns a memory_font * or null in case of problem
+// ---------------------------------------------------------------------------------------------
+// Read a PSF file (PSF1 or PSF2) and fill a memory_font structure
+// Returns a memory_font * or NULL in case of problem
 static memory_font* load_font(const char* filename)
 {
 	string file = filename;
@@ -225,58 +308,63 @@ static memory_font* load_font(const char* filename)
 	fseek(f, startoffset, SEEK_SET);
 	for (unsigned int g = 0; g < mf->numglyphs; g++)
 	{
+		struct memory_glyph* cg = mf->glyphs + g;
 		ushort row = 0;			// Never more than 16 bits
 		unsigned char rowbuffer[2] = { 0, 0 };
-		mf->glyphs[g].rows = (ushort*)malloc(mf->height * sizeof(ushort));
-		ushort* bufferptr = mf->glyphs[g].rows;
-		ushort m1_variable = 0;
-		ushort m2_variable = 1 << 15;
+		cg->rows = (ushort*)malloc(mf->height * sizeof(ushort));
+		ushort* bufferptr = cg->rows;
+		ushort m1_variable = 0;					// min of min
+		ushort m2_variable = 1 << 15;			// max of max
 		assert(bufferptr != nullptr);
 		for (unsigned int i = 0; i < mf->height; i++)
 		{
 			// Convert 1 or 2 bytes to a ushort, independent from endianness
 			fread(rowbuffer, 1, mf->stride, f);
 			if (mf->stride == 1)
-				row = rowbuffer[0];
+				row = rowbuffer[0] << 8;
 			else
 				row = (rowbuffer[0] << 8) + rowbuffer[1];
 			*bufferptr++ = row;
 
 			if (row)
 			{
-				ushort row_m1 = leftmost_bit(row);
-				ushort row_m2 = rightmost_bit(row);
+				ushort row_m1 = leftmost_p2(row);
+				ushort row_m2 = rightmost_p2(row);
 				if (row_m1 > m1_variable) m1_variable = row_m1;
 				if (row_m2 < m2_variable) m2_variable = row_m2;
 			}
 		}
-		mf->glyphs[g].m1_fixed = (ushort)1 << (8 * mf->stride - 1);
-		mf->glyphs[g].m2_fixed = (ushort)1 << (8 * mf->stride - mf->width);
-		if (m1_variable == 0 && m2_variable == 1 << 15)
+		cg->m1_fixed = (ushort)1 << 15;
+		cg->m2_fixed = (ushort)1 << (16- mf->width);
+		cg->b1_fixed = 15;
+		cg->b2_fixed = 16 - mf->width;
+		if (m1_variable == 0 && m2_variable == 1 << 15)		// Empty char
 		{
-			mf->glyphs[g].m1_variable = mf->glyphs[g].m1_fixed;
-			mf->glyphs[g].m2_variable = 1 << (8 * mf->stride - mf->width / 2);
+			cg->m1_variable = cg->m1_fixed;
+			cg->m2_variable = 1 << (16 - mf->width / 2);		// by convention, space variable width = half fixed width
+			cg->b1_variable = 15;
+			cg->b2_variable = 16 - mf->width / 2;
 		}
 		else
 		{
-			mf->glyphs[g].m1_variable = m1_variable;
-			mf->glyphs[g].m2_variable = m2_variable;
+			cg->m1_variable = m1_variable;
+			cg->m2_variable = m2_variable;
+			cg->b1_variable = log2(m1_variable);
+			cg->b2_variable = log2(m2_variable);
 		}
+
+		assert(cg->m1_variable == 1 << cg->b1_variable);
+		assert(cg->m2_variable == 1 << cg->b2_variable);
+		assert(cg->m1_fixed == 1 << cg->b1_fixed);
+		assert(cg->m2_fixed == 1 << cg->b2_fixed);
+
+		assert(log2(cg->m1_variable) == cg->b1_variable);
+		assert(log2(cg->m2_variable) == cg->b2_variable);
+		assert(log2(cg->m1_fixed) == cg->b1_fixed);
+		assert(log2(cg->m2_fixed) == cg->b2_fixed);
 	}
 	fclose(f);
 	return mf;
-}
-
-int log2(int n)
-{
-	if (n <= 1) return 0;
-	int r = 1;
-	while (n > 0)
-	{
-		r++;
-		n >>= 1;
-	}
-	return r;
 }
 
 
@@ -303,17 +391,15 @@ static void dump_font(memory_font* mf, const char* target)
 		ushort* bufferptr = mg->rows;
 
 		out << "Char " << c;
-		if (c == 33)
-			int zz = 3;
 		if (c > 32 && c < 127)
 			out << " " << (char)c;
-		out << " " << log2(mg->m1_fixed) << "-" << log2(mg->m2_fixed) << " [" << log2(mg->m1_variable) << "-" << log2(mg->m2_variable) << "]";
+		out << " " << mg->b1_fixed << "-" << mg->b2_fixed << " [" << mg->b1_variable << "-" << mg->b2_variable << "]";
 		out << endl;
 
 		for (unsigned int i = 0; i < mf->height; i++)
 		{
 			ushort row = *bufferptr++;
-			out << hex << setw((short)(2 * mf->stride)) << setfill('0') << row << resetiosflags(ios::showbase) << setfill(' ') << dec << "  ";
+			out << hex << setw(4) << setfill('0') << row << resetiosflags(ios::showbase) << setfill(' ') << dec << "  ";
 			for (ushort m = mg->m1_fixed; m >= mg->m2_fixed; m >>= 1)
 				if ((row & m) != 0)
 					out << "# ";
@@ -385,6 +471,35 @@ static void Transpose_Range(const uint8_t font[][5], uint8_t* buffer, ushort fro
 	}
 }
 
+static void Store_Range(const uint8_t *font, uint8_t* buffer, ushort from, ushort to, ushort height, ushort* pactwidth, ushort* pactheight)
+{
+	assert(height <= 12);		// Because of tmpchar fixed size
+	for (ushort i = from; i <= to; i++)
+	{
+		assert(i >= 0 && i <= 255);
+
+		uint8_t tmpchar[12] = { 0 };
+		for (ushort j = 0; j < height; j++)
+			tmpchar[j] = font[i*height+j];
+
+		ushort rmax = 16;
+#pragma warning(disable: 6385)
+		for (ushort k = 0; k < height; k++)
+			if (tmpchar[height - k])
+			{
+				rmax = height - k;
+				break;
+			}
+		if (rmax > 0 && rmax > *pactheight)
+			*pactheight = rmax;
+		*pactwidth = 8;
+		//for (ushort k = 0; k < height; k++)
+		//	tmpchar[k] <<= 8;
+		memcpy(buffer + height * i, tmpchar, height);
+	}
+}
+
+
 static void Build_Font(const char* target, void (*fillbuffer)(uint8_t* buffer, ushort height, ushort*, ushort*), ushort width, ushort height)
 {
 	assert(width >= 4 && width <= 8);		// Only handle 8 bits width max for now
@@ -445,6 +560,16 @@ void Fill_Matrix_orbital(uint8_t* buffer, ushort height, ushort* pactwidth, usho
 	Transpose_Range(font_mo, buffer, 16, 255, height, pactwidth, pactheight);
 }
 
+void Fill_Motorola_6847(uint8_t* buffer, ushort height, ushort* pactwidth, ushort* pactheight)
+{
+	Store_Range((uint8_t *)byCoCoFont, buffer, 0, 255, height, pactwidth, pactheight);
+}
+
+void Fill_Motorola_6847_3(uint8_t* buffer, ushort height, ushort* pactwidth, ushort* pactheight)
+{
+	Store_Range((uint8_t*)byCoCo3Font, buffer, 0, 127, height, pactwidth, pactheight);
+}
+
 int main()
 {
 #ifdef _WIN32
@@ -456,7 +581,9 @@ int main()
 	//Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\5x8Crystalfont.psf)", Fill_Crystalfont, 5, 8);
 	//Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Hitachi-HD44780A00.psf)", Fill_HitachiA00, 5, 8);
 	//Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Hitachi-HD44780A02.psf)", Fill_HitachiA02, 5, 8);
-	Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Matrix_orbital.psf)", Fill_Matrix_orbital, 5, 8);
+	//Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Matrix_orbital.psf)", Fill_Matrix_orbital, 5, 8);
+	//Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Motorola_6847.psf)", Fill_Motorola_6847, 8, 12);
+	Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Motorola_6847_3.psf)", Fill_Motorola_6847_3, 8, 8);
 
 	//dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\5x7-ISO8859-1_7.psf)");
 	//dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-Terminus18x10.psf)");

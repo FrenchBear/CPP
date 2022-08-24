@@ -25,6 +25,7 @@
     <ClInclude Include="Crystalfontz.h" />
     <ClInclude Include="Hitachi_HD44780A00_HD44780A02.h" />
     <ClInclude Include="Matrix_orbital.h" />
+    <ClInclude Include="Motorola_6847_derived.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DB222E6C-6D50-470F-A448-B37D955597BE}</ProjectGuid>
