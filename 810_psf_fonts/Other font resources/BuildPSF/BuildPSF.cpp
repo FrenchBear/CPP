@@ -12,11 +12,14 @@
 #include <fstream>
 #include <iomanip>
 
-// Font to convert
+// Fonts to convert
 #include "Crystalfontz.h"
 #include "Hitachi_HD44780A00_HD44780A02.h"
 #include "Matrix_orbital.h"
 #include "Motorola_6847_derived.h"
+#include "Std_ASCII_5x7.h"
+#include "TI-99-4A.h"
+#include "Verdana.h"
 
 using namespace std;
 //using ushort = unsigned short;
@@ -335,7 +338,7 @@ static memory_font* load_font(const char* filename)
 			}
 		}
 		cg->m1_fixed = (ushort)1 << 15;
-		cg->m2_fixed = (ushort)1 << (16- mf->width);
+		cg->m2_fixed = (ushort)1 << (16 - mf->width);
 		cg->b1_fixed = 15;
 		cg->b2_fixed = 16 - mf->width;
 		if (m1_variable == 0 && m2_variable == 1 << 15)		// Empty char
@@ -417,7 +420,6 @@ static void dump(const char* filename)
 {
 	cout << filename << endl;
 
-
 	char target[_MAX_PATH + 1];
 	strcpy(target, filename);
 	strcpy(target + strlen(target) - 3, "txt");
@@ -426,7 +428,7 @@ static void dump(const char* filename)
 	dump_font(mf, target);
 }
 
-static void Transpose_Range(const uint8_t font[][5], uint8_t* buffer, ushort from, ushort to, ushort height, ushort* pactwidth, ushort* pactheight)
+static void Transpose_Range(const uint8_t font[][5], uint8_t* buffer, ushort from, ushort to, ushort width, ushort height, ushort* pactwidth, ushort* pactheight)
 {
 	assert(height <= 8);
 	uint8_t tmpchar[8] = { 0 };
@@ -440,7 +442,7 @@ static void Transpose_Range(const uint8_t font[][5], uint8_t* buffer, ushort fro
 		for (ushort j = 0; j < 5; j++)
 		{
 			uint8_t bm = font[i - from][j];
-			if (bm!=0 && j > wmax) wmax = j;
+			if (bm != 0 && j > wmax) wmax = j;
 			for (ushort k = 0; k < height; k++)
 			{
 				tmpchar[k] <<= 1;
@@ -471,7 +473,7 @@ static void Transpose_Range(const uint8_t font[][5], uint8_t* buffer, ushort fro
 	}
 }
 
-static void Store_Range(const uint8_t *font, uint8_t* buffer, ushort from, ushort to, ushort height, ushort* pactwidth, ushort* pactheight)
+static void Store_Range(const uint8_t* font, uint8_t* buffer, ushort from, ushort to, ushort width, ushort height, ushort* pactwidth, ushort* pactheight)
 {
 	assert(height <= 12);		// Because of tmpchar fixed size
 	for (ushort i = from; i <= to; i++)
@@ -480,7 +482,7 @@ static void Store_Range(const uint8_t *font, uint8_t* buffer, ushort from, ushor
 
 		uint8_t tmpchar[12] = { 0 };
 		for (ushort j = 0; j < height; j++)
-			tmpchar[j] = font[i*height+j];
+			tmpchar[j] = font[(i - from) * width + j];
 
 		ushort rmax = 16;
 #pragma warning(disable: 6385)
@@ -500,7 +502,7 @@ static void Store_Range(const uint8_t *font, uint8_t* buffer, ushort from, ushor
 }
 
 
-static void Build_Font(const char* target, void (*fillbuffer)(uint8_t* buffer, ushort height, ushort*, ushort*), ushort width, ushort height)
+static void Build_Font(const char* target, void (*fillbuffer)(uint8_t* buffer, ushort width, ushort height, ushort*, ushort*), ushort width, ushort height)
 {
 	assert(width >= 4 && width <= 8);		// Only handle 8 bits width max for now
 
@@ -523,7 +525,7 @@ static void Build_Font(const char* target, void (*fillbuffer)(uint8_t* buffer, u
 	memset(buffer, 0, (size_t)256 * h2.charsize);
 
 	ushort actheight = 1, actwidth = 1;
-	fillbuffer(buffer, (ushort)h2.charsize, &actwidth, &actheight);
+	fillbuffer(buffer, (ushort)h2.width, (ushort)h2.charsize, &actwidth, &actheight);
 
 	cout << endl;
 	if (actwidth + 1 < (ushort)h2.width)
@@ -539,36 +541,59 @@ static void Build_Font(const char* target, void (*fillbuffer)(uint8_t* buffer, u
 	dump(target);
 }
 
-void Fill_Crystalfont(uint8_t* buffer, ushort height, ushort* pactwidth, ushort* pactheight)
-{
-	Transpose_Range(font_cf, buffer, 16, 255, height, pactwidth, pactheight);
+void Fill_Crystalfont(uint8_t* buffer, ushort width, ushort height, ushort* pactwidth, ushort* pactheight) {
+	Transpose_Range(font_cf, buffer, 16, 255, width, height, pactwidth, pactheight);
 }
 
-void Fill_HitachiA00(uint8_t* buffer, ushort height, ushort* pactwidth, ushort* pactheight)
-{
-	Transpose_Range(font_A00, buffer, 32, 127, height, pactwidth, pactheight);
-	Transpose_Range(font_A00h, buffer, 160, 255, height, pactwidth, pactheight);
+void Fill_HitachiA00(uint8_t* buffer, ushort width, ushort height, ushort* pactwidth, ushort* pactheight) {
+	Transpose_Range(font_A00, buffer, 32, 127, width, height, pactwidth, pactheight);
+	Transpose_Range(font_A00h, buffer, 160, 255, width, height, pactwidth, pactheight);
 }
 
-void Fill_HitachiA02(uint8_t* buffer, ushort height, ushort* pactwidth, ushort* pactheight)
-{
-	Transpose_Range(font_A02, buffer, 16, 255, height, pactwidth, pactheight);
+void Fill_HitachiA02(uint8_t* buffer, ushort width, ushort height, ushort* pactwidth, ushort* pactheight) {
+	Transpose_Range(font_A02, buffer, 16, 255, width, height, pactwidth, pactheight);
 }
 
-void Fill_Matrix_orbital(uint8_t* buffer, ushort height, ushort* pactwidth, ushort* pactheight)
-{
-	Transpose_Range(font_mo, buffer, 16, 255, height, pactwidth, pactheight);
+void Fill_Matrix_orbital(uint8_t* buffer, ushort width, ushort height, ushort* pactwidth, ushort* pactheight) {
+	Transpose_Range(font_mo, buffer, 16, 255, width, height, pactwidth, pactheight);
 }
 
-void Fill_Motorola_6847(uint8_t* buffer, ushort height, ushort* pactwidth, ushort* pactheight)
-{
-	Store_Range((uint8_t *)byCoCoFont, buffer, 0, 255, height, pactwidth, pactheight);
+void Fill_Motorola_6847(uint8_t* buffer, ushort width, ushort height, ushort* pactwidth, ushort* pactheight) {
+	Store_Range((uint8_t*)byCoCoFont, buffer, 0, 255, width, height, pactwidth, pactheight);
 }
 
-void Fill_Motorola_6847_3(uint8_t* buffer, ushort height, ushort* pactwidth, ushort* pactheight)
-{
-	Store_Range((uint8_t*)byCoCo3Font, buffer, 0, 127, height, pactwidth, pactheight);
+void Fill_Motorola_6847_3(uint8_t* buffer, ushort width, ushort height, ushort* pactwidth, ushort* pactheight) {
+	Store_Range((uint8_t*)byCoCo3Font, buffer, 0, 127, width, height, pactwidth, pactheight);
 }
+
+void Fill_Std_5x7(uint8_t* buffer, ushort width, ushort height, ushort* pactwidth, ushort* pactheight) {
+	Transpose_Range(font_5x7, buffer, 0, 255, width, height, pactwidth, pactheight);
+}
+
+void Fill_TI99_Large(uint8_t* buffer, ushort width, ushort height, ushort* pactwidth, ushort* pactheight) {
+	Store_Range((uint8_t*)ti_994A_large, buffer, 32, 95, width, height, pactwidth, pactheight);
+}
+
+void Fill_TI99_Normal(uint8_t* buffer, ushort width, ushort height, ushort* pactwidth, ushort* pactheight) {
+	Store_Range((uint8_t*)ti_994A_normal, buffer, 32, 127, width, height, pactwidth, pactheight);
+}
+
+void Fill_TI998_Large(uint8_t* buffer, ushort width, ushort height, ushort* pactwidth, ushort* pactheight) {
+	Store_Range((uint8_t*)ti_998_large, buffer, 32, 95, width, height, pactwidth, pactheight);
+}
+
+void Fill_TI998_Normal(uint8_t* buffer, ushort width, ushort height, ushort* pactwidth, ushort* pactheight) {
+	Store_Range((uint8_t*)ti_998_40col, buffer, 32, 127, width, height, pactwidth, pactheight);
+}
+
+void Fill_TI998_32col(uint8_t* buffer, ushort width, ushort height, ushort* pactwidth, ushort* pactheight) {
+	Store_Range((uint8_t*)ti_998_32col, buffer, 0, 127, width, height, pactwidth, pactheight);
+}
+
+void Fill_Verdana(uint8_t* buffer, ushort width, ushort height, ushort* pactwidth, ushort* pactheight) {
+	Transpose_Range(verdana, buffer, 32, 127, width, height, pactwidth, pactheight);
+}
+
 
 int main()
 {
@@ -583,8 +608,75 @@ int main()
 	//Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Hitachi-HD44780A02.psf)", Fill_HitachiA02, 5, 8);
 	//Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Matrix_orbital.psf)", Fill_Matrix_orbital, 5, 8);
 	//Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Motorola_6847.psf)", Fill_Motorola_6847, 8, 12);
-	Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Motorola_6847_3.psf)", Fill_Motorola_6847_3, 8, 8);
+	//Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Motorola_6847_3.psf)", Fill_Motorola_6847_3, 8, 8);
+	//Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Std_5x7.psf)", Fill_Std_5x7, 5, 7);
+	//Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\TI99_Large.psf)", Fill_TI99_Large, 8, 8);
+	//Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\TI99_Normal.psf)", Fill_TI99_Normal, 8, 8);
+	//Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\TI998_Large.psf)", Fill_TI998_Large, 8, 8);
+	//Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\TI998_Normal.psf)", Fill_TI998_Normal, 8, 8);
+	//Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\TI998_32col.psf)", Fill_TI998_32col, 8, 8);
+	//Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Verdana.psf)", Fill_Verdana, 5, 8);
 
-	//dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\5x7-ISO8859-1_7.psf)");
-	//dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-Terminus18x10.psf)");
+
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Verdana.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\TI998_32col.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\TI998_Normal.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\TI998_Large.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\TI99_Normal.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\TI99_Large.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Std_5x7.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Motorola_6847_3.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Motorola_6847.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Matrix_orbital.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Hitachi-HD44780A02.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Hitachi-HD44780A00.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\5x8Crystalfont.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\6x9-ISO8859-1_9.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\5x8-ISO8859-1_8.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\5x7-ISO8859-1_7.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\zap-vga09.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-TerminusBold20x10.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-TerminusBold22x11.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-TerminusBold24x12.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-TerminusBold28x14.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-TerminusBold32x16.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-TerminusBoldVGA14.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-TerminusBoldVGA16.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-VGA8.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-VGA14.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-VGA16.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-VGA28x16.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-VGA32x16.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-Fixed13.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-Fixed14.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-Fixed15.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-Fixed16.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-Fixed18.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-Terminus12x6.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-Terminus14.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-Terminus16.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-Terminus18x10.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-Terminus20x10.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-Terminus22x11.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-Terminus24x12.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-Terminus28x14.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-Terminus32x16.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-TerminusBold14.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-TerminusBold16.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-TerminusBold18x10.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Tamsyn10x20b.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Tamsyn10x20r.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Tamsyn7x13b.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Tamsyn7x14b.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Tamsyn7x14r.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Tamsyn8x15b.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Tamsyn8x15r.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Tamsyn8x16b.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Tamsyn8x16r.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Tamsyn5x9b.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Tamsyn5x9r.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Tamsyn6x12b.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Tamsyn6x12r.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Tamsyn7x13r.psf)");
+	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\cp850-8x8.psf)");
 }
