@@ -22,6 +22,7 @@
     <ClCompile Include="buildPSF.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BuildPSF.h" />
     <ClInclude Include="Crystalfontz.h" />
     <ClInclude Include="Hitachi_HD44780A00_HD44780A02.h" />
     <ClInclude Include="Matrix_orbital.h" />

@@ -20,7 +20,6 @@
 #include "Std_ASCII_5x7.h"
 #include "TI-99-4A.h"
 #include "Verdana.h"
-#include "BuildPSF.h"
 
 using namespace std;
 //using ushort = unsigned short;
@@ -509,7 +508,7 @@ static void Build_Font(const char* target, void (*fillbuffer)(uint8_t* buffer, u
 
 	psf2_header h2{
 		.magic = {PSF2_MAGIC0, PSF2_MAGIC1, PSF2_MAGIC2, PSF2_MAGIC3},
-		.version = 0,
+		.version = 1,
 		.headersize = sizeof(psf2_header),
 		.flags = 0,
 		.length = 256,
@@ -596,49 +595,6 @@ void Fill_Verdana(uint8_t* buffer, ushort width, ushort height, ushort* pactwidt
 }
 
 
-void DemoFont(const char* filename)
-{
-	auto mf = load_font(filename);
-	string* rows = new string[mf->height];
-
-	const char* s = "The quick brown fox jumps over the lazy dog";
-	unsigned char c;
-	for (const char* p = s; c = *p; p++)
-	{
-		struct memory_glyph* mg = mf->glyphs + c;
-		ushort* bufferptr = mg->rows;
-
-		for (unsigned int i = 0; i < mf->height; i++)
-		{
-			ushort row = *bufferptr++;
-			for (ushort m = mg->m1_variable; m >= mg->m2_variable; m >>= 1)
-				if ((row & m) != 0)
-					rows[i] += "# ";
-				else
-					rows[i] += "  ";
-			rows[i] += " ";
-		}
-	}
-
-	const char* outfile = R"(C:\Temp\out.txt)";
-	std::ofstream out(outfile, std::ofstream::out);
-	if (out.bad() || out.fail())
-	{
-		cerr << "Error creating output file " << outfile << ": " << strerror(errno) << endl;
-		return;
-	}
-
-	out << "Text: " << s << endl;
-	out << "Font: " << filename << endl;
-	out << "Height: " << mf->height << endl;
-	out << endl;
-
-	for (unsigned int i = 0; i < mf->height; i++)
-		out << rows[i] << endl;
-	out.close();
-}
-
-
 int main()
 {
 #ifdef _WIN32
@@ -662,7 +618,6 @@ int main()
 	//Build_Font(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Verdana.psf)", Fill_Verdana, 5, 8);
 
 
-	/*
 	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Verdana.psf)");
 	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\TI998_32col.psf)");
 	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\TI998_Normal.psf)");
@@ -724,10 +679,4 @@ int main()
 	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Tamsyn6x12r.psf)");
 	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Tamsyn7x13r.psf)");
 	dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\cp850-8x8.psf)");
-	*/
-
-	//dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-VGA32x16.psf)");
-
-	DemoFont(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-Terminus18x10.psf)");
-	//DemoFont(R"(C:\Development\GitHub\CPP\810_psf_fonts\nafe\BuildNafe\Std_5x7_v2.psf)");
 }
