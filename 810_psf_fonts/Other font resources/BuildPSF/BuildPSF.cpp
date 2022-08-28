@@ -94,9 +94,9 @@ struct memory_glyph {
 };
 
 struct memory_font {
-	memory_font(const char* filename, const char* format, ushort numglyphs, ushort width, ushort height)
+	memory_font(const char* fontfile, const char* format, ushort numglyphs, ushort width, ushort height)
 	{
-		name = _strdup(filename);
+		name = _strdup(fontfile);
 		this->format = _strdup(format);		// "PSF1" or "PSF2"
 		this->numglyphs = numglyphs;				// usually 256 or 512, can be different for PSF2
 		this->width = width;						// 4..16
@@ -213,8 +213,8 @@ ushort leftmost_bit(ushort row)
 // File helpers
 // 
 // Check if a file exists
-inline bool file_exists(const std::string& name) {
-	if (FILE* file = fopen(name.c_str(), "r"))
+inline bool file_exists(const char *name) {
+	if (FILE* file = fopen(name, "r"))
 	{
 		fclose(file);
 		return true;
@@ -227,19 +227,19 @@ inline bool file_exists(const std::string& name) {
 // ---------------------------------------------------------------------------------------------
 // Read a PSF file (PSF1 or PSF2) and fill a memory_font structure
 // Returns a memory_font * or NULL in case of problem
-static memory_font* load_font(const char* filename)
+static memory_font* load_font(const char* fontfile)
 {
-	string file = filename;
+	string file = fontfile;
 
-	if (!file_exists(file))
+	if (!file_exists(file.c_str()))
 	{
-		file = "fonts/"s + filename;
-		if (!file_exists(file))
+		file = "fonts/"s + fontfile;
+		if (!file_exists(file.c_str()))
 		{
-			file = "../../fonts/"s + filename;
-			if (!file_exists(file))
+			file = "../../fonts/"s + fontfile;
+			if (!file_exists(file.c_str()))
 			{
-				cerr << "Error: Can't find font file " << filename << endl;
+				cerr << "Error: Can't find font file " << fontfile << endl;
 				return nullptr;
 			}
 		}
@@ -262,7 +262,7 @@ static memory_font* load_font(const char* filename)
 		fread(&h1, sizeof(h1), 1, f);
 		if (verbose)
 		{
-			cout << "PSF1 file " << filename << endl;
+			cout << "PSF1 file " << fontfile << endl;
 			cout << "Mode: " << (unsigned int)h1.mode << endl;
 			cout << "Charsize: " << h1.charsize << endl;
 			cout << "Implied: width: 8\n";
@@ -271,7 +271,7 @@ static memory_font* load_font(const char* filename)
 
 		ushort numglyphs = 256;
 		if ((h1.mode & PSF1_MODE512) != 0) numglyphs = 512;
-		mf = new memory_font(filename, "PSF1", numglyphs, 8, (ushort)h1.charsize);
+		mf = new memory_font(fontfile, "PSF1", numglyphs, 8, (ushort)h1.charsize);
 		startoffset = 4;
 	}
 	else if (magic[0] == PSF2_MAGIC0 && magic[1] == PSF2_MAGIC1 && magic[2] == PSF2_MAGIC2 && magic[3] == PSF2_MAGIC3)
@@ -281,7 +281,7 @@ static memory_font* load_font(const char* filename)
 		fread(&h2, sizeof(h2), 1, f);
 		if (verbose)
 		{
-			cout << "PSF2 file " << filename << endl;
+			cout << "PSF2 file " << fontfile << endl;
 			cout << "version: " << h2.version << endl;
 			cout << "headersize: " << h2.headersize << endl;
 			cout << "flags: " << h2.flags << endl;
@@ -291,19 +291,19 @@ static memory_font* load_font(const char* filename)
 			cout << "width: " << h2.width << endl;
 		}
 		assert(h2.charsize == h2.height * ((h2.width + 7) / 8));
-		mf = new memory_font(filename, "PSF2", (ushort)h2.length, (ushort)h2.width, (ushort)h2.height);
+		mf = new memory_font(fontfile, "PSF2", (ushort)h2.length, (ushort)h2.width, (ushort)h2.height);
 		startoffset = h2.headersize;
 	}
 	else
 	{
-		cerr << "Error: Unknown format of file " << filename << endl;
+		cerr << "Error: Unknown format of file " << fontfile << endl;
 		fclose(f);
 		return nullptr;
 	}
 
 	if (mf->width > 16)
 	{
-		cerr << "Error: Width " << mf->width << " > 16 not supported in file " << filename << endl;
+		cerr << "Error: Width " << mf->width << " > 16 not supported in file " << fontfile << endl;
 		fclose(f);
 		delete mf;
 		return nullptr;
@@ -417,15 +417,15 @@ static void dump_font(memory_font* mf, const char* target)
 	out.close();
 }
 
-static void dump(const char* filename)
+static void dump(const char* fontfile)
 {
-	cout << filename << endl;
+	cout << fontfile << endl;
 
 	char target[_MAX_PATH + 1];
-	strcpy(target, filename);
+	strcpy(target, fontfile);
 	strcpy(target + strlen(target) - 3, "txt");
 
-	auto mf = load_font(filename);
+	auto mf = load_font(fontfile);
 	dump_font(mf, target);
 }
 
@@ -596,10 +596,12 @@ void Fill_Verdana(uint8_t* buffer, ushort width, ushort height, ushort* pactwidt
 }
 
 
-void DemoFont(const char* filename)
+void DemoFont(const char* fontfile, const char *outfile)
 {
-	auto mf = load_font(filename);
+	auto mf = load_font(fontfile);
 	string* rows = new string[mf->height];
+
+	cout << "Demo " << fontfile << endl;
 
 	const char* s = "The quick brown fox jumps over the lazy dog";
 	unsigned char c;
@@ -620,7 +622,6 @@ void DemoFont(const char* filename)
 		}
 	}
 
-	const char* outfile = R"(C:\Temp\out.txt)";
 	std::ofstream out(outfile, std::ofstream::out);
 	if (out.bad() || out.fail())
 	{
@@ -629,7 +630,7 @@ void DemoFont(const char* filename)
 	}
 
 	out << "Text: " << s << endl;
-	out << "Font: " << filename << endl;
+	out << "Font: " << fontfile << endl;
 	out << "Height: " << mf->height << endl;
 	out << endl;
 
@@ -728,6 +729,7 @@ int main()
 
 	//dump(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-VGA32x16.psf)");
 
-	DemoFont(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-Terminus18x10.psf)");
-	//DemoFont(R"(C:\Development\GitHub\CPP\810_psf_fonts\nafe\BuildNafe\Std_5x7_v2.psf)");
+	DemoFont(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Lat2-Terminus18x10.psf)", R"(C:\Temp\demo_Lat2-Terminus18x10.txt)");
+	DemoFont(R"(C:\Development\GitHub\CPP\810_psf_fonts\nafe\BuildNafe\Std_5x7_v2.psf)", R"(C:\Temp\demo_Std_5x7_v2.txt)");
+	DemoFont(R"(C:\Development\GitHub\CPP\810_psf_fonts\fonts\Verdana.psf)", R"(C:\Temp\demo_Verdana.txt)");
 }
