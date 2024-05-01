@@ -8,8 +8,8 @@ class Carre55
 {
 public:
 	char	tMotif[5][5];
-	int		lmax, cmax;		// Encombrement de la pi�ce
-	int		iOffsetCol;		// D�calage de colonne pour occuper la cellule [0][0]
+	int		lmax, cmax;		// Encombrement de la pièce
+	int		iOffsetCol;		// Décalage de colonne pour occuper la cellule [0][0]
 
 
 	Carre55()

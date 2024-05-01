@@ -45,11 +45,11 @@ typedef char Jeu[MAXLIG][MAXCOL];
 // Tableau de pointeurs sur les pentaminos à utiliser pour le problème
 Piece* tP[MAXPIECE];
 
-
+// Actually, has no influence on performances (at least in Release build)
 #pragma inline_recursion(on)
 #pragma inline_depth(12)
 
-void inline Pavage(int lstart, int cstart, Jeu& jeu, int iMasquePieces)
+void inline static Pavage(int lstart, int cstart, Jeu& jeu, int iMasquePieces)
 {
 	int l, c;
 	int bTrouve = false;
@@ -79,24 +79,20 @@ void inline Pavage(int lstart, int cstart, Jeu& jeu, int iMasquePieces)
 			break;
 	}
 
-	// Si on n'en a pas trouvé, c'est que le pavage est terminé!
+	// On n'est pas censé ne pas en trouver...
 	if (l == MAXLIG && c == MAXCOL)
-	{
-		iNbSol++;
-		return;
-	}
+		__debugbreak();
 
 	// On cherche parmi toutes les pièces qui restent une pièce pour couvrir la case vide
 	int i, j;
-	for (i = 0; i < MAXPIECE; i++)
-		if (iMasquePieces & (1 << i))
+	for (i = 0; i < MAXPIECE; i++)				// Pour toutes les pièces...
+		if (iMasquePieces & (1 << i))			// restantes, 
 			for (j = 0; j < tP[i]->iNbt; j++)	// Pour chacune des transformations
 			{
 				Carre55& ca = tP[i]->c[j];
 				int l2, c2;
 				int bCollision;
 
-				//int bContinue = false;
 				if (c + ca.cmax - ca.iOffsetCol > MAXCOL || // Trop large
 					l + ca.lmax > MAXLIG ||					// Trop haut
 					c < ca.iOffsetCol)						// Doit être décalée trop à gauche
@@ -117,6 +113,9 @@ void inline Pavage(int lstart, int cstart, Jeu& jeu, int iMasquePieces)
 						break;
 				}
 
+				// If there is a collision for current piece current transformation, no need to proceed in depth calling Pavage again
+				// Just continue to next piece/transformation, that's it
+
 				if (!bCollision)
 				{
 					// Piece valable! On la place
@@ -127,8 +126,16 @@ void inline Pavage(int lstart, int cstart, Jeu& jeu, int iMasquePieces)
 						for (c2 = 0; c2 < ca.cmax; c2++)
 							if (ca.tMotif[l2][c2]) jeu2[l + l2][c + c2 - ca.iOffsetCol] = (char)(i + 1);
 
+					// S'il ne reste plus de pièces, on a trouvé une solution!
+					int nextMask = iMasquePieces & ~(1 << i);
+					if (nextMask == 0)
+					{
+						iNbSol++;
+						return;
+					}
+
 					// On continue avec les pièces qui restent
-					Pavage(l, c, jeu2, iMasquePieces & ~(1 << i));
+					Pavage(l, c, jeu2, nextMask);
 				}
 			}
 }

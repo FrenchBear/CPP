@@ -26,12 +26,13 @@ Piece::Piece(short hNP, char cP,
 			char i10, char i11, char i12, char i13, char i14,
 			char i20, char i21, char i22, char i23, char i24)
 {
+	if (i00 + i01 + i02 + i03 + i04 + i10 + i11 + i12 + i13 + i14 + i20 + i21 + i22 + i23 + i24 != 5)
+		cout << "Définition de la pièce " << hNP << " incorrecte\n";
+
 	hNumPiece = hNP;
 	cPiece = cP;
 	c[0] = Carre55(i00, i01, i02, i03, i04, i10, i11, i12, i13, i14, i20, i21, i22, i23, i24);
 	iNbt = 1;
-	if (i00 + i01 + i02 + i03 + i04 + i10 + i11 + i12 + i13 + i14 + i20 + i21 + i22 + i23 + i24 != 5)
-		cout << "Définition de la pièce " << hNP << " incorrecte\n";
 
 	// On génère le tableau des transformations possibles
 	for (int i = 1; i < 8; i++)

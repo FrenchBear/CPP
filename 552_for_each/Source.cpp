@@ -4,7 +4,7 @@
 // 2016-10-04	PV
 // 2017-04-29	PV		GitHub and Linux
 // 2021-09-14	PV		Visual Studio 2022
-// 2022-07-12	PC		C++ 20 range-based loop with initializer
+// 2022-07-12	PV		C++ 20 range-based loop with initializer
 
 #define _SCL_SECURE_NO_WARNINGS		// Otherwise use of copy generated a deprecated error
 
@@ -72,12 +72,10 @@ int main() {
 	vector <int> v1;
 	vector <int>::iterator Iter1;
 
-	// Constructing vector v1
+	// Filling vector v1
 	int i;
 	for (i = -4; i <= 2; i++)
-	{
 		v1.push_back(i);
-	}
 
 	cout << "Original vector  v1 = ( ";
 	for (Iter1 = v1.begin(); Iter1 != v1.end(); Iter1++)

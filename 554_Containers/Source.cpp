@@ -216,7 +216,7 @@ int main() {
 	colorMap.insert(pair<string, string>("blanc", "white North"));		// Actually no effect since key already exists
 	cout << "\r\nmap<string, string>\r\n";
 	cout << "colorMap: ";
-	for (auto i : colorMap)
+	for (auto &i : colorMap)
 		cout << "(" << i.first << ", " << i.second << "), ";
 	cout << endl;
 	cout << "colorMap[\"rouge\"]: " << colorMap["rouge"] << endl;
@@ -242,7 +242,7 @@ int main() {
 		umap.insert(pair<long long, int>(f, i));
 	cout << "\r\nunordered_map<long long, int>\r\n";
 	cout << "umap: ";
-	for (auto i : umap)
+	for (auto &i : umap)
 		cout << "(" << i.first << ", " << i.second << "), ";
 	cout << endl;
 	cout << "umap[120ll]: " << umap[120ll] << endl;
@@ -258,7 +258,7 @@ int main() {
 	numToStringMultimap.insert(intstring(3, "trois"));
 	cout << "\r\nmultimap<int, string>\r\n";
 	cout << "numToStringMultimap = ";
-	for (auto i : numToStringMultimap)
+	for (auto &i : numToStringMultimap)
 		cout << i.first << " " << i.second << ", ";
 	cout << endl;
 
